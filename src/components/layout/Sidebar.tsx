@@ -257,6 +257,10 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             {new Date().getFullYear()}© {config.company?.developer}
                         </a>
                     </div>
+
+                    <span className="pointer-events-none absolute bottom-5 left-4 max-w-[42%] text-[8px] leading-tight text-white/55 font-secondary">
+                        Las imágenes están sujetas a <a href="/terminos-y-condiciones" className="pointer-events-auto underline hover:text-white/90 transition-colors">términos y condiciones</a> de la inmobiliaria
+                    </span>
                 </div>
             </div>
         );
@@ -306,7 +310,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     The upward drop-shadow that used to live here was removed: it
                     fell across the crest and re-drew the very seam the wave-shaped
                     blur is meant to dissolve. */}
-                <div className="relative isolate -mt-px overflow-hidden bg-gradient-to-b from-ocean-600/60 via-ocean-700/65 to-ocean-800/70 backdrop-blur-xl px-4 pt-0 pb-3">
+                <div className="relative isolate -mt-px overflow-hidden bg-gradient-to-b from-ocean-600/60 via-ocean-700/65 to-ocean-800/70 backdrop-blur-xl px-4 pt-0 pb-8">
                     {/* Colour bridge. The four crest layers composite to ~99% alpha
                         (1-(1-.45)(1-.65)(1-.75)(1-.85)), so the panel has to START
                         fully opaque in the crest's own colour and only then decay to
@@ -378,6 +382,10 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             </a>
                         </div>
                     </div>
+
+                    <span className="pointer-events-none absolute bottom-3 left-4 max-w-[42%] text-[8px] leading-tight text-white/55 font-secondary">
+                        Las imágenes están sujetas a <a href="/terminos-y-condiciones" className="pointer-events-auto underline hover:text-white/90 transition-colors">términos y condiciones</a> de la inmobiliaria
+                    </span>
                 </div>
             </nav>
         </>
