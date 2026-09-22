@@ -451,7 +451,7 @@ export async function createAppointment(data: {
   if (data.type === "VIRTUAL") {
     try {
       const title = `Cita Virtual - ${data.prospectName} y ${seller?.name || "Asesor"}`;
-      const description = `Reunión virtual para conocer el proyecto ${config.company?.buildingName || "Residencial Océano Atlántico"}.\n\nAsesor: ${seller?.name || "Asesor Inmobiliario"} (${seller?.email || "N/A"})\nProspecto: ${data.prospectName} (${data.prospectEmail})`;
+      const description = `Reunión virtual para conocer el proyecto ${config.company?.buildingName || "Residencial Mar de Java"}.\n\nAsesor: ${seller?.name || "Asesor Inmobiliario"} (${seller?.email || "N/A"})\nProspecto: ${data.prospectName} (${data.prospectEmail})`;
       
       meetLink = await createGoogleMeetEvent({
         summary: title,
@@ -521,7 +521,7 @@ export async function createAppointment(data: {
         await resend.emails.send({
           from: fromEmail,
           to: [data.prospectEmail.trim().toLowerCase()],
-          subject: `Confirmación de Cita - ${config.company?.buildingName || "Residencial Océano Atlántico"}`,
+          subject: `Confirmación de Cita - ${config.company?.buildingName || "Residencial Mar de Java"}`,
           headers: unsubscribeHeaders,
           react: AppointmentEmail({
             prospectName: data.prospectName,

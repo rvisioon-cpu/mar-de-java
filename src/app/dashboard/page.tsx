@@ -4,7 +4,7 @@ import DashboardClient from "@/components/dashboard/DashboardClient";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Dashboard - Residencial Océano Atlántico",
+  title: "Dashboard - Residencial Mar de Java",
 };
 
 export default async function DashboardPage() {

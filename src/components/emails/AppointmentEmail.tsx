@@ -51,7 +51,7 @@ export const AppointmentEmail = ({
     hour12: true,
   });
 
-  const projectName = config.company?.buildingName || 'Residencial Océano Atlántico';
+  const projectName = config.company?.buildingName || 'Residencial Mar de Java';
   const buildingAddress = config.company?.buildingAddress || config.company?.address || '';
   const googleMapsUrl = buildingAddress
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(buildingAddress)}`

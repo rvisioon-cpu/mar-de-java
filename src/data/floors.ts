@@ -57,7 +57,7 @@ export interface Floor {
 }
 
 // ============================================================================
-// Residencial Océano Atlántico — 6 floors, 2 basements (S1, S2).
+// Residencial Mar de Java — 6 floors, 2 basements (S1, S2).
 // Bedrooms / bathrooms / area (m²) provided by the client.
 // NOTE: units 301/401 mirror the 201 stack and 302/402 mirror the 202 stack
 // (the client left those rows blank; stacked lines share the same layout).

@@ -57,31 +57,31 @@ export interface ConfigProps {
 }
 
 const config: ConfigProps = {
-  appName: "Residencial Océano Atlántico",
-  appDescription: "Experiencia virtual del Residencial Océano Atlántico.",
+  appName: "Residencial Mar de Java",
+  appDescription: "Experiencia virtual del Residencial Mar de Java.",
   domainName: "rmpromotorainmobiliaria.com",
   // Dominio verificado en Resend. Cualquier remitente debe pertenecer a él o
   // el envío es rechazado.
   resend: {
-    fromNoReply: `Océano Atlántico <no-reply@rmpromotorainmobiliaria.com>`,
-    fromAdmin: `Océano Atlántico <admin@rmpromotorainmobiliaria.com>`,
+    fromNoReply: `Mar de Java <no-reply@rmpromotorainmobiliaria.com>`,
+    fromAdmin: `Mar de Java <admin@rmpromotorainmobiliaria.com>`,
     // Buzón que recibe los formularios de contacto. Es un dominio distinto al
     // de envío: Resend solo exige el dominio verificado en el remitente.
     supportEmail: "info@rmpromotora.com",
   },
   colors: {
     theme: "light",
-    main: "#0E86C7", // Brand main color (Océano Atlántico ocean blue)
+    main: "#0E86C7", // Brand main color (Mar de Java ocean blue)
   },
   auth: {
     loginUrl: "/api/auth/signin",
     callbackUrl: "/dashboard",
   },
   company: {
-    name: "Residencial Océano Atlántico",
+    name: "Residencial Mar de Java",
     address: "Calle Las Gencianas 150 Int. 511, Urb. Los Recaudadores - Ate, Lima, Perú",
-    buildingName: "Residencial Océano Atlántico",
-    buildingAddress: "Jirón Océano Atlántico 338-342, Surco, Lima",
+    buildingName: "Residencial Mar de Java",
+    buildingAddress: "Jirón Mar de Java 338-342, Surco, Lima",
     email: "info@rmpromotora.com",
     website: "https://rmpromotora.com",
     city: "Lima",

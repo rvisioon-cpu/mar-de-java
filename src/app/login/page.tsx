@@ -50,7 +50,7 @@ export default function LoginPage() {
           <div className="relative w-20 h-20 mb-4 flex items-center justify-center p-3 rounded-2xl bg-slate-800/40 border border-white/5 shadow-inner">
             <img 
               src="/identity/identity_logo_ISOTIPO.png" 
-              alt="Océano Atlántico Isotipo Logo"
+              alt="Mar de Java Isotipo Logo"
               className="w-14 h-14 object-contain drop-shadow-[0_0_12px_rgba(245,156,29,0.25)]"
             />
           </div>
@@ -58,7 +58,7 @@ export default function LoginPage() {
             Ingreso al Sistema
           </h2>
           <p className="text-gray-400 text-[10px] tracking-wider uppercase font-semibold opacity-60 mt-1">
-            Showroom Virtual - Océano Atlántico
+            Showroom Virtual - Mar de Java
           </p>
         </div>
 

@@ -4,7 +4,7 @@ import ContentDashboard from "@/components/dashboard/content/ContentDashboard";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Contenido RRSS - Dashboard Océano Atlántico",
+  title: "Contenido RRSS - Dashboard Mar de Java",
 };
 
 export default async function ContentPage() {

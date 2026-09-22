@@ -104,7 +104,7 @@ function PageTransitionInner({ children }: { children: ReactNode }) {
               <div className="absolute -inset-4 rounded-full bg-ocean-400/20 blur-xl animate-pulse" />
               <img
                 src="/identity/identity_logo_white.png"
-                alt="Océano Atlántico"
+                alt="Mar de Java"
                 className="relative w-44 lg:w-60 object-contain drop-shadow-[0_10px_35px_rgba(0,0,0,0.6)]"
               />
             </div>

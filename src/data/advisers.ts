@@ -23,7 +23,7 @@ export const advisersData: AdviserData[] = [
     role: "Asesor de Ventas",
     gender: 'male',
     phone: "+51964281172",
-    whatsappMessage: "Hola, vengo desde la web de Océano Atlántico, deseo más información."
+    whatsappMessage: "Hola, vengo desde la web de Mar de Java, deseo más información."
   },
   {
     id: 'raul',
@@ -31,6 +31,6 @@ export const advisersData: AdviserData[] = [
     role: "Asesor de Ventas",
     gender: 'male',
     phone: "+51997171543",
-    whatsappMessage: "Hola, vengo desde la web de Océano Atlántico, deseo más información."
+    whatsappMessage: "Hola, vengo desde la web de Mar de Java, deseo más información."
   }
 ];

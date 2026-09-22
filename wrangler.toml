@@ -1,14 +1,14 @@
-name = "oceano-atlantico-showroom"
+name = "mar-java-showroom"
 compatibility_date = "2026-06-01"
 compatibility_flags = [ "nodejs_compat" ]
 pages_build_output_dir = ".open-next/assets"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "oceano-atlantico-db"
+database_name = "mar-java-db"
 database_id = "7e148e34-a56c-4c94-8edd-5bdd419bc0e4"
 migrations_dir = "drizzle"
 
 [[r2_buckets]]
 binding = "R2"
-bucket_name = "oceano-atlantico-showroom"
+bucket_name = "mar-java-showroom"

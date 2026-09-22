@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         documentNumber,
         contactPreference,
         horario,
-        project: project || 'Residencial Océano Atlántico',
+        project: project || 'Residencial Mar de Java',
         mensaje
       }),
     });

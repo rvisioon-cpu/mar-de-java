@@ -1710,7 +1710,7 @@ export default function UnitsDashboard({
                      {/* WhatsApp Share Image */}
                      <a
                        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                         `Hola, te comparto esta imagen de la unidad ${selectedUnit.identifier} del Showroom Océano Atlántico: ${getAbsoluteAssetUrl(selectedImageUrl)}`
+                         `Hola, te comparto esta imagen de la unidad ${selectedUnit.identifier} del Showroom Mar de Java: ${getAbsoluteAssetUrl(selectedImageUrl)}`
                        )}`}
                        target="_blank"
                        rel="noreferrer"
@@ -1725,9 +1725,9 @@ export default function UnitsDashboard({
                      {/* Email Share Image */}
                      <a
                        href={`mailto:?subject=${encodeURIComponent(
-                         `Imagen de la unidad ${selectedUnit.identifier} - Showroom Océano Atlántico`
+                         `Imagen de la unidad ${selectedUnit.identifier} - Showroom Mar de Java`
                        )}&body=${encodeURIComponent(
-                         `Hola,\n\nTe comparto esta imagen de la unidad ${selectedUnit.identifier} del Showroom Océano Atlántico:\n\n${getAbsoluteAssetUrl(selectedImageUrl)}\n\nSaludos!`
+                         `Hola,\n\nTe comparto esta imagen de la unidad ${selectedUnit.identifier} del Showroom Mar de Java:\n\n${getAbsoluteAssetUrl(selectedImageUrl)}\n\nSaludos!`
                        )}`}
                        className="btn btn-sm btn-outline btn-neutral flex items-center gap-1.5"
                      >
@@ -1823,7 +1823,7 @@ export default function UnitsDashboard({
                         {/* WhatsApp sharing */}
                         <a
                           href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                            `Hola, te comparto el brochure de la unidad ${selectedUnit.identifier} del Showroom Océano Atlántico: ${getAbsoluteAssetUrl(unitBrochureUrl)}`
+                            `Hola, te comparto el brochure de la unidad ${selectedUnit.identifier} del Showroom Mar de Java: ${getAbsoluteAssetUrl(unitBrochureUrl)}`
                           )}`}
                           target="_blank"
                           rel="noreferrer"
@@ -1838,9 +1838,9 @@ export default function UnitsDashboard({
                         {/* Email sharing */}
                         <a
                           href={`mailto:?subject=${encodeURIComponent(
-                            `Brochure de la unidad ${selectedUnit.identifier} - Showroom Océano Atlántico`
+                            `Brochure de la unidad ${selectedUnit.identifier} - Showroom Mar de Java`
                           )}&body=${encodeURIComponent(
-                            `Hola,\n\nTe comparto el brochure de la unidad ${selectedUnit.identifier} del Showroom Océano Atlántico:\n\n${getAbsoluteAssetUrl(unitBrochureUrl)}\n\nSaludos!`
+                            `Hola,\n\nTe comparto el brochure de la unidad ${selectedUnit.identifier} del Showroom Mar de Java:\n\n${getAbsoluteAssetUrl(unitBrochureUrl)}\n\nSaludos!`
                           )}`}
                           className="btn btn-outline btn-neutral flex items-center gap-2"
                         >

@@ -5,7 +5,7 @@ import { locationsPoi } from "@/lib/db/schema";
 import { eq, isNull, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
-import initialLocations from "@/data/oceano_atlantico_locations.json";
+import initialLocations from "@/data/mar_java_locations.json";
 
 export async function getLocations(includeInactive = false) {
   const db = await getDb();
@@ -121,7 +121,7 @@ export async function seedLocations() {
   
   // Filter out the project itself if present (it has its own hardcoded marker on map)
   const features = (initialLocations.features || []).filter(
-    (f: any) => f.properties.nombre !== "Océano Atlántico"
+    (f: any) => f.properties.nombre !== "Mar de Java"
   );
   
   for (const feature of features) {

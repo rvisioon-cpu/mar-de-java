@@ -115,7 +115,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Océano Atlántico",
+        "name": "Mar de Java",
         "icon": "logo-proyecto"
       },
       "geometry": {

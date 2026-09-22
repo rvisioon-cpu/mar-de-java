@@ -375,7 +375,7 @@ export default function AIGenerator({
                         </div>
                       </div>
                       <div className="chat-header text-[10px] text-gray-400 mb-0.5 ml-1">
-                        {isAI ? "Asistente Océano Atlántico" : "Usuario"}
+                        {isAI ? "Asistente Mar de Java" : "Usuario"}
                       </div>
                       <div className={`chat-bubble text-xs leading-relaxed max-w-[85%] ${
                         isAI ? "bg-gray-100 text-gray-800" : "bg-brand-orange text-white"

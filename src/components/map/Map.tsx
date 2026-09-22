@@ -13,7 +13,7 @@ import type { Landmark } from '@/data/landmarks';
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '';
 const MAPBOX_STYLE = 'mapbox://styles/mapbox/light-v11';
 
-// Initial view state centering on Residencial Océano Atlántico (Salamanca, Ate, Lima)
+// Initial view state centering on Residencial Mar de Java (Salamanca, Ate, Lima)
 const INITIAL_VIEW_STATE = {
   latitude: -12.080049,
   longitude: -76.974883,
@@ -64,11 +64,11 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
             let end: [number, number];
 
             if (destination && !origin) {
-                // Explore Mode: From Océano Atlántico TO Destination
+                // Explore Mode: From Mar de Java TO Destination
                 start = [INITIAL_VIEW_STATE.longitude, INITIAL_VIEW_STATE.latitude];
                 end = destination;
             } else if (origin) {
-                // Search Mode: From Origin TO Océano Atlántico
+                // Search Mode: From Origin TO Mar de Java
                 start = origin;
                 end = [INITIAL_VIEW_STATE.longitude, INITIAL_VIEW_STATE.latitude];
             } else {
@@ -279,7 +279,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
                         'line-cap': 'round'
                     }}
                     paint={{
-                        'line-color': config.colors.main, // Brand blue (Océano Atlántico)
+                        'line-color': config.colors.main, // Brand blue (Mar de Java)
                         'line-width': 4,
                         'line-opacity': 0.8
                     }}
@@ -309,7 +309,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
             </Marker>
         ))}
 
-        {/* Océano Atlántico Marker (Main Project) */}
+        {/* Mar de Java Marker (Main Project) */}
         <Marker longitude={INITIAL_VIEW_STATE.longitude} latitude={INITIAL_VIEW_STATE.latitude} anchor="bottom" style={{ zIndex: 9999 }}>
             <div className="relative flex flex-col items-center group cursor-pointer" style={{ zIndex: 9999 }}>
                  {/* Popup Card - Hover Only */}
@@ -318,14 +318,14 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
                         <img 
                             src={getAssetUrl('building/photos/face_0_daylight.png')} 
                             className="w-full h-full object-cover"
-                            alt="Océano Atlántico"
+                            alt="Mar de Java"
                         />
                         <div className="absolute top-2 left-2 px-2 py-0.5 bg-gray-900/80 backdrop-blur-sm rounded text-[8px] font-bold text-white uppercase tracking-wider">
                             Edificio Boutique
                         </div>
                     </div>
                     <div className="p-2">
-                        <h3 className="text-xs font-bold text-gray-900 leading-tight mb-0.5">{config.company?.buildingName || 'Residencial Océano Atlántico'}</h3>
+                        <h3 className="text-xs font-bold text-gray-900 leading-tight mb-0.5">{config.company?.buildingName || 'Residencial Mar de Java'}</h3>
                     </div>
                  </div>
 

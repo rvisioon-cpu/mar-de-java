@@ -4,7 +4,7 @@ import { RotateCcw } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useStore } from '../../store/useStore';
 
-const SESSION_KEY = 'oceano-landscape-shown';
+const SESSION_KEY = 'mar-java-landscape-shown';
 
 const UseLandscape = () => {
     const pathname = usePathname();

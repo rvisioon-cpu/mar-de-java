@@ -9,7 +9,7 @@ import { getLocations, seedLocations } from '@/app/actions/locations';
 import { useStore } from '@/store/useStore';
 import { getAssetUrl } from '@/utils/assets';
 
-// Residencial Océano Atlántico — the origin every hito is measured from.
+// Residencial Mar de Java — the origin every hito is measured from.
 const PROJECT_COORDS: [number, number] = [-76.974883, -12.080049];
 
 const DirectionsPage = () => {

@@ -45,7 +45,7 @@ export const ContactEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
-            <Text style={logo}>OCÉANO ATLÁNTICO</Text>
+            <Text style={logo}>MAR DE JAVA</Text>
         </Section>
         
         <Section style={content}>
@@ -106,7 +106,7 @@ export const ContactEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            Este es un mensaje automático enviado desde el sitio web de Residencial Océano Atlántico.
+            Este es un mensaje automático enviado desde el sitio web de Residencial Mar de Java.
           </Text>
         </Section>
       </Container>

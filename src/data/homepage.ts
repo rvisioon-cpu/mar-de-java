@@ -24,7 +24,7 @@ export const homepageData: HomepageData = {
   },
   slides: [
     {
-      text: "{{highlight}} Océano Atlántico es un proyecto residencial de solo 10 departamentos, diseñado para quienes valoran la privacidad, el confort y los acabados premium.",
+      text: "{{highlight}} Mar de Java es un proyecto residencial de solo 10 departamentos, diseñado para quienes valoran la privacidad, el confort y los acabados premium.",
       highlight: "Exclusividad en cada detalle"
     },
     {
@@ -36,7 +36,7 @@ export const homepageData: HomepageData = {
       highlight: "Diseño premium, estilo único"
     },
     {
-      text: "{{highlight}} Con únicamente 10 unidades y 14 estacionamientos simples y dobles, Océano Atlántico ofrece una propuesta residencial privada, moderna y diferenciada.",
+      text: "{{highlight}} Con únicamente 10 unidades y 14 estacionamientos simples y dobles, Mar de Java ofrece una propuesta residencial privada, moderna y diferenciada.",
       highlight: "Un edificio boutique para pocos"
     },
     {
