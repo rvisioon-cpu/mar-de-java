@@ -5,7 +5,7 @@ export interface ConfigProps {
   resend: {
     fromNoReply: string;
     fromAdmin: string;
-    supportEmail: string;
+    supportEmails: string[];
   };
   colors: {
     theme: "light" | "dark";
@@ -57,9 +57,9 @@ export interface ConfigProps {
 }
 
 const config: ConfigProps = {
-  appName: "Residencial Mar de Java",
-  appDescription: "Experiencia virtual del Residencial Mar de Java.",
-  domainName: "rmpromotorainmobiliaria.com",
+  appName: "Mar de Java",
+  appDescription: "Experiencia virtual de Mar de Java.",
+  domainName: "inmobiliariabuleje.pe",
   // Dominio verificado en Resend. Cualquier remitente debe pertenecer a él o
   // el envío es rechazado.
   resend: {
@@ -67,37 +67,38 @@ const config: ConfigProps = {
     fromAdmin: `Mar de Java <admin@rmpromotorainmobiliaria.com>`,
     // Buzón que recibe los formularios de contacto. Es un dominio distinto al
     // de envío: Resend solo exige el dominio verificado en el remitente.
-    supportEmail: "info@rmpromotora.com",
+    supportEmails: ["ventas@inmobiliariabuleje.pe", "gerencia_comercial@inmobiliariiabuleje.pe"],
   },
   colors: {
     theme: "light",
-    main: "#0E86C7", // Brand main color (Mar de Java ocean blue)
+    main: "#10356D", // Brand main color (Mar de Java navy)
   },
   auth: {
     loginUrl: "/api/auth/signin",
     callbackUrl: "/dashboard",
   },
   company: {
-    name: "Residencial Mar de Java",
-    address: "Calle Las Gencianas 150 Int. 511, Urb. Los Recaudadores - Ate, Lima, Perú",
-    buildingName: "Residencial Mar de Java",
-    buildingAddress: "Jirón Mar de Java 338-342, Surco, Lima",
-    email: "info@rmpromotora.com",
-    website: "https://rmpromotora.com",
+    name: "Grupo Inmobiliario Buleje",
+    address: "Calle Mar de Java 175, Urb. Neptuno, Surco, Lima, Perú",
+    buildingName: "Mar de Java",
+    buildingAddress: "Calle Mar de Java 175, Urb. Neptuno, Surco, Lima",
+    email: "ventas@inmobiliariabuleje.pe",
+    website: "https://inmobiliariabuleje.pe",
     city: "Lima",
     country: "Perú",
-    phone: "997 171 543",
-    // El proyecto no tiene cuentas propias: se muestran las de RM Promotora.
+    phone: "907 123 221",
     buildingSocials: {
-      facebook: "https://www.facebook.com/profile.php?id=100063594609401&locale=es_LA",
-      instagram: "https://www.instagram.com/rmpromotora/"
+      facebook: "https://facebook.com/bulejeinmobiliaria",
+      instagram: "https://instagram.com/inmobiliaria.buleje",
+      tiktok: "https://tiktok.com/@inmobiliaria.buleje"
     },
-    realStateName: "RM Promotora",
+    realStateName: "Grupo Inmobiliario Buleje",
     realStateSlogan: "Constructora e Inmobiliaria",
-    realStateWebsite: "https://rmpromotora.com",
+    realStateWebsite: "https://inmobiliariabuleje.pe",
     realStateSocials: {
-      facebook: "https://www.facebook.com/profile.php?id=100063594609401&locale=es_LA",
-      instagram: "https://www.instagram.com/rmpromotora/"
+      facebook: "https://facebook.com/bulejeinmobiliaria",
+      instagram: "https://instagram.com/inmobiliaria.buleje",
+      tiktok: "https://tiktok.com/@inmobiliaria.buleje"
     },
     developer: "Rvisioon",
     developerSlogan: "Creamos experiencias visuales que conectan, inspiran y venden.",

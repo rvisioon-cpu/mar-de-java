@@ -193,7 +193,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     if (isForcedLandscape) {
         return (
             <div
-                className={`fixed inset-0 z-[70] isolate overflow-hidden flex flex-col bg-gradient-to-b from-ocean-600/60 via-ocean-700/65 to-ocean-800/70 backdrop-blur-xl transition-opacity duration-400
+                className={`fixed inset-0 z-[70] isolate overflow-hidden flex flex-col bg-gradient-to-b from-brand-primary/90 via-ocean-700/95 to-ocean-900/95 backdrop-blur-xl transition-opacity duration-400
                     ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             >
                 <div className="relative z-10 flex flex-1 flex-col">
@@ -219,7 +219,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                             onMouseEnter={() => handleMouseEnter((item as any).preloadKey)}
                                             className={`w-full flex flex-col items-center justify-center gap-2 p-3 rounded-2xl transition-all duration-300 group cursor-pointer wavy-btn
                                             ${active
-                                                    ? 'bg-white text-ocean-700 shadow-lg'
+                                                    ? 'bg-brand-yellow text-brand-primary shadow-lg'
                                                     : 'text-white/85 hover:text-white'}`}
                                         >
                                             <IconComponent size={24} strokeWidth={1.9} className="transition-transform group-hover:scale-110 relative z-10" />
@@ -245,7 +245,9 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                             title={config.company?.realStateName}
                             className="transition-opacity hover:opacity-100 opacity-90"
                         >
-                            <img src="/identity/logo_inmobiliaria_white.png" alt={config.company?.realStateName} className="h-7 w-auto object-contain" />
+                            <span className="flex h-9 items-center rounded-md bg-white px-2 py-1 shadow-sm">
+                                <img src="/identity/buleje-grupo-inmobiliario.png" alt={config.company?.realStateName} className="h-full w-auto object-contain" />
+                            </span>
                         </a>
                         <div className="hidden sm:block h-5 w-px bg-white/25" />
                         <a
@@ -310,7 +312,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     The upward drop-shadow that used to live here was removed: it
                     fell across the crest and re-drew the very seam the wave-shaped
                     blur is meant to dissolve. */}
-                <div className="relative isolate -mt-px overflow-hidden bg-gradient-to-b from-ocean-600/60 via-ocean-700/65 to-ocean-800/70 backdrop-blur-xl px-4 pt-0 pb-8">
+                <div className="relative isolate -mt-px overflow-hidden border-t border-brand-yellow/50 bg-gradient-to-b from-brand-primary/95 via-ocean-700/95 to-ocean-900/95 backdrop-blur-xl px-4 pt-0 pb-8">
                     {/* Colour bridge. The four crest layers composite to ~99% alpha
                         (1-(1-.45)(1-.65)(1-.75)(1-.85)), so the panel has to START
                         fully opaque in the crest's own colour and only then decay to
@@ -318,7 +320,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         Fades to ocean-600/0 rather than `transparent` so only alpha
                         interpolates; `transparent` is rgba(0,0,0,0) and would pull
                         the midpoint toward grey, drawing a fresh band. */}
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-20 z-0 bg-gradient-to-b from-ocean-600 to-ocean-600/0" />
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-20 z-0 bg-gradient-to-b from-brand-primary to-brand-primary/0" />
                     {isOpen && <LiquidMenuBackground />}
 
                     {/* Header row: close only — the logo now lives large and
@@ -342,7 +344,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                         onMouseEnter={() => handleMouseEnter((item as any).preloadKey)}
                                         className={`group/item w-[76px] flex flex-col items-center gap-1 rounded-2xl px-1.5 py-2 transition-all duration-300 cursor-pointer wavy-btn
                                             ${active
-                                                ? 'bg-white text-ocean-700 shadow-lg'
+                                                ? 'bg-brand-yellow text-brand-primary shadow-lg'
                                                 : 'text-white/85 hover:text-white'}`}
                                     >
                                         <div className="w-6 h-6 flex items-center justify-center transition-transform duration-300 group-hover/item:scale-110 relative z-10">
@@ -369,7 +371,9 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 title={config.company?.realStateName}
                                 className="transition-opacity hover:opacity-100 opacity-90"
                             >
-                                <img src="/identity/logo_inmobiliaria_white.png" alt={config.company?.realStateName} className="h-6 w-auto object-contain" />
+                                <span className="flex h-8 items-center rounded-md bg-white px-2 py-1 shadow-sm">
+                                    <img src="/identity/buleje-grupo-inmobiliario.png" alt={config.company?.realStateName} className="h-full w-auto object-contain" />
+                                </span>
                             </a>
                             <div className="hidden sm:block h-4 w-px bg-white/20" />
                             <a

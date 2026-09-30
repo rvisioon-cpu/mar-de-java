@@ -1,4 +1,4 @@
-name = "mar-java-showroom"
+name = "mar-de-java"
 compatibility_date = "2026-06-01"
 compatibility_flags = [ "nodejs_compat" ]
 pages_build_output_dir = ".open-next/assets"
@@ -6,7 +6,7 @@ pages_build_output_dir = ".open-next/assets"
 [[d1_databases]]
 binding = "DB"
 database_name = "mar-java-db"
-database_id = "7e148e34-a56c-4c94-8edd-5bdd419bc0e4"
+database_id = "63d3785c-851f-4793-9b86-9dc205f32d43"
 migrations_dir = "drizzle"
 
 [[r2_buckets]]

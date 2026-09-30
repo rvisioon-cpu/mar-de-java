@@ -10,7 +10,7 @@ import { useStore } from '@/store/useStore';
 import { getAssetUrl } from '@/utils/assets';
 
 // Residencial Mar de Java — the origin every hito is measured from.
-const PROJECT_COORDS: [number, number] = [-76.974883, -12.080049];
+const PROJECT_COORDS: [number, number] = [-76.97538, -12.079162];
 
 const DirectionsPage = () => {
     const isForcedLandscape = useStore(state => state.isForcedLandscape);
@@ -171,7 +171,7 @@ const DirectionsPage = () => {
                 try {
                     if (!MAPBOX_TOKEN) return;
                     const response = await fetch(
-                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(filter)}.json?access_token=${MAPBOX_TOKEN}&country=pe&limit=5&language=es&proximity=-76.974883,-12.080049`
+                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(filter)}.json?access_token=${MAPBOX_TOKEN}&country=pe&limit=5&language=es&proximity=-76.97538,-12.079162`
                     );
                     const data = (await response.json()) as any;
                     setSearchResults(data.features || []);

@@ -26,25 +26,25 @@
 }
 
 @theme {
-  /* Mar de Java brand — ocean blues */
-  --color-brand-orange: #0E86C7;
-  --color-brand-dark-orange: #0C6FA6;
-  --color-brand-light-orange: #19A7DE;
-  --color-brand-yellow: #F2C53D;
-  --color-brand-primary: #0E86C7;
+  /* Mar de Java brand — extracted from the supplied artwork. */
+  --color-brand-orange: #10356D;
+  --color-brand-dark-orange: #0B2855;
+  --color-brand-light-orange: #28558F;
+  --color-brand-yellow: #CD983B;
+  --color-brand-primary: #10356D;
 
-  /* Ocean palette (light → deep) for the wave navigation */
-  --color-ocean-50: #ecf8fc;
-  --color-ocean-100: #d2eef6;
-  --color-ocean-200: #a7e0ec;
-  --color-ocean-300: #62cdde;
-  --color-ocean-400: #2fb4cd;
-  --color-ocean-500: #1593c2;
-  --color-ocean-600: #0e74a3;
-  --color-ocean-700: #0c5a7e;
-  --color-ocean-800: #0a3f57;
-  --color-ocean-900: #082e40;
-  --color-ocean-950: #041b26;
+  /* Navy scale for surfaces and overlays; gold and white remain accents. */
+  --color-ocean-50: #F6F8FB;
+  --color-ocean-100: #E7EDF6;
+  --color-ocean-200: #C8D6E9;
+  --color-ocean-300: #9FB6D4;
+  --color-ocean-400: #6C8FBA;
+  --color-ocean-500: #3F679B;
+  --color-ocean-600: #10356D;
+  --color-ocean-700: #0B2855;
+  --color-ocean-800: #081E41;
+  --color-ocean-900: #061630;
+  --color-ocean-950: #030B19;
 
   --font-primary: 'Montserrat', sans-serif;
   --font-secondary: 'Inter', sans-serif;
@@ -204,25 +204,25 @@ html, body {
 }
 
 .top-wave-1 {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%2362cdde' fill-opacity='0.45' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%23ffffff' fill-opacity='0.36' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
   animation: scroll-wave-1 16s linear infinite;
   z-index: 1;
 }
 
 .top-wave-2 {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%232fb4cd' fill-opacity='0.65' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%23CD983B' fill-opacity='0.7' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
   animation: scroll-wave-2 12s linear infinite;
   z-index: 2;
 }
 
 .top-wave-3 {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%231593c2' fill-opacity='0.75' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%2310356D' fill-opacity='0.8' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
   animation: scroll-wave-3 9s linear infinite;
   z-index: 3;
 }
 
 .top-wave-4 {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%230e74a3' fill-opacity='0.85' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='198'%3E%3Cpath fill='%230B2855' fill-opacity='0.9' fill-rule='evenodd' d='M.005 121C311 121 409.898-.25 811 0c400 0 500 121 789 121v77H0s.005-48 .005-77z' transform='matrix(-1 0 0 1 1600 0)'/%3E%3C/svg%3E");
   animation: scroll-wave-4 7s linear infinite;
   z-index: 4;
 }

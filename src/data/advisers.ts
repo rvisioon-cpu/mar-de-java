@@ -18,19 +18,12 @@ export interface AdviserData {
 
 export const advisersData: AdviserData[] = [
   {
-    id: 'nicolas',
-    name: "Nicolás Matamoros Bosleman",
+    id: 'buleje',
+    name: "Grupo Inmobiliario Buleje",
     role: "Asesor de Ventas",
     gender: 'male',
-    phone: "+51964281172",
-    whatsappMessage: "Hola, vengo desde la web de Mar de Java, deseo más información."
-  },
-  {
-    id: 'raul',
-    name: "Raul Matamoros Vega",
-    role: "Asesor de Ventas",
-    gender: 'male',
-    phone: "+51997171543",
+    phone: "+51907123221",
+    email: "ventas@inmobiliariabuleje.pe",
     whatsappMessage: "Hola, vengo desde la web de Mar de Java, deseo más información."
   }
 ];

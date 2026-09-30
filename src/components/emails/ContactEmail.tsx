@@ -106,7 +106,7 @@ export const ContactEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            Este es un mensaje automático enviado desde el sitio web de Residencial Mar de Java.
+            Este es un mensaje automático enviado desde el sitio web de Mar de Java.
           </Text>
         </Section>
       </Container>

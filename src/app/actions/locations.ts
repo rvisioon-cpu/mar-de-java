@@ -107,17 +107,15 @@ export async function deleteLocation(id: string) {
 export async function seedLocations() {
   const db = await getDb();
   
-  // Check if locations already exist
+  // Add any newly shipped points without overwriting locations that the
+  // administrator has already edited in the dashboard.
   const existing = await db
     .select()
     .from(locationsPoi)
     .where(isNull(locationsPoi.deletedAt));
     
-  if (existing.length > 0) {
-    return existing;
-  }
-  
   const seeded: any[] = [];
+  const existingIds = new Set(existing.map(location => location.id));
   
   // Filter out the project itself if present (it has its own hardcoded marker on map)
   const features = (initialLocations.features || []).filter(
@@ -125,6 +123,7 @@ export async function seedLocations() {
   );
   
   for (const feature of features) {
+    if (feature.id && existingIds.has(feature.id)) continue;
     const name = feature.properties.nombre;
     const category = feature.properties.categoria || "Otros";
     const imagePath = feature.properties.imagen || null;

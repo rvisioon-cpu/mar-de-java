@@ -1151,6 +1151,36 @@
         "type": "Point"
       },
       "id": "fd636507c1738a7c5e4f641b4f9c3010"
+    },
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Proyecto Bujele 1", "categoria": "Otros proyectos", "imagen": "ICONOS/otros-proyectos/logo-bujele.png" },
+      "geometry": { "coordinates": [-76.974706, -12.079552], "type": "Point" },
+      "id": "buleje-project-1"
+    },
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Proyecto Bujele 2", "categoria": "Otros proyectos", "imagen": "ICONOS/otros-proyectos/logo-bujele.png" },
+      "geometry": { "coordinates": [-76.93895, -12.11416], "type": "Point" },
+      "id": "buleje-project-2"
+    },
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Proyecto Bujele 3", "categoria": "Otros proyectos", "imagen": "ICONOS/otros-proyectos/logo-bujele.png" },
+      "geometry": { "coordinates": [-76.939771, -12.114096], "type": "Point" },
+      "id": "buleje-project-3"
+    },
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Proyecto Bujele 4", "categoria": "Otros proyectos", "imagen": "ICONOS/otros-proyectos/logo-bujele.png" },
+      "geometry": { "coordinates": [-76.941024, -12.115057], "type": "Point" },
+      "id": "buleje-project-4"
+    },
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Proyecto Bujele 5", "categoria": "Otros proyectos", "imagen": "ICONOS/otros-proyectos/logo-bujele.png" },
+      "geometry": { "coordinates": [-76.938594, -12.060145], "type": "Point" },
+      "id": "buleje-project-5"
     }
   ],
   "type": "FeatureCollection"

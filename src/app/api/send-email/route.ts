@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: config.resend.fromNoReply,
-      to: [config.resend.supportEmail],
+      to: config.resend.supportEmails,
       subject: `Nueva Solicitud: ${nombres} ${apellido}`,
       react: ContactEmail({
         nombres,
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         documentNumber,
         contactPreference,
         horario,
-        project: project || 'Residencial Mar de Java',
+        project: project || config.company.buildingName,
         mensaje
       }),
     });

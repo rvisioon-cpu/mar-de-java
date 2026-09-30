@@ -32,6 +32,7 @@ const CATEGORIES = [
   "Áreas verdes y Recreación",
   "Lifestyle",
   "Educación",
+  "Otros proyectos",
   "Otros"
 ];
 
@@ -85,6 +86,9 @@ const ICON_PRESETS: Record<string, string[]> = {
     "icons/EDUCACION/san_martin.png",
     "icons/EDUCACION/pacifico.png",
     "icons/EDUCACION/peruano_japones.png"
+  ],
+  "Otros proyectos": [
+    "ICONOS/otros-proyectos/logo-bujele.png"
   ]
 };
 
