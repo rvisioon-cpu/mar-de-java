@@ -10,6 +10,7 @@ import UnitCard from '@/components/floor/UnitCard';
 import MobileFloorNav from '@/components/floor/MobileFloorNav';
 import FullScreenToggle from '@/components/UI/FullScreenToggle';
 import PathBuilder from '@/components/floor/PathBuilder';
+import { Ruler } from 'lucide-react';
 import { preloadImages } from '@/utils/preload';
 import { useStore } from '@/store/useStore';
 import { getAssetUrl } from '@/utils/assets';
@@ -279,7 +280,26 @@ const FloorContent = () => {
         </div>
       </div>
 
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+        {/* Measuring & Drafting Toggle Button */}
+        <div className="relative group">
+          <button
+            onClick={() => setIsDrawingMode(!isDrawingMode)}
+            className={`p-2.5 rounded-full backdrop-blur-xl border transition-all hover:scale-110 cursor-pointer shadow-lg flex items-center justify-center ${
+              isDrawingMode
+                ? 'bg-amber-500 hover:bg-amber-600 border-amber-300 text-white ring-2 ring-amber-400/50'
+                : 'bg-brand-primary/80 hover:bg-brand-primary border-white/20 text-white'
+            }`}
+            aria-label="Medir y trazar planta"
+            title={isDrawingMode ? 'Cerrar herramienta de medición' : 'Medir y trazar planta'}
+          >
+            <Ruler size={22} className={isDrawingMode ? 'animate-pulse' : ''} />
+          </button>
+          <div className="absolute top-1/2 right-full mr-3 -translate-y-1/2 px-3 py-1 bg-black/80 backdrop-blur-sm text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+            {isDrawingMode ? 'Cerrar medición' : 'Medir y trazar planta'}
+          </div>
+        </div>
+
         <FullScreenToggle />
       </div>
 
@@ -387,6 +407,41 @@ const FloorContent = () => {
                   strokeDasharray="0.8 0.8"
                 />
               )}
+
+              {/* Segment Distance Badges / Measurements */}
+              {drawPoints.map((pt, idx) => {
+                const nextIdx = (idx + 1) % drawPoints.length;
+                if (drawPoints.length < 2) return null;
+                if (idx === drawPoints.length - 1 && drawPoints.length < 3) return null;
+
+                const nextPt = drawPoints[nextIdx];
+                const midX = (pt.x + nextPt.x) / 2;
+                const midY = (pt.y + nextPt.y) / 2;
+                const dist = Math.hypot(nextPt.x - pt.x, nextPt.y - pt.y);
+
+                return (
+                  <g key={`seg-${idx}`} transform={`translate(${midX}, ${midY})`}>
+                    <rect
+                      x="-2.5"
+                      y="-1"
+                      width="5"
+                      height="2"
+                      rx="0.5"
+                      className="fill-black/80 stroke-amber-400/80 stroke-[0.2]"
+                    />
+                    <text
+                      x="0"
+                      y="0.4"
+                      textAnchor="middle"
+                      fontSize="0.9"
+                      fontWeight="bold"
+                      className="fill-amber-300 font-mono select-none"
+                    >
+                      {dist.toFixed(1)}%
+                    </text>
+                  </g>
+                );
+              })}
 
               {/* Numbered Vertex Handles */}
               {drawPoints.map((pt, idx) => (

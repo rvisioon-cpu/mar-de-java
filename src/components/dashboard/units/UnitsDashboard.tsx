@@ -24,6 +24,7 @@ import {
   Compass,
   Mail,
   Copy,
+  Ruler,
 } from "lucide-react";
 import {
   createFloor,
@@ -739,6 +740,15 @@ export default function UnitsDashboard({
                     {/* Far Right: Floor Admin Controls */}
                     {isSuperAdmin && (
                       <div className="flex items-center gap-1 border-t md:border-t-0 md:border-l pt-2 md:pt-0 md:pl-3 border-base-200 shrink-0 ml-auto justify-end">
+                        <a
+                          href={`/plantas/${floor.id.replace('floor_', '')}?draw=true`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-ghost btn-circle btn-sm text-gray-500 hover:text-amber-500 hover:bg-base-200"
+                          title="Medir y trazar planta"
+                        >
+                          <Ruler className="w-4 h-4" />
+                        </a>
                         <button
                           onClick={(e) => openEditFloorModal(floor, e)}
                           className="btn btn-ghost btn-circle btn-sm text-gray-500 hover:text-brand-orange hover:bg-base-200"

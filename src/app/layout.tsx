@@ -26,6 +26,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: config.appName,
   description: config.appDescription,
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default async function RootLayout({
