@@ -21,9 +21,10 @@ const DirectionsPage = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    // Video Transition State & References
+    // Video Transition State & References (desactivado por ahora para cargar el mapa directamente)
+    const ENABLE_INTRO_VIDEO = false;
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [viewMode, setViewMode] = useState<'video' | 'map'>('video');
+    const [viewMode, setViewMode] = useState<'video' | 'map'>('map');
     // The "Explorar mapa" button appears once the intro video reaches the mark
     // below, so it is offered well before the clip finishes its first pass.
     const [showExploreButton, setShowExploreButton] = useState(false);
@@ -555,8 +556,8 @@ const DirectionsPage = () => {
                 </div>
             )}
 
-            {/* Video Transition Overlay */}
-            {viewMode === 'video' && (
+            {/* Video Transition Overlay (desactivado temporalmente) */}
+            {ENABLE_INTRO_VIDEO && viewMode === 'video' && (
                 <div className="fixed inset-0 z-40 bg-black flex items-center justify-center">
                     <video
                         ref={videoRef}
