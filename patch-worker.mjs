@@ -25,7 +25,7 @@ const pathname = url.pathname;
 if (pathname === '/api/map-config') {
   return Response.json(
     { token: env.MAPBOX_ACCESS_TOKEN || env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '' },
-    { headers: { 'cache-control': 'public, max-age=300, s-maxage=300' } }
+    { headers: { 'cache-control': 'no-store' } }
   );
 }
 
