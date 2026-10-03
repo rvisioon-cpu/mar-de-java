@@ -18,6 +18,17 @@ const patch = `
 // Serve static assets via Cloudflare Pages ASSETS and R2 bindings
 const url = new URL(request.url);
 const pathname = url.pathname;
+
+// NEXT_PUBLIC_* values are normally compiled into the browser bundle. Pages
+// secrets exist only on the Worker at runtime, so expose this public Mapbox
+// token through a tiny same-origin config response before the Next handler.
+if (pathname === '/api/map-config') {
+  return Response.json(
+    { token: env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '' },
+    { headers: { 'cache-control': 'public, max-age=300, s-maxage=300' } }
+  );
+}
+
 const hasExtension = /\\.[a-zA-Z0-9]+$/.test(pathname);
 const isStaticPrefix = 
   pathname.startsWith('/_next/') ||
