@@ -24,7 +24,7 @@ const pathname = url.pathname;
 // token through a tiny same-origin config response before the Next handler.
 if (pathname === '/api/map-config') {
   return Response.json(
-    { token: env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '' },
+    { token: env.MAPBOX_ACCESS_TOKEN || env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '' },
     { headers: { 'cache-control': 'public, max-age=300, s-maxage=300' } }
   );
 }

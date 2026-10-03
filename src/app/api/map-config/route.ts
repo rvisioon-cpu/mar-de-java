@@ -8,7 +8,7 @@ export async function GET() {
 
   try {
     const { env } = (await getCloudflareContext({ async: true })) as any;
-    token = env?.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || token;
+    token = env?.MAPBOX_ACCESS_TOKEN || env?.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || token;
   } catch {
     // Local Next.js development does not always have a Cloudflare context.
   }
