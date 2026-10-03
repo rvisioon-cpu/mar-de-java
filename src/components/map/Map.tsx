@@ -210,8 +210,8 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
 
   const markers = useMemo(() => {
     const list = displayLocations.map((feature: any) => {
-      const isOtherProject = feature.properties.categoria?.toLocaleLowerCase('es')
-        === OTHER_PROJECTS_CATEGORY.toLocaleLowerCase('es');
+      const cat = feature.properties.categoria?.toLocaleLowerCase('es')?.trim();
+      const isOtherProject = cat === 'proyectos' || cat === 'otros proyectos';
 
       return (
       <Marker

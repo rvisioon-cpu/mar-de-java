@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import MapComponent from '@/components/map/Map';
 import Sidebar from '@/components/layout/Sidebar';
-import { Search, MapPin, Menu, ChevronDown, ChevronUp, Car, Footprints, Bike, Navigation, X, Map as MapIcon } from 'lucide-react';
+import { Search, MapPin, Menu, ChevronDown, ChevronUp, Car, Footprints, Bike, Navigation, X, Map as MapIcon, Play } from 'lucide-react';
 import { type LocationFeature } from '@/data/locations';
 import { landmarks, landmarkPoiNames } from '@/data/landmarks';
 import { getLocations, seedLocations } from '@/app/actions/locations';
@@ -168,14 +168,41 @@ const DirectionsPage = () => {
         return () => { cancelled = true; };
     }, [transportMode, mapboxToken]);
 
-    const categories = Array.from(new Set(locationsFeatures.map((f: LocationFeature) => f.properties.categoria))).filter(Boolean) as string[];
+    const rawCategories = Array.from(new Set(locationsFeatures.map((f: LocationFeature) => f.properties.categoria))).filter(Boolean) as string[];
+    const otherCategories = rawCategories.filter(c => c !== 'Proyectos' && c !== 'Otros proyectos');
+    const categories: string[] = ['Hitos'];
+    if (rawCategories.some(c => c === 'Proyectos' || c === 'Otros proyectos')) {
+        categories.push('Proyectos');
+    }
+    categories.push(...otherCategories);
+
+    const filteredLandmarks = landmarks.filter((landmark) => {
+        const matchesSearch = landmark.name.toLowerCase().includes(filter.toLowerCase()) ||
+                              landmark.category.toLowerCase().includes(filter.toLowerCase());
+
+        let matchesCategory = true;
+        if (selectedCategory) {
+            if (selectedCategory === 'Hitos') {
+                matchesCategory = true;
+            } else {
+                matchesCategory = landmark.category.toLowerCase() === selectedCategory.toLowerCase();
+            }
+        }
+        return matchesSearch && matchesCategory;
+    });
 
     const filteredLocations = locationsFeatures.filter((feature: LocationFeature) => {
-        // The hitos carry their own marker, so the plain POI would double-pin them.
+        // The hitos carry their own marker and are rendered first from filteredLandmarks
         if (landmarkPoiNames.has(feature.properties.nombre)) return false;
 
+        if (selectedCategory === 'Hitos') return false;
+
         const matchesSearch = feature.properties.nombre.toLowerCase().includes(filter.toLowerCase());
-        const matchesCategory = selectedCategory ? feature.properties.categoria === selectedCategory : true;
+        const matchesCategory = selectedCategory
+            ? (selectedCategory === 'Proyectos'
+                ? (feature.properties.categoria === 'Proyectos' || feature.properties.categoria === 'Otros proyectos')
+                : feature.properties.categoria === selectedCategory)
+            : true;
         return matchesSearch && matchesCategory;
     });
 
@@ -468,31 +495,115 @@ const DirectionsPage = () => {
 
                     <div className="flex-1 overflow-y-auto p-4 pt-4 space-y-2">
                         {searchMode === 'explore' ? (
-                            filteredLocations.length > 0 ? (
-                                filteredLocations.map((feature: any) => (
-                                    <div
-                                        key={feature.id || feature.properties.nombre}
-                                        onClick={() => handleLocationSelect(feature.geometry.coordinates, feature.properties.nombre)}
-                                        className="p-3 rounded-lg border border-gray-100 hover:border-brand-orange/30 hover:bg-orange-50/30 transition-all cursor-pointer group flex items-start gap-3"
-                                    >
-                                        <div className="w-10 h-10 rounded-full bg-white p-1.5 shadow-sm border border-gray-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                            {feature.properties.imagen ? (
-                                                <img
-                                                    src={feature.properties.imagen.startsWith('http') || feature.properties.imagen.startsWith('/') ? feature.properties.imagen : `/${feature.properties.imagen}`}
-                                                    alt={feature.properties.nombre}
-                                                    className="w-full h-full object-contain"
-                                                    onError={(e) => e.currentTarget.style.display = 'none'}
-                                                />
-                                            ) : (
-                                                <MapPin size={20} className="text-gray-400 group-hover:text-brand-orange" />
-                                            )}
-                                        </div>
-                                        <div>
-                                            <h3 className="text-sm font-bold text-gray-800">{feature.properties.nombre}</h3>
-                                            <p className="text-xs text-brand-orange font-medium">{feature.properties.categoria}</p>
-                                        </div>
-                                    </div>
-                                ))
+                            (filteredLandmarks.length > 0 || filteredLocations.length > 0) ? (
+                                <>
+                                    {/* Hitos renderizados primero */}
+                                    {filteredLandmarks.map((landmark) => {
+                                        const isSelected = selectedName === landmark.name;
+                                        const duration = landmarkDurations[landmark.slug];
+                                        return (
+                                            <div
+                                                key={landmark.slug}
+                                                onClick={() => handleLocationSelect(landmark.coordinates, landmark.name)}
+                                                className={`p-2.5 rounded-xl border transition-all cursor-pointer group flex items-center justify-between gap-3 shadow-xs ${
+                                                    isSelected
+                                                        ? 'border-brand-orange bg-orange-50/70 ring-1 ring-brand-orange'
+                                                        : 'border-brand-orange/30 bg-orange-50/20 hover:border-brand-orange hover:bg-orange-50/45'
+                                                }`}
+                                            >
+                                                <div className="flex items-center gap-3 min-w-0">
+                                                    <div
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setOpenLandmarkSlug(landmark.slug);
+                                                        }}
+                                                        className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-brand-orange/20 shadow-xs bg-black/5"
+                                                        title="Reproducir clip"
+                                                    >
+                                                        <img
+                                                            src={getAssetUrl(landmark.poster)}
+                                                            alt={landmark.name}
+                                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                            onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                                                        />
+                                                        <div className="absolute inset-0 bg-black/25 flex items-center justify-center hover:bg-black/10 transition-colors">
+                                                            <div className="w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center shadow">
+                                                                <Play size={9} className="fill-current ml-0.5" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="min-w-0">
+                                                        <div className="flex items-center gap-1.5 flex-wrap">
+                                                            <h3 className="text-sm font-bold text-gray-900 group-hover:text-brand-orange transition-colors truncate">
+                                                                {landmark.name}
+                                                            </h3>
+                                                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-brand-orange/15 text-brand-orange tracking-wide uppercase">
+                                                                Hito
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500">
+                                                            <span className="text-brand-orange font-medium">{landmark.category}</span>
+                                                            {duration && (
+                                                                <>
+                                                                    <span className="text-gray-300">•</span>
+                                                                    <span className="font-medium text-gray-600">
+                                                                        A {formatDuration(duration)}
+                                                                    </span>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setOpenLandmarkSlug(landmark.slug);
+                                                    }}
+                                                    className="px-2.5 py-1.5 rounded-lg bg-white/90 border border-brand-orange/20 hover:bg-brand-orange hover:text-white text-brand-orange transition-all shrink-0 flex items-center gap-1.5 text-xs font-semibold shadow-xs"
+                                                    title="Ver clip"
+                                                >
+                                                    <Play size={11} className="fill-current" />
+                                                    <span className="hidden sm:inline">Ver clip</span>
+                                                </button>
+                                            </div>
+                                        );
+                                    })}
+
+                                    {/* POIs regulares */}
+                                    {filteredLocations.map((feature: any) => {
+                                        const isSelected = selectedName === feature.properties.nombre;
+                                        return (
+                                            <div
+                                                key={feature.id || feature.properties.nombre}
+                                                onClick={() => handleLocationSelect(feature.geometry.coordinates, feature.properties.nombre)}
+                                                className={`p-3 rounded-lg border transition-all cursor-pointer group flex items-start gap-3 ${
+                                                    isSelected
+                                                        ? 'border-brand-orange bg-orange-50/60 ring-1 ring-brand-orange'
+                                                        : 'border-gray-100 hover:border-brand-orange/30 hover:bg-orange-50/30'
+                                                }`}
+                                            >
+                                                <div className="w-10 h-10 rounded-full bg-white p-1.5 shadow-sm border border-gray-100 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                                    {feature.properties.imagen ? (
+                                                        <img
+                                                            src={feature.properties.imagen.startsWith('http') || feature.properties.imagen.startsWith('/') ? feature.properties.imagen : `/${feature.properties.imagen}`}
+                                                            alt={feature.properties.nombre}
+                                                            className="w-full h-full object-contain"
+                                                            onError={(e) => e.currentTarget.style.display = 'none'}
+                                                        />
+                                                    ) : (
+                                                        <MapPin size={20} className="text-gray-400 group-hover:text-brand-orange" />
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-sm font-bold text-gray-800">{feature.properties.nombre}</h3>
+                                                    <p className="text-xs text-brand-orange font-medium">{feature.properties.categoria}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </>
                             ) : (
                                 <div className="text-center py-10 text-gray-400 text-sm">
                                     No se encontraron resultados

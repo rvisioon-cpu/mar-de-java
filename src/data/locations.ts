@@ -23,7 +23,7 @@ export const PROJECT_LOCATION = {
   markerImage: "ICONOS/proyecto/logo-proyecto.png",
 };
 
-export const OTHER_PROJECTS_CATEGORY = "Otros proyectos";
+export const OTHER_PROJECTS_CATEGORY = "Proyectos";
 
 export const locationsData: LocationCollection = {
   features: [
