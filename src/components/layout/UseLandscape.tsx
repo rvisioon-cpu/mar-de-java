@@ -40,8 +40,9 @@ const UseLandscape = () => {
     }, []);
 
     useEffect(() => {
-        // Exclude dashboard, login, and ubicacion routes from global overlay
-        if (pathname?.startsWith('/dashboard') || pathname?.startsWith('/login') || pathname?.startsWith('/ubicacion')) {
+        // Keep the public landing page readable in portrait mode. The immersive
+        // showroom still uses the landscape prompt and rotation below.
+        if (pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login') || pathname?.startsWith('/ubicacion')) {
             setShowOverlay(false);
             setForcedLandscape(false);
             return;
