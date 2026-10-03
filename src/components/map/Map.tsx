@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useMemo, useState, useEffect } from 'react';
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { useStore } from '@/store/useStore';
 import MapboxMap, {
   Marker as MapboxMarker,
@@ -103,6 +103,60 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
 
   // Use passed locations or default to all if not provided (fallback)
   const displayLocations = locations || locationsData.features;
+
+  const hideMapDefaultPois = useCallback((map: any) => {
+    if (!map) return;
+
+    // For Mapbox Standard style (imported as 'basemap')
+    try {
+      if (typeof map.setConfigProperty === 'function') {
+        map.setConfigProperty('basemap', 'showPointOfInterestLabels', false);
+        map.setConfigProperty('basemap', 'showTransitLabels', false);
+      }
+    } catch {
+      // not Mapbox standard or not supported
+    }
+
+    // For custom style layers or classic Mapbox / MapLibre layers
+    try {
+      if (typeof map.getStyle === 'function') {
+        const style = map.getStyle();
+        if (style && Array.isArray(style.layers)) {
+          style.layers.forEach((layer: any) => {
+            const id = (layer.id || '').toLowerCase();
+            const sourceLayer = (layer['source-layer'] || '').toLowerCase();
+            if (
+              sourceLayer.includes('poi') ||
+              sourceLayer.includes('transit') ||
+              id.includes('poi') ||
+              id.includes('transit')
+            ) {
+              try {
+                map.setLayoutProperty(layer.id, 'visibility', 'none');
+              } catch {}
+            }
+          });
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleMapLoad = useCallback((e: any) => {
+    const map = e.target;
+    if (!map) return;
+
+    hideMapDefaultPois(map);
+
+    try {
+      if (typeof map.on === 'function') {
+        map.on('style.load', () => {
+          hideMapDefaultPois(map);
+        });
+      }
+    } catch {}
+  }, [hideMapDefaultPois]);
 
   // Fetch Route when destination changes
   useEffect(() => {
@@ -322,6 +376,7 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
         doubleClickZoom={true}
         touchZoomRotate={true}
         touchPitch={true}
+        onLoad={handleMapLoad}
       >
         <NavigationControl position="top-right" />
         <FullscreenControl position="top-right" />
