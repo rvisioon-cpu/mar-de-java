@@ -1,8 +1,25 @@
 "use client";
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { useStore } from '@/store/useStore';
-import Map, { Marker, NavigationControl, FullscreenControl, ScaleControl, Source, Layer, Popup } from 'react-map-gl/mapbox';
-// import 'mapbox-gl/dist/mapbox-gl.css';
+import MapboxMap, {
+  Marker as MapboxMarker,
+  NavigationControl as MapboxNavigationControl,
+  FullscreenControl as MapboxFullscreenControl,
+  ScaleControl as MapboxScaleControl,
+  Source as MapboxSource,
+  Layer as MapboxLayer,
+  Popup as MapboxPopup,
+} from 'react-map-gl/mapbox';
+import MapLibreMap, {
+  Marker as MapLibreMarker,
+  NavigationControl as MapLibreNavigationControl,
+  FullscreenControl as MapLibreFullscreenControl,
+  ScaleControl as MapLibreScaleControl,
+  Source as MapLibreSource,
+  Layer as MapLibreLayer,
+  Popup as MapLibrePopup,
+} from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { MapPin } from 'lucide-react';
 import { locationsData, OTHER_PROJECTS_CATEGORY, PROJECT_LOCATION } from '@/data/locations';
 import { getAssetUrl } from '@/utils/assets';
@@ -12,6 +29,17 @@ import type { Landmark } from '@/data/landmarks';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '';
 const MAPBOX_STYLE = process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || 'mapbox://styles/rvisioon/cmu75eceh006i01s72u5e54ee';
+
+// Each renderer's child controls depend on its own React context, so select
+// the complete component family together at build time.
+const Map = (MAPBOX_TOKEN ? MapboxMap : MapLibreMap) as any;
+const Marker = (MAPBOX_TOKEN ? MapboxMarker : MapLibreMarker) as any;
+const NavigationControl = (MAPBOX_TOKEN ? MapboxNavigationControl : MapLibreNavigationControl) as any;
+const FullscreenControl = (MAPBOX_TOKEN ? MapboxFullscreenControl : MapLibreFullscreenControl) as any;
+const ScaleControl = (MAPBOX_TOKEN ? MapboxScaleControl : MapLibreScaleControl) as any;
+const Source = (MAPBOX_TOKEN ? MapboxSource : MapLibreSource) as any;
+const Layer = (MAPBOX_TOKEN ? MapboxLayer : MapLibreLayer) as any;
+const Popup = (MAPBOX_TOKEN ? MapboxPopup : MapLibrePopup) as any;
 
 // Pages injects NEXT_PUBLIC_* values at build time. Keep the map usable when
 // that build variable is missing instead of letting Mapbox abort initialization
@@ -283,7 +311,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
         initialViewState={INITIAL_VIEW_STATE}
         style={{ width: '100%', height: '100%' }}
         mapStyle={MAPBOX_TOKEN ? MAPBOX_STYLE : FALLBACK_MAP_STYLE}
-        mapboxAccessToken={MAPBOX_TOKEN || undefined}
+        {...(MAPBOX_TOKEN ? { mapboxAccessToken: MAPBOX_TOKEN } : {})}
         attributionControl={!MAPBOX_TOKEN}
         padding={padding}
         scrollZoom={true}
