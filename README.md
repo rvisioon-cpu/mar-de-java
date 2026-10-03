@@ -26,6 +26,8 @@ Follow these steps to set up the project for the first time:
    ```
    *Note: Ensure you set at least `NEXTAUTH_SECRET`, `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN`, and `NEXT_PUBLIC_ASSET_BASE_URL`.*
 
+   For Cloudflare Pages production, configure `MAPBOX_ACCESS_TOKEN` as an encrypted secret. The map loads this runtime value from `/api/map-config`.
+
 4. **Initialize Database:**
    This project uses Cloudflare D1. Initialize your local database with migrations and seed data:
    ```bash
