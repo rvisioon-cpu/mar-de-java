@@ -13,6 +13,28 @@ import type { Landmark } from '@/data/landmarks';
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '';
 const MAPBOX_STYLE = process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || 'mapbox://styles/rvisioon/cmu75eceh006i01s72u5e54ee';
 
+// Pages injects NEXT_PUBLIC_* values at build time. Keep the map usable when
+// that build variable is missing instead of letting Mapbox abort initialization
+// before any marker can mount.
+const FALLBACK_MAP_STYLE = {
+  version: 8 as const,
+  sources: {
+    openStreetMap: {
+      type: 'raster' as const,
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '© OpenStreetMap contributors',
+    },
+  },
+  layers: [
+    {
+      id: 'open-street-map',
+      type: 'raster' as const,
+      source: 'openStreetMap',
+    },
+  ],
+};
+
 // Initial view state centering on Residencial Mar de Java (Salamanca, Ate, Lima)
 const INITIAL_VIEW_STATE = {
   latitude: PROJECT_LOCATION.coordinates[1],
@@ -260,9 +282,9 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
         ref={mapRef}
         initialViewState={INITIAL_VIEW_STATE}
         style={{ width: '100%', height: '100%' }}
-        mapStyle={MAPBOX_STYLE}
-        mapboxAccessToken={MAPBOX_TOKEN}
-        attributionControl={false}
+        mapStyle={MAPBOX_TOKEN ? MAPBOX_STYLE : FALLBACK_MAP_STYLE}
+        mapboxAccessToken={MAPBOX_TOKEN || undefined}
+        attributionControl={!MAPBOX_TOKEN}
         padding={padding}
         scrollZoom={true}
         dragPan={true}
