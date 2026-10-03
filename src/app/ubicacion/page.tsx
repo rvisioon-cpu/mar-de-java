@@ -16,6 +16,7 @@ const DirectionsPage = () => {
     const isForcedLandscape = useStore(state => state.isForcedLandscape);
     const setForcedLandscape = useStore(state => state.setForcedLandscape);
     const [locations, setLocations] = useState<any[]>([]);
+    const [mapboxToken, setMapboxToken] = useState('');
     const [filter, setFilter] = useState('');
     const [selectedName, setSelectedName] = useState<string | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -88,6 +89,20 @@ const DirectionsPage = () => {
         });
     }, []);
 
+    // Cloudflare Pages exposes secrets to the Worker at runtime. Fetch the
+    // public Mapbox token from our own route instead of relying on build-time
+    // NEXT_PUBLIC_* replacement.
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/api/map-config')
+            .then(response => response.ok ? response.json() : Promise.reject(new Error('Map config unavailable')))
+            .then(({ token }) => {
+                if (!cancelled && typeof token === 'string') setMapboxToken(token);
+            })
+            .catch(error => console.error('Error loading map configuration:', error));
+        return () => { cancelled = true; };
+    }, []);
+
     // Map database locations to GeoJSON features
     const locationsFeatures = useMemo<LocationFeature[]>(() => {
         return locations.map(loc => ({
@@ -131,13 +146,12 @@ const DirectionsPage = () => {
     // disagree by minutes on some of these, which would show the same trip
     // with two different times on screen at once.
     useEffect(() => {
-        const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-        if (!MAPBOX_TOKEN) return;
+        if (!mapboxToken) return;
         let cancelled = false;
 
         const origin = `${PROJECT_COORDS[0]},${PROJECT_COORDS[1]}`;
         Promise.all(landmarks.map(landmark =>
-            fetch(`https://api.mapbox.com/directions/v5/mapbox/${transportMode}/${origin};${landmark.coordinates[0]},${landmark.coordinates[1]}?access_token=${MAPBOX_TOKEN}`)
+            fetch(`https://api.mapbox.com/directions/v5/mapbox/${transportMode}/${origin};${landmark.coordinates[0]},${landmark.coordinates[1]}?access_token=${mapboxToken}`)
                 .then(res => res.json() as Promise<any>)
                 .then(data => data?.routes?.[0]?.duration as number | undefined)
                 .catch(() => undefined)
@@ -152,7 +166,7 @@ const DirectionsPage = () => {
         });
 
         return () => { cancelled = true; };
-    }, [transportMode]);
+    }, [transportMode, mapboxToken]);
 
     const categories = Array.from(new Set(locationsFeatures.map((f: LocationFeature) => f.properties.categoria))).filter(Boolean) as string[];
 
@@ -166,13 +180,12 @@ const DirectionsPage = () => {
     });
 
     useEffect(() => {
-        const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
         if (searchMode === 'directions' && filter.length > 2) {
             const timer = setTimeout(async () => {
                 try {
-                    if (!MAPBOX_TOKEN) return;
+                    if (!mapboxToken) return;
                     const response = await fetch(
-                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(filter)}.json?access_token=${MAPBOX_TOKEN}&country=pe&limit=5&language=es&proximity=-76.97538,-12.079162`
+                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(filter)}.json?access_token=${mapboxToken}&country=pe&limit=5&language=es&proximity=-76.97538,-12.079162`
                     );
                     const data = (await response.json()) as any;
                     setSearchResults(data.features || []);
@@ -184,7 +197,7 @@ const DirectionsPage = () => {
         } else if (searchMode === 'directions') {
             setSearchResults([]);
         }
-    }, [filter, searchMode]);
+    }, [filter, searchMode, mapboxToken]);
 
     const handleLocationSelect = (coords: [number, number], name?: string) => {
         if (name) setSelectedName(name);
@@ -230,6 +243,7 @@ const DirectionsPage = () => {
         >
             <div className="absolute inset-0 z-0">
                 <MapComponent
+                    mapboxToken={mapboxToken}
                     destination={destination}
                     origin={originLocation}
                     onMarkerClick={(coords, name) => {

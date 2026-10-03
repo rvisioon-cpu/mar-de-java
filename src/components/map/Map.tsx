@@ -27,19 +27,7 @@ import config from '@/config/config';
 import LandmarkMarker from './LandmarkMarker';
 import type { Landmark } from '@/data/landmarks';
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '';
 const MAPBOX_STYLE = process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || 'mapbox://styles/rvisioon/cmu75eceh006i01s72u5e54ee';
-
-// Each renderer's child controls depend on its own React context, so select
-// the complete component family together at build time.
-const Map = (MAPBOX_TOKEN ? MapboxMap : MapLibreMap) as any;
-const Marker = (MAPBOX_TOKEN ? MapboxMarker : MapLibreMarker) as any;
-const NavigationControl = (MAPBOX_TOKEN ? MapboxNavigationControl : MapLibreNavigationControl) as any;
-const FullscreenControl = (MAPBOX_TOKEN ? MapboxFullscreenControl : MapLibreFullscreenControl) as any;
-const ScaleControl = (MAPBOX_TOKEN ? MapboxScaleControl : MapLibreScaleControl) as any;
-const Source = (MAPBOX_TOKEN ? MapboxSource : MapLibreSource) as any;
-const Layer = (MAPBOX_TOKEN ? MapboxLayer : MapLibreLayer) as any;
-const Popup = (MAPBOX_TOKEN ? MapboxPopup : MapLibrePopup) as any;
 
 // Pages injects NEXT_PUBLIC_* values at build time. Keep the map usable when
 // that build variable is missing instead of letting Mapbox abort initialization
@@ -78,6 +66,7 @@ interface RouteStats {
 }
 
 interface MapProps {
+    mapboxToken?: string;
     destination?: [number, number] | null; // [lng, lat]
     origin?: [number, number] | null; // [lng, lat]
     padding?: { top: number; bottom: number; left: number; right: number };
@@ -93,12 +82,24 @@ interface MapProps {
     onLandmarkOpen?: (slug: string) => void;
 }
 
-export default function MapComponent({ destination, origin, padding, onMarkerClick, transportMode = 'driving', onRouteCalculated, locations, landmarks, landmarkDurations, openLandmarkSlug, onLandmarkOpen }: MapProps) {
+export default function MapComponent({ mapboxToken = '', destination, origin, padding, onMarkerClick, transportMode = 'driving', onRouteCalculated, locations, landmarks, landmarkDurations, openLandmarkSlug, onLandmarkOpen }: MapProps) {
   const mapRef = useRef<any>(null);
   const [routeGeoJSON, setRouteGeoJSON] = useState<any>(null);
   const [routeStats, setRouteStats] = useState<RouteStats | null>(null);
   // Only one hito card shows at a time, and it is lifted above the project pin.
   const [activeLandmark, setActiveLandmark] = useState<string | null>(null);
+
+  // The Pages secret is available at runtime, not while Next.js compiles the
+  // browser bundle. Select the complete renderer family after loading it from
+  // /api/map-config so every child uses the matching React map context.
+  const Map = (mapboxToken ? MapboxMap : MapLibreMap) as any;
+  const Marker = (mapboxToken ? MapboxMarker : MapLibreMarker) as any;
+  const NavigationControl = (mapboxToken ? MapboxNavigationControl : MapLibreNavigationControl) as any;
+  const FullscreenControl = (mapboxToken ? MapboxFullscreenControl : MapLibreFullscreenControl) as any;
+  const ScaleControl = (mapboxToken ? MapboxScaleControl : MapLibreScaleControl) as any;
+  const Source = (mapboxToken ? MapboxSource : MapLibreSource) as any;
+  const Layer = (mapboxToken ? MapboxLayer : MapLibreLayer) as any;
+  const Popup = (mapboxToken ? MapboxPopup : MapLibrePopup) as any;
 
   // Use passed locations or default to all if not provided (fallback)
   const displayLocations = locations || locationsData.features;
@@ -107,7 +108,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
   useEffect(() => {
     const fetchRoute = async () => {
         try {
-            if (!MAPBOX_TOKEN) return;
+            if (!mapboxToken) return;
 
             // Determine start and end points
             let start: [number, number];
@@ -132,7 +133,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
             // Fetch estimates for all modes
             const modes = ['driving', 'walking', 'cycling'] as const;
             const requests = modes.map(mode => 
-                fetch(`https://api.mapbox.com/directions/v5/mapbox/${mode}/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${MAPBOX_TOKEN}`)
+                fetch(`https://api.mapbox.com/directions/v5/mapbox/${mode}/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxToken}`)
                 .then(res => res.json() as Promise<any>)
             );
 
@@ -205,7 +206,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
     };
 
     fetchRoute();
-  }, [destination, origin, padding, transportMode]);
+  }, [destination, origin, padding, transportMode, mapboxToken, onRouteCalculated]);
 
   const markers = useMemo(() => {
     const list = displayLocations.map((feature: any) => {
@@ -266,7 +267,7 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
       }
 
       return list;
-  }, [onMarkerClick, origin, displayLocations]);
+  }, [onMarkerClick, origin, displayLocations, mapboxToken]);
 
     const isForcedLandscape = useStore(state => state.isForcedLandscape);
 
@@ -307,12 +308,13 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
   return (
     <div className="w-full h-full relative">
       <Map
+        key={mapboxToken ? 'mapbox' : 'maplibre'}
         ref={mapRef}
         initialViewState={INITIAL_VIEW_STATE}
         style={{ width: '100%', height: '100%' }}
-        mapStyle={MAPBOX_TOKEN ? MAPBOX_STYLE : FALLBACK_MAP_STYLE}
-        {...(MAPBOX_TOKEN ? { mapboxAccessToken: MAPBOX_TOKEN } : {})}
-        attributionControl={!MAPBOX_TOKEN}
+        mapStyle={mapboxToken ? MAPBOX_STYLE : FALLBACK_MAP_STYLE}
+        {...(mapboxToken ? { mapboxAccessToken: mapboxToken } : {})}
+        attributionControl={!mapboxToken}
         padding={padding}
         scrollZoom={true}
         dragPan={true}
