@@ -17,6 +17,14 @@ export interface LocationCollection {
   features: LocationFeature[];
 }
 
+export const PROJECT_LOCATION = {
+  name: "Mar de Java",
+  coordinates: [-76.97538, -12.079162] as [number, number],
+  markerImage: "ICONOS/proyecto/logo-proyecto.png",
+};
+
+export const OTHER_PROJECTS_CATEGORY = "Otros proyectos";
+
 export const locationsData: LocationCollection = {
   features: [
     {

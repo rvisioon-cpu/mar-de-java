@@ -48,6 +48,8 @@ export const assetManifest: string[] = [
     // Location Assets
     'location/photos/FOTO_VISTA_PLANETA_PERU.webp',
     'location/videos/video_mapa.mp4',
+    'ICONOS/proyecto/logo-proyecto.png',
+    'ICONOS/otros-proyectos/logo-bujele.png',
 
     // Building Assets
     'building/photos/0.1.webp',

@@ -4,7 +4,7 @@ import { useStore } from '@/store/useStore';
 import Map, { Marker, NavigationControl, FullscreenControl, ScaleControl, Source, Layer, Popup } from 'react-map-gl/mapbox';
 // import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin } from 'lucide-react';
-import { locationsData } from '@/data/locations';
+import { locationsData, OTHER_PROJECTS_CATEGORY, PROJECT_LOCATION } from '@/data/locations';
 import { getAssetUrl } from '@/utils/assets';
 import config from '@/config/config';
 import LandmarkMarker from './LandmarkMarker';
@@ -15,8 +15,8 @@ const MAPBOX_STYLE = process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || 'mapbox://style
 
 // Initial view state centering on Residencial Mar de Java (Salamanca, Ate, Lima)
 const INITIAL_VIEW_STATE = {
-  latitude: -12.079162,
-  longitude: -76.97538,
+  latitude: PROJECT_LOCATION.coordinates[1],
+  longitude: PROJECT_LOCATION.coordinates[0],
   zoom: 16,
   bearing: 0,
   pitch: 0
@@ -158,7 +158,11 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
   }, [destination, origin, padding, transportMode]);
 
   const markers = useMemo(() => {
-    const list = displayLocations.map((feature: any) => (
+    const list = displayLocations.map((feature: any) => {
+      const isOtherProject = feature.properties.categoria?.toLocaleLowerCase('es')
+        === OTHER_PROJECTS_CATEGORY.toLocaleLowerCase('es');
+
+      return (
       <Marker
         key={feature.id || feature.properties.nombre}
         longitude={feature.geometry.coordinates[0]}
@@ -171,9 +175,12 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
       >
         <div className="relative group cursor-pointer hover:z-50">
             {feature.properties.imagen ? (
-                <div className="w-12 h-12 bg-white rounded-full p-2 shadow-md flex items-center justify-center hover:scale-125 transition-transform border border-brand-orange/20">
+                <div className={isOtherProject
+                    ? "w-16 h-16 drop-shadow-lg hover:scale-110 transition-transform"
+                    : "w-12 h-12 bg-white rounded-full p-2 shadow-md flex items-center justify-center hover:scale-125 transition-transform border border-brand-orange/20"
+                }>
                     <img 
-                        src={feature.properties.imagen.startsWith('http') || feature.properties.imagen.startsWith('/') ? feature.properties.imagen : `/${feature.properties.imagen}`}
+                        src={getAssetUrl(feature.properties.imagen)}
                         alt={feature.properties.nombre}
                         className="w-full h-full object-contain"
                         onError={(e) => {
@@ -186,7 +193,8 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
             )}
         </div>
       </Marker>
-    ));
+      );
+    });
 
       // Add Origin Marker if exists
       if (origin) {
@@ -329,17 +337,13 @@ export default function MapComponent({ destination, origin, padding, onMarkerCli
                     </div>
                  </div>
 
-                 {/* Pin/Logo */}
-                 <div className="relative z-50 group-hover:scale-110 transition-transform duration-300">
-                     <div className="w-20 h-20 bg-white rounded-full p-2 shadow-xl border-2 border-brand-orange relative z-10 flex items-center justify-center">
-                        <img
-                            src="/identity/identity_logo_ISOTIPO.png"
-                            className="w-full h-full object-contain" // Use contain to fit logo
-                            alt={config.appName}
-                        />
-                     </div>
-                     {/* Triangle pointer */}
-                     <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-3 w-9 h-9 bg-brand-orange rotate-45 border-r border-b border-brand-orange/50 shadow-sm z-0"></div>
+                 {/* The supplied artwork already includes the full map-pin silhouette. */}
+                 <div className="relative z-50 w-24 h-24 drop-shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <img
+                        src={getAssetUrl(PROJECT_LOCATION.markerImage)}
+                        className="w-full h-full object-contain"
+                        alt={config.appName}
+                    />
                  </div>
             </div>
         </Marker>

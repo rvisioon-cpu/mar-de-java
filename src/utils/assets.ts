@@ -22,6 +22,12 @@ export const getAssetUrl = (path: string): string => {
   
   // Ensure path doesn't start with slash
   const cleanPathNoSlash = cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath;
+
+  // Map icons are bundled with the application under public/ICONOS. They must
+  // stay same-origin even when the rest of the media library is served by R2.
+  if (cleanPathNoSlash.startsWith('ICONOS/')) {
+    return `/${cleanPathNoSlash}`;
+  }
   
   // Si es un archivo de video, lo servimos obligatoriamente por el proxy same-origin
   // para evitar problemas de CORS que impiden el streaming/Range requests en el navegador.
@@ -53,4 +59,3 @@ export const getCanvasImageUrl = (path: string): string => {
 };
 
 export { assetManifest } from '../data/asset-manifest';
-

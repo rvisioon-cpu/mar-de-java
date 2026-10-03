@@ -163,6 +163,254 @@ html, body {
   }
 }
 
+/* Left showroom menu ------------------------------------------------------ */
+.java-ocean-backdrop {
+  background:
+    radial-gradient(circle at 72% 18%, rgba(86, 169, 202, .16), transparent 34%),
+    linear-gradient(180deg, rgba(3, 22, 45, .48), rgba(3, 11, 25, .7));
+  -webkit-backdrop-filter: blur(12px) saturate(.82);
+  backdrop-filter: blur(12px) saturate(.82);
+}
+
+.java-ocean-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(96, 182, 211, .11), transparent 42%),
+    linear-gradient(90deg, rgba(18, 76, 109, .2), transparent 48%);
+  pointer-events: none;
+}
+
+.java-underwater-rays {
+  position: absolute;
+  inset: -18% -12% 20% 10%;
+  transform: skewX(-10deg);
+  transform-origin: top center;
+  background:
+    linear-gradient(106deg, transparent 14%, rgba(184, 230, 242, .11) 19%, transparent 27%),
+    linear-gradient(101deg, transparent 38%, rgba(143, 207, 227, .075) 45%, transparent 53%),
+    linear-gradient(110deg, transparent 62%, rgba(195, 235, 244, .07) 68%, transparent 76%);
+  filter: blur(10px);
+  opacity: .78;
+  animation: java-rays-sway 11s ease-in-out infinite alternate;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.java-caustics {
+  position: absolute;
+  inset: -24%;
+  background-image:
+    repeating-radial-gradient(ellipse at 32% 18%, transparent 0 18px, rgba(182, 231, 241, .12) 20px 22px, transparent 25px 48px),
+    repeating-radial-gradient(ellipse at 68% 36%, transparent 0 26px, rgba(122, 203, 225, .09) 29px 31px, transparent 34px 64px);
+  background-size: 190px 125px, 250px 170px;
+  mix-blend-mode: screen;
+  filter: blur(7px);
+  opacity: .36;
+  mask-image: linear-gradient(to bottom, black, rgba(0,0,0,.55) 55%, transparent 94%);
+  animation: java-caustics-drift 16s linear infinite;
+  pointer-events: none;
+  will-change: transform, background-position;
+}
+
+.java-marine-dust,
+.java-dust-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.java-dust-layer {
+  inset: -12%;
+  background-repeat: repeat;
+  will-change: transform;
+}
+
+.java-dust-layer--far {
+  background-image: radial-gradient(circle, rgba(212, 241, 247, .28) 0 1px, transparent 1.4px);
+  background-size: 91px 79px;
+  opacity: .28;
+  animation: java-dust-far 28s linear infinite;
+}
+
+.java-dust-layer--mid {
+  background-image: radial-gradient(circle, rgba(224, 247, 250, .36) 0 1.2px, transparent 1.8px);
+  background-size: 137px 113px;
+  background-position: 43px 27px;
+  opacity: .32;
+  animation: java-dust-mid 21s linear infinite;
+}
+
+.java-dust-layer--near {
+  background-image: radial-gradient(circle, rgba(227, 248, 250, .32) 0 1.7px, transparent 2.5px);
+  background-size: 211px 173px;
+  background-position: 82px 64px;
+  opacity: .24;
+  filter: blur(.35px);
+  animation: java-dust-near 15s linear infinite;
+}
+
+.java-bubbles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.java-bubble {
+  position: absolute;
+  bottom: -50px;
+  left: var(--bubble-left);
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border: 1px solid rgba(218, 244, 255, .48);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 26%, rgba(255,255,255,.52), rgba(205,240,252,.13) 34%, rgba(255,255,255,.025) 68%);
+  box-shadow:
+    inset -4px -5px 12px rgba(5, 35, 61, .3),
+    inset 2px 2px 5px rgba(255,255,255,.15),
+    0 0 18px rgba(163, 218, 235, .16);
+  opacity: var(--bubble-opacity, .2);
+  animation: java-bubble-rise var(--bubble-duration) ease-in infinite,
+             java-bubble-drift var(--bubble-drift) ease-in-out infinite alternate;
+  animation-delay: var(--bubble-delay), var(--bubble-delay);
+  will-change: transform, margin-left;
+}
+
+.java-bubble--1 { --bubble-left: 8%; --bubble-size: 34px; --bubble-duration: 16s; --bubble-drift: 5s; --bubble-delay: -2s; --bubble-opacity: .4; }
+.java-bubble--2 { --bubble-left: 18%; --bubble-size: 14px; --bubble-duration: 11s; --bubble-drift: 4s; --bubble-delay: -7s; --bubble-opacity: .31; }
+.java-bubble--3 { --bubble-left: 31%; --bubble-size: 11px; --bubble-duration: 20s; --bubble-drift: 6s; --bubble-delay: -12s; --bubble-opacity: .45; }
+.java-bubble--4 { --bubble-left: 42%; --bubble-size: 28px; --bubble-duration: 17s; --bubble-drift: 5s; --bubble-delay: -9s; --bubble-opacity: .36; }
+.java-bubble--5 { --bubble-left: 56%; --bubble-size: 40px; --bubble-duration: 21s; --bubble-drift: 7s; --bubble-delay: -16s; --bubble-opacity: .28; }
+.java-bubble--6 { --bubble-left: 72%; --bubble-size: 13px; --bubble-duration: 27s; --bubble-drift: 5s; --bubble-delay: -4s; --bubble-opacity: .46; }
+.java-bubble--7 { --bubble-left: 88%; --bubble-size: 19px; --bubble-duration: 24s; --bubble-drift: 8s; --bubble-delay: -19s; --bubble-opacity: .38; }
+.java-bubble--8 { --bubble-left: 14%; --bubble-size: 9px; --bubble-duration: 14s; --bubble-drift: 3s; --bubble-delay: -10s; --bubble-opacity: .44; }
+.java-bubble--9 { --bubble-left: 48%; --bubble-size: 23px; --bubble-duration: 19s; --bubble-drift: 6s; --bubble-delay: -6s; --bubble-opacity: .34; }
+.java-bubble--10 { --bubble-left: 64%; --bubble-size: 48px; --bubble-duration: 25s; --bubble-drift: 9s; --bubble-delay: -23s; --bubble-opacity: .27; }
+.java-bubble--11 { --bubble-left: 79%; --bubble-size: 32px; --bubble-duration: 22s; --bubble-drift: 6s; --bubble-delay: -14s; --bubble-opacity: .35; }
+.java-bubble--12 { --bubble-left: 94%; --bubble-size: 10px; --bubble-duration: 13s; --bubble-drift: 4s; --bubble-delay: -8s; --bubble-opacity: .46; }
+
+@keyframes java-bubble-rise {
+  0% { transform: translateY(0) scale(.88); opacity: 0; }
+  10% { opacity: var(--bubble-opacity, .2); }
+  88% { opacity: var(--bubble-opacity, .2); }
+  100% { transform: translateY(-120vh) scale(1.08); opacity: 0; }
+}
+
+@keyframes java-bubble-drift {
+  from { margin-left: -12px; }
+  to { margin-left: 90px; }
+}
+
+@keyframes java-rays-sway {
+  0% { transform: translateX(-2%) skewX(-10deg) scaleX(.94); opacity: .58; }
+  50% { opacity: .82; }
+  100% { transform: translateX(5%) skewX(-6deg) scaleX(1.07); opacity: .66; }
+}
+
+@keyframes java-caustics-drift {
+  0% { background-position: 0 0, 60px 30px; transform: rotate(-1deg) scale(1); }
+  50% { background-position: 95px 62px, -65px 88px; transform: rotate(1deg) scale(1.04); }
+  100% { background-position: 190px 125px, -190px 170px; transform: rotate(-1deg) scale(1); }
+}
+
+@keyframes java-dust-far {
+  from { transform: translate3d(0, 7%, 0); }
+  to { transform: translate3d(18px, -7%, 0); }
+}
+
+@keyframes java-dust-mid {
+  from { transform: translate3d(0, 10%, 0); }
+  to { transform: translate3d(-34px, -10%, 0); }
+}
+
+@keyframes java-dust-near {
+  from { transform: translate3d(-10px, 13%, 0); }
+  to { transform: translate3d(46px, -13%, 0); }
+}
+
+.java-side-menu {
+  isolation: isolate;
+  overflow: hidden;
+  border-right: 1px solid rgba(151, 198, 215, .42);
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 94% 18%, rgba(116, 184, 205, .17), transparent 34%),
+    linear-gradient(145deg, rgba(22, 75, 107, .98), rgba(8, 38, 72, .985) 56%, rgba(4, 26, 53, .99));
+  box-shadow: 18px 0 52px rgba(2, 18, 42, .42), inset -1px 0 0 rgba(255,255,255,.04);
+}
+
+.java-side-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255,255,255,.035), transparent 36%);
+  pointer-events: none;
+}
+
+.java-side-current {
+  position: absolute;
+  z-index: 2;
+  right: 7px;
+  top: 88px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(205, 152, 59, .92) 12%, rgba(242, 208, 103, .78) 82%, transparent);
+  box-shadow: 0 0 9px rgba(205, 152, 59, .28);
+  animation: java-current-glow 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.java-menu-close {
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.java-menu-item::before {
+  content: "";
+  position: absolute;
+  left: -70px;
+  top: -18px;
+  width: 48px;
+  height: 76px;
+  transform: skewX(-25deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  transition: left .65s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+}
+
+.java-menu-item:hover::before,
+.java-menu-item:focus-visible::before { left: 115%; }
+
+.java-menu-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(141, 190, 209, .28) transparent;
+}
+
+@keyframes java-current-glow {
+  0%, 100% { opacity: .56; }
+  50% { opacity: 1; }
+}
+
+@media (max-height: 680px) {
+  .java-side-menu .java-menu-eyebrow { margin-top: .75rem; margin-bottom: .5rem; }
+  .java-side-menu .java-menu-item { height: 2.35rem; }
+  .java-side-menu .java-menu-list { padding-bottom: .25rem; }
+  .java-side-menu > div:last-child > div:last-child { margin-top: .5rem; padding-top: .5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .java-bubble { animation: none; opacity: .12; }
+  .java-side-current { animation: none; }
+  .java-underwater-rays,
+  .java-caustics,
+  .java-dust-layer { animation: none; }
+}
+
 /* Wave-shaped backdrop blur.
    The crest strip used to sit on unblurred page content while the nav panel
    below it was `backdrop-blur-xl`, which drew a hard horizontal line where the

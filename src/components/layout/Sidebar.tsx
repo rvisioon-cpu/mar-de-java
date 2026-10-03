@@ -10,7 +10,6 @@ import { floorsData as staticFloorsData, getEntryFloorId } from '@/data/floors';
 import config from '@/config/config';
 import { getFeatures } from '@/app/actions/features';
 import defaultFeatures from '@/data/features.json';
-import LiquidMenuBackground from './LiquidMenuBackground';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -36,21 +35,6 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
 const IconMap: Record<string, any> = {
     Home, Building2, Box, Layers, Image, Rotate3D, Mountain, Video, Download, MapPin, Construction, Phone, Facebook, Instagram
 };
-
-// Decorative layered ocean waves that crest along the top edge of the navigation.
-// All 4 layers animate at different speeds for an organic, living ocean surface.
-// Paths run from x=-80 to x=1520 so the horizontal drift never exposes a gap.
-// `.top-wave-blur` carries the panel's frosted backdrop up through the crest
-// (masked to the wave silhouette) so crest and panel read as one surface.
-const WaveCrest = ({ className = "" }: { className?: string }) => (
-    <div className={`pointer-events-none relative h-[46px] w-full overflow-hidden ${className}`}>
-        <div className="top-wave-blur backdrop-blur-xl" />
-        <div className="top-wave-1 absolute inset-0" />
-        <div className="top-wave-2 absolute inset-0" />
-        <div className="top-wave-3 absolute inset-0" />
-        <div className="top-wave-4 absolute inset-0" />
-    </div>
-);
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const router = useRouter();
@@ -268,128 +252,106 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         );
     }
 
-    // ── STANDARD WEB: bottom navigation bar that slides up, crested with ocean waves.
+    // ── STANDARD WEB: organic left-side navigation inspired by the supplied model.
     return (
         <>
-            {/* Frosted backdrop — blurs the page behind the menu. The homepage's
-                own hero logo is hidden separately while the menu is open, so the
-                menu's centered logo doesn't ghost over a duplicate. */}
+            {/* Frosted underwater backdrop. The bubbles borrow the slow vertical
+                drift from the supplied CodePen; no sprite or GitHub asset is used. */}
             <div
-                className={`fixed inset-0 bg-ocean-900/40 backdrop-blur-md z-[60] transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                className={`java-ocean-backdrop fixed inset-0 z-[60] overflow-hidden transition-all duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
                 onClick={onClose}
-            />
-
-            {/* Project logo, centered on the blurred backdrop. This is the menu's
-                own logo — it renders on every route rather than relying on the
-                homepage hero logo being lifted above the backdrop, and it
-                replaces the small logo that used to sit in the nav header.
-                pointer-events-none keeps the backdrop's click-to-close intact. */}
-            <div
-                aria-hidden={!isOpen}
-                className={`fixed inset-0 z-[62] flex items-center justify-center px-8 pb-[clamp(11rem,24vh,15rem)] pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-                    ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
             >
-                {/* The bottom padding offsets the nav bar's height so the logo
-                    reads as centered in the space actually left visible.
-                    Sizing classes deliberately mirror the homepage hero logo
-                    (src/app/page.tsx) so the mark keeps one size across the site. */}
-                <img
-                    src="/identity/identity_logo_white.png"
-                    alt={config.appName}
-                    className="w-[180px] lg:w-full max-w-xl object-contain drop-shadow-2xl"
-                />
+                <div className="java-ocean-glow" aria-hidden="true" />
+                <div className="java-underwater-rays" aria-hidden="true" />
+                <div className="java-caustics" aria-hidden="true" />
+                <div className="java-marine-dust" aria-hidden="true">
+                    <span className="java-dust-layer java-dust-layer--far" />
+                    <span className="java-dust-layer java-dust-layer--mid" />
+                    <span className="java-dust-layer java-dust-layer--near" />
+                </div>
+                <div className="java-bubbles" aria-hidden="true">
+                    {Array.from({ length: 12 }, (_, index) => (
+                        <span key={index} className={`java-bubble java-bubble--${index + 1}`} />
+                    ))}
+                </div>
             </div>
 
-            {/* Bottom Wave Navigation */}
             <nav
                 aria-label="Navegación principal"
-                className={`sidebar-nav group fixed bottom-0 left-0 w-full z-[70] transform transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-                    ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
+                aria-hidden={!isOpen}
+                className={`java-side-menu fixed inset-y-0 left-0 z-[70] h-dvh w-[min(330px,88vw)] transform transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                    ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-[115%] opacity-0 pointer-events-none'}`}
             >
-                <WaveCrest />
-
-                {/* -mt-px closes the subpixel hairline between crest and panel.
-                    The upward drop-shadow that used to live here was removed: it
-                    fell across the crest and re-drew the very seam the wave-shaped
-                    blur is meant to dissolve. */}
-                <div className="relative isolate -mt-px overflow-hidden border-t border-brand-yellow/50 bg-gradient-to-b from-brand-primary/95 via-ocean-700/95 to-ocean-900/95 backdrop-blur-xl px-4 pt-0 pb-8">
-                    {/* Colour bridge. The four crest layers composite to ~99% alpha
-                        (1-(1-.45)(1-.65)(1-.75)(1-.85)), so the panel has to START
-                        fully opaque in the crest's own colour and only then decay to
-                        its translucent base — anything less leaves a visible step.
-                        Fades to ocean-600/0 rather than `transparent` so only alpha
-                        interpolates; `transparent` is rgba(0,0,0,0) and would pull
-                        the midpoint toward grey, drawing a fresh band. */}
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-20 z-0 bg-gradient-to-b from-brand-primary to-brand-primary/0" />
-                    {isOpen && <LiquidMenuBackground />}
-
-                    {/* Header row: close only — the logo now lives large and
-                        centered on the backdrop, not shrunk into this strip. */}
-                    <div className="relative z-10 flex items-center justify-end px-1 pb-1.5">
-                        <button onClick={onClose} className="p-1.5 -mr-1 text-white/70 hover:text-white hover:scale-110 transition-all cursor-pointer relative z-10">
-
-                            <X size={20} />
+                <div className="java-side-current" aria-hidden="true" />
+                <div className="relative z-10 flex h-full min-h-0 flex-col px-5 pb-5 pt-3 sm:px-6">
+                    <div className="relative flex h-[84px] shrink-0 items-center justify-center">
+                        <img
+                            src="/identity/identity_logo_white.png"
+                            alt={config.appName}
+                            className="h-12 w-auto max-w-[190px] object-contain drop-shadow-lg"
+                        />
+                        <button
+                            onClick={onClose}
+                            aria-label="Cerrar menú"
+                            className="java-menu-close absolute right-0 grid h-8 w-8 place-items-center text-brand-yellow/85 transition-all duration-300 hover:text-brand-yellow hover:scale-105 cursor-pointer"
+                        >
+                            <X size={16} strokeWidth={1.8} />
                         </button>
                     </div>
 
-                    {/* Menu items: centered on wide screens, horizontally scrollable on narrow */}
-                    <ul className="relative z-10 flex gap-1.5 overflow-x-auto scrollbar-thin pb-0.5 justify-start lg:justify-center">
+                    <ul className="java-menu-list mt-4 min-h-0 flex-1 space-y-1 overflow-y-auto pr-1">
                         {menuItems.map((item) => {
                             const active = isItemActive(item.path);
                             const IconComponent = IconMap[item.icon] || Box;
                             return (
-                                <li key={item.label} className="shrink-0">
+                                <li key={item.label}>
                                     <button
                                         onClick={() => handleNavigation(item.path, (item as any).action)}
                                         onMouseEnter={() => handleMouseEnter((item as any).preloadKey)}
-                                        className={`group/item w-[76px] flex flex-col items-center gap-1 rounded-2xl px-1.5 py-2 transition-all duration-300 cursor-pointer wavy-btn
+                                        className={`java-menu-item group/item relative flex h-11 w-full items-center gap-3 overflow-hidden rounded-[10px_10px_20px_10px] border px-3 text-left transition-all duration-300 cursor-pointer
                                             ${active
-                                                ? 'bg-brand-yellow text-brand-primary shadow-lg'
-                                                : 'text-white/85 hover:text-white'}`}
+                                                ? 'border-brand-yellow/40 bg-gradient-to-r from-[#eabf45] to-brand-yellow text-brand-primary shadow-lg'
+                                                : 'border-transparent text-white/90 hover:border-white/10 hover:bg-white/[0.06] hover:text-brand-yellow'}`}
                                     >
-                                        <div className="w-6 h-6 flex items-center justify-center transition-transform duration-300 group-hover/item:scale-110 relative z-10">
-                                            <IconComponent size={18} strokeWidth={2} />
-                                        </div>
-                                        <span className="font-primary text-[10px] font-semibold tracking-wide text-center leading-tight whitespace-nowrap relative z-10">
+                                        <IconComponent size={18} strokeWidth={active ? 2 : 1.7} className="relative z-10 shrink-0 transition-transform duration-300 group-hover/item:translate-x-0.5" />
+                                        <span className="relative z-10 font-primary text-[12px] font-semibold tracking-wide transition-transform duration-300 group-hover/item:translate-x-0.5">
                                             {item.label}
                                         </span>
-                                        {!active && <div className="wavy-btn-wave" />}
                                     </button>
                                 </li>
                             );
                         })}
                     </ul>
 
-                    {/* Footer: socials · inmobiliaria logo · credit */}
-                    <div className="relative z-10 mt-2 pt-2 border-t border-white/15 flex items-center justify-between gap-4">
-                        <SocialLinks />
-                        <div className="flex items-center gap-3">
+                    <div className="mt-4 shrink-0 border-t border-white/10 pt-4 text-center">
+                        <div className="mb-3 flex justify-center"><SocialLinks /></div>
+                        {config.company?.realStateWebsite && (
                             <a
-                                href={config.company?.realStateWebsite}
+                                href={config.company.realStateWebsite}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                title={config.company?.realStateName}
-                                className="transition-opacity hover:opacity-100 opacity-90"
+                                title={config.company.realStateName}
+                                className="mx-auto mb-3 flex h-11 w-[154px] items-center justify-center px-1 py-1 opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-[1.03]"
                             >
-                                <span className="flex h-8 items-center rounded-md bg-white px-2 py-1 shadow-sm">
-                                    <img src="/identity/buleje-grupo-inmobiliario.png" alt={config.company?.realStateName} className="h-full w-auto object-contain" />
-                                </span>
+                                <img
+                                    src="/identity/buleje-grupo-inmobiliario.png"
+                                    alt={config.company.realStateName}
+                                    className="h-full w-full object-contain brightness-0 invert"
+                                />
                             </a>
-                            <div className="hidden sm:block h-4 w-px bg-white/20" />
-                            <a
-                                href={config.company?.developerWebsite}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hidden sm:block text-[10px] text-white/55 hover:text-white/90 transition-colors font-secondary whitespace-nowrap"
-                            >
-                                {new Date().getFullYear()}© {config.company?.developer}
-                            </a>
-                        </div>
+                        )}
+                        <a
+                            href={config.company?.developerWebsite}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-secondary text-[11px] tracking-wide text-white/70 transition-colors hover:text-brand-yellow"
+                        >
+                            {new Date().getFullYear()} © {config.company?.developer}
+                        </a>
+                        <p className="mx-auto mt-2 max-w-[245px] font-secondary text-[10px] leading-relaxed text-ocean-200/65">
+                            Las imágenes están sujetas a <a href="/terminos-y-condiciones" className="underline transition-colors hover:text-white">términos y condiciones</a> de la inmobiliaria.
+                        </p>
                     </div>
-
-                    <span className="pointer-events-none absolute bottom-3 left-4 max-w-[42%] text-[8px] leading-tight text-white/55 font-secondary">
-                        Las imágenes están sujetas a <a href="/terminos-y-condiciones" className="pointer-events-auto underline hover:text-white/90 transition-colors">términos y condiciones</a> de la inmobiliaria
-                    </span>
                 </div>
             </nav>
         </>
