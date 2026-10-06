@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
+import { useRef, useMemo, useState, useEffect, useCallback, type ReactNode } from 'react';
 import { useStore } from '@/store/useStore';
 import MapboxMap, {
   Marker as MapboxMarker,
@@ -26,6 +26,33 @@ import { getAssetUrl } from '@/utils/assets';
 import config from '@/config/config';
 import LandmarkMarker from './LandmarkMarker';
 import type { Landmark } from '@/data/landmarks';
+import { getProjectVideo } from '@/data/projectVideos';
+
+/**
+ * Wraps a pin so a double click opens it instead of zooming the map. The
+ * listener is native (not React's delegated one) so it runs before the event
+ * bubbles up to the map container, where Mapbox's double-click zoom lives.
+ */
+function DoubleClickArea({ onDoubleClick, children, className }: { onDoubleClick?: () => void; children: ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const handlerRef = useRef(onDoubleClick);
+  handlerRef.current = onDoubleClick;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const listener = (e: MouseEvent) => {
+      if (!handlerRef.current) return;
+      e.stopPropagation();
+      e.preventDefault();
+      handlerRef.current();
+    };
+    el.addEventListener('dblclick', listener);
+    return () => el.removeEventListener('dblclick', listener);
+  }, []);
+
+  return <div ref={ref} className={className}>{children}</div>;
+}
 
 const MAPBOX_STYLE = process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL || 'mapbox://styles/rvisioon/cmu75eceh006i01s72u5e54ee';
 
@@ -80,9 +107,11 @@ interface MapProps {
     /** Slug of the clip currently playing, if any. */
     openLandmarkSlug?: string | null;
     onLandmarkOpen?: (slug: string) => void;
+    /** Double click on a project pin that has building footage. */
+    onProjectOpen?: (id: string, name: string) => void;
 }
 
-export default function MapComponent({ mapboxToken = '', destination, origin, padding, onMarkerClick, transportMode = 'driving', onRouteCalculated, locations, landmarks, landmarkDurations, openLandmarkSlug, onLandmarkOpen }: MapProps) {
+export default function MapComponent({ mapboxToken = '', destination, origin, padding, onMarkerClick, transportMode = 'driving', onRouteCalculated, locations, landmarks, landmarkDurations, openLandmarkSlug, onLandmarkOpen, onProjectOpen }: MapProps) {
   const mapRef = useRef<any>(null);
   const [routeGeoJSON, setRouteGeoJSON] = useState<any>(null);
   const [routeStats, setRouteStats] = useState<RouteStats | null>(null);
@@ -266,6 +295,7 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
     const list = displayLocations.map((feature: any) => {
       const cat = feature.properties.categoria?.toLocaleLowerCase('es')?.trim();
       const isOtherProject = cat === 'proyectos' || cat === 'otros proyectos';
+      const hasBuildingVideo = isOtherProject && !!getProjectVideo(feature.id, feature.properties.nombre);
 
       return (
       <Marker
@@ -278,7 +308,10 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
             if (onMarkerClick) onMarkerClick(feature.geometry.coordinates, feature.properties.nombre);
         }}
       >
-        <div className="relative group cursor-pointer hover:z-50">
+        <DoubleClickArea
+            className="relative group cursor-pointer hover:z-50"
+            onDoubleClick={hasBuildingVideo && onProjectOpen ? () => onProjectOpen(String(feature.id), feature.properties.nombre) : undefined}
+        >
             {feature.properties.imagen ? (
                 <div className={isOtherProject
                     ? "w-16 h-16 drop-shadow-lg hover:scale-110 transition-transform"
@@ -296,7 +329,12 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
             ) : (
                 <MapPin size={32} className="text-brand-orange drop-shadow-md hover:scale-125 transition-transform" />
             )}
-        </div>
+            {hasBuildingVideo && (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 rounded-full bg-gray-900/85 text-white text-[10px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    Doble clic para ver edificio
+                </div>
+            )}
+        </DoubleClickArea>
       </Marker>
       );
     });
@@ -321,7 +359,7 @@ export default function MapComponent({ mapboxToken = '', destination, origin, pa
       }
 
       return list;
-  }, [onMarkerClick, origin, displayLocations, mapboxToken]);
+  }, [onMarkerClick, onProjectOpen, origin, displayLocations, mapboxToken]);
 
     const isForcedLandscape = useStore(state => state.isForcedLandscape);
 

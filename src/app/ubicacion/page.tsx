@@ -2,12 +2,14 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import MapComponent from '@/components/map/Map';
 import Sidebar from '@/components/layout/Sidebar';
-import { Search, MapPin, Menu, ChevronDown, ChevronUp, Car, Footprints, Bike, Navigation, X, Map as MapIcon, Play } from 'lucide-react';
+import { Search, MapPin, Menu, ChevronDown, ChevronUp, Car, Footprints, Bike, Navigation, X, Map as MapIcon, Play, Building2 } from 'lucide-react';
 import { type LocationFeature } from '@/data/locations';
 import { landmarks, landmarkPoiNames } from '@/data/landmarks';
 import { getLocations, seedLocations } from '@/app/actions/locations';
 import { useStore } from '@/store/useStore';
 import { getAssetUrl } from '@/utils/assets';
+import { getProjectVideo } from '@/data/projectVideos';
+import ProjectBuildingPlayer from '@/components/map/ProjectBuildingPlayer';
 
 // Residencial Mar de Java — the origin every hito is measured from.
 const PROJECT_COORDS: [number, number] = [-76.97538, -12.079162];
@@ -141,6 +143,12 @@ const DirectionsPage = () => {
     const [openLandmarkSlug, setOpenLandmarkSlug] = useState<string | null>(null);
     const openLandmark = landmarks.find(l => l.slug === openLandmarkSlug) || null;
 
+    // Proyectos: building footage (transition + loop), opened with a double
+    // click on the pin or from "Ver edificio" after selecting it.
+    const [openProject, setOpenProject] = useState<{ id: string; name: string } | null>(null);
+    const openProjectVideo = openProject ? getProjectVideo(openProject.id, openProject.name) : null;
+    const handleProjectOpen = useCallback((id: string, name: string) => setOpenProject({ id, name }), []);
+
     // Deliberately the Directions endpoint, not the cheaper Matrix one: the
     // route drawn when a hito is picked comes from Directions, and the two
     // disagree by minutes on some of these, which would show the same trip
@@ -206,6 +214,14 @@ const DirectionsPage = () => {
         return matchesSearch && matchesCategory;
     });
 
+    // The selected pin, when it is a project with building footage
+    const selectedProject = useMemo(() => {
+        if (!selectedName) return null;
+        const feature = locationsFeatures.find(f => f.properties.nombre === selectedName);
+        if (!feature || !getProjectVideo(feature.id, feature.properties.nombre)) return null;
+        return feature;
+    }, [selectedName, locationsFeatures]);
+
     useEffect(() => {
         if (searchMode === 'directions' && filter.length > 2) {
             const timer = setTimeout(async () => {
@@ -249,7 +265,7 @@ const DirectionsPage = () => {
 
     // Three states: open, peeking (its handle stays clickable so it can be
     // reopened), and fully out of the way while a hito's clip is playing.
-    const panelStateClasses = openLandmark || viewMode !== 'map'
+    const panelStateClasses = openLandmark || openProject || viewMode !== 'map'
         ? 'translate-y-full pointer-events-none'
         : isPanelOpen
             ? 'translate-y-0 pointer-events-auto'
@@ -284,6 +300,7 @@ const DirectionsPage = () => {
                     landmarkDurations={landmarkDurations}
                     openLandmarkSlug={openLandmarkSlug}
                     onLandmarkOpen={setOpenLandmarkSlug}
+                    onProjectOpen={handleProjectOpen}
                     padding={useMemo(() => {
                         // Only push map on desktop where panel is sidebar
                         const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
@@ -348,7 +365,7 @@ const DirectionsPage = () => {
             <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
             {/* Floating Toggle Button - Mobile Only (Visible when panel closed) */}
-            {!isPanelOpen && !openLandmark && (
+            {!isPanelOpen && !openLandmark && !openProject && (
                 <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20 md:hidden pointer-events-auto">
                     <button
                         onClick={() => setIsPanelOpen(true)}
@@ -493,6 +510,46 @@ const DirectionsPage = () => {
                         </div>
                     )}
 
+                    {/* Selected project: offer its building view */}
+                    {searchMode === 'explore' && selectedProject && (
+                        <div className="px-4 pt-4 shrink-0">
+                            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 p-4 flex items-center gap-4 shadow-lg">
+                                <div className="w-12 h-12 rounded-lg bg-white/10 p-1.5 flex items-center justify-center shrink-0">
+                                    {selectedProject.properties.imagen ? (
+                                        <img
+                                            src={getAssetUrl(selectedProject.properties.imagen)}
+                                            alt={selectedProject.properties.nombre}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    ) : (
+                                        <Building2 size={22} className="text-white" />
+                                    )}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-[10px] uppercase tracking-wider text-white/60 font-semibold">Proyecto</p>
+                                    <h3 className="text-sm font-bold text-white truncate">{selectedProject.properties.nombre}</h3>
+                                </div>
+                                <button
+                                    id="view-building-button"
+                                    type="button"
+                                    onClick={() => handleProjectOpen(selectedProject.id, selectedProject.properties.nombre)}
+                                    className="shrink-0 inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-dark-orange text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer"
+                                >
+                                    <Building2 size={14} />
+                                    Ver edificio
+                                </button>
+                                {/* Warm the cache so the transition starts right away */}
+                                <video
+                                    key={selectedProject.id}
+                                    src={getAssetUrl(getProjectVideo(selectedProject.id, selectedProject.properties.nombre)!.transition)}
+                                    preload="auto"
+                                    muted
+                                    className="hidden"
+                                />
+                            </div>
+                        </div>
+                    )}
+
                     <div className="flex-1 overflow-y-auto p-4 pt-4 space-y-2">
                         {searchMode === 'explore' ? (
                             (filteredLandmarks.length > 0 || filteredLocations.length > 0) ? (
@@ -596,10 +653,24 @@ const DirectionsPage = () => {
                                                         <MapPin size={20} className="text-gray-400 group-hover:text-brand-orange" />
                                                     )}
                                                 </div>
-                                                <div>
+                                                <div className="flex-1 min-w-0">
                                                     <h3 className="text-sm font-bold text-gray-800">{feature.properties.nombre}</h3>
                                                     <p className="text-xs text-brand-orange font-medium">{feature.properties.categoria}</p>
                                                 </div>
+                                                {getProjectVideo(feature.id, feature.properties.nombre) && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleProjectOpen(feature.id, feature.properties.nombre);
+                                                        }}
+                                                        className="self-center px-2.5 py-1.5 rounded-lg bg-white border border-brand-orange/20 hover:bg-brand-orange hover:text-white text-brand-orange transition-all shrink-0 flex items-center gap-1.5 text-xs font-semibold shadow-xs cursor-pointer"
+                                                        title="Ver edificio"
+                                                    >
+                                                        <Building2 size={12} />
+                                                        <span className="hidden sm:inline">Ver edificio</span>
+                                                    </button>
+                                                )}
                                             </div>
                                         );
                                     })}
@@ -679,6 +750,16 @@ const DirectionsPage = () => {
                         </button>
                     </div>
                 </div>
+            )}
+
+            {/* Project building view — transition, then loop */}
+            {openProject && openProjectVideo && (
+                <ProjectBuildingPlayer
+                    key={openProject.id}
+                    name={openProject.name}
+                    video={openProjectVideo}
+                    onClose={() => setOpenProject(null)}
+                />
             )}
 
             {/* Video Transition Overlay (desactivado temporalmente) */}
