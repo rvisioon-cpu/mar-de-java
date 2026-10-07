@@ -25,9 +25,9 @@ const DirectionsPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Video Transition State & References (desactivado por ahora para cargar el mapa directamente)
-    const ENABLE_INTRO_VIDEO = false;
+    const ENABLE_INTRO_VIDEO = true;
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [viewMode, setViewMode] = useState<'video' | 'map'>('map');
+    const [viewMode, setViewMode] = useState<'video' | 'map'>('video');
     // The "Explorar mapa" button appears once the intro video reaches the mark
     // below, so it is offered well before the clip finishes its first pass.
     const [showExploreButton, setShowExploreButton] = useState(false);
@@ -58,7 +58,7 @@ const DirectionsPage = () => {
         };
     }, [viewMode, setForcedLandscape]);
 
-    const videoUrl = getAssetUrl('location/videos/video_mapa.mp4');
+    const videoUrl = getAssetUrl('location/videos/video_mapa_final.mp4');
     const posterUrl = getAssetUrl('location/photos/FOTO_VISTA_PLANETA_PERU.webp');
 
     const handleVideoEnded = () => {
@@ -776,6 +776,18 @@ const DirectionsPage = () => {
                         onTimeUpdate={handleTimeUpdate}
                         className="w-full h-full object-cover"
                     />
+
+                    <button
+                        onClick={() => {
+                            setViewMode('map');
+                            setForcedLandscape(false);
+                        }}
+                        className="fixed top-6 right-6 z-50 flex items-center gap-2 rounded-full border border-white/25 bg-black/40 px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-md transition hover:border-white/50 hover:bg-black/60"
+                        aria-label="Saltar el video e ir al mapa"
+                    >
+                        <span>Saltar</span>
+                        <X size={14} className="text-white/60" />
+                    </button>
 
                     {/* Floating Button to Switch to Interactive Map — revealed
                         once the intro video passes EXPLORE_BUTTON_AT_SECONDS. */}
