@@ -21,12 +21,12 @@ const unitTransitions = [
 ];
 
 const unitGalleries: Record<string, number> = {
-    '101': 9,
-    '102': 8,
-    'x01': 8,
-    'x02': 7,
-    '501': 12,
-    '502': 12,
+    '101': 11,
+    '102': 12,
+    'x01': 9,
+    'x02': 10,
+    '501': 15,
+    '502': 15,
 };
 
 const unitViewAssets = unitViewFolders.flatMap(folder => [

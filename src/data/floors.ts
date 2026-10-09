@@ -21,7 +21,7 @@ export interface Unit {
   bedrooms?: number;  // Optional for storage units
   bathrooms?: number; // Optional for storage units
   status: UnitStatus;
-  type?: 'apartment' | 'storage'; // To distinguish unit types
+  type?: 'apartment' | 'storage' | 'DUPLEX'; // To distinguish unit types
   subtitle?: string; // e.g. "Flat", "Duplex", "Bodega"
   description?: string;
   images?: string[];
@@ -101,7 +101,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/101/furnished.webp"],
         photosUnfurnished: ["plants/details/101/unfurnished.webp"],
         photosPlans: ["plants/details/101/plans.webp"],
-        gallery: ["plants/details/101/gallery/1.webp", "plants/details/101/gallery/2.webp", "plants/details/101/gallery/3.webp", "plants/details/101/gallery/4.webp", "plants/details/101/gallery/5.webp", "plants/details/101/gallery/6.webp", "plants/details/101/gallery/7.webp", "plants/details/101/gallery/8.webp", "plants/details/101/gallery/9.webp"]
+        gallery: ["plants/details/101/gallery/1.webp", "plants/details/101/gallery/2.webp", "plants/details/101/gallery/3.webp", "plants/details/101/gallery/4.webp", "plants/details/101/gallery/5.webp", "plants/details/101/gallery/6.webp", "plants/details/101/gallery/7.webp", "plants/details/101/gallery/8.webp", "plants/details/101/gallery/9.webp", "plants/details/101/gallery/10.webp", "plants/details/101/gallery/11.webp"]
       },
       {
         id: "102",
@@ -120,7 +120,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/102/furnished.webp"],
         photosUnfurnished: ["plants/details/102/unfurnished.webp"],
         photosPlans: ["plants/details/102/plans.webp"],
-        gallery: ["plants/details/102/gallery/1.webp", "plants/details/102/gallery/2.webp", "plants/details/102/gallery/3.webp", "plants/details/102/gallery/4.webp", "plants/details/102/gallery/5.webp", "plants/details/102/gallery/6.webp", "plants/details/102/gallery/7.webp", "plants/details/102/gallery/8.webp"]
+        gallery: ["plants/details/102/gallery/1.webp", "plants/details/102/gallery/2.webp", "plants/details/102/gallery/3.webp", "plants/details/102/gallery/4.webp", "plants/details/102/gallery/5.webp", "plants/details/102/gallery/6.webp", "plants/details/102/gallery/7.webp", "plants/details/102/gallery/8.webp", "plants/details/102/gallery/9.webp", "plants/details/102/gallery/10.webp", "plants/details/102/gallery/11.webp", "plants/details/102/gallery/12.webp"]
       },
     ]
   },
@@ -147,7 +147,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x01/furnished.webp"],
         photosUnfurnished: ["plants/details/x01/unfurnished.webp"],
         photosPlans: ["plants/details/x01/plans.webp"],
-        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp"]
+        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp", "plants/details/x01/gallery/9.webp"]
       },
       {
         id: "202",
@@ -166,7 +166,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x02/furnished.webp"],
         photosUnfurnished: ["plants/details/x02/unfurnished.webp"],
         photosPlans: ["plants/details/x02/plans.webp"],
-        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp"]
+        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp", "plants/details/x02/gallery/8.webp", "plants/details/x02/gallery/9.webp", "plants/details/x02/gallery/10.webp"]
       },
     ]
   },
@@ -193,7 +193,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x01/furnished.webp"],
         photosUnfurnished: ["plants/details/x01/unfurnished.webp"],
         photosPlans: ["plants/details/x01/plans.webp"],
-        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp"]
+        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp", "plants/details/x01/gallery/9.webp"]
       },
       {
         id: "302",
@@ -212,7 +212,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x02/furnished.webp"],
         photosUnfurnished: ["plants/details/x02/unfurnished.webp"],
         photosPlans: ["plants/details/x02/plans.webp"],
-        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp"]
+        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp", "plants/details/x02/gallery/8.webp", "plants/details/x02/gallery/9.webp", "plants/details/x02/gallery/10.webp"]
       },
     ]
   },
@@ -239,7 +239,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x01/furnished.webp"],
         photosUnfurnished: ["plants/details/x01/unfurnished.webp"],
         photosPlans: ["plants/details/x01/plans.webp"],
-        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp"]
+        gallery: ["plants/details/x01/gallery/1.webp", "plants/details/x01/gallery/2.webp", "plants/details/x01/gallery/3.webp", "plants/details/x01/gallery/4.webp", "plants/details/x01/gallery/5.webp", "plants/details/x01/gallery/6.webp", "plants/details/x01/gallery/7.webp", "plants/details/x01/gallery/8.webp", "plants/details/x01/gallery/9.webp"]
       },
       {
         id: "402",
@@ -258,7 +258,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/x02/furnished.webp"],
         photosUnfurnished: ["plants/details/x02/unfurnished.webp"],
         photosPlans: ["plants/details/x02/plans.webp"],
-        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp"]
+        gallery: ["plants/details/x02/gallery/1.webp", "plants/details/x02/gallery/2.webp", "plants/details/x02/gallery/3.webp", "plants/details/x02/gallery/4.webp", "plants/details/x02/gallery/5.webp", "plants/details/x02/gallery/6.webp", "plants/details/x02/gallery/7.webp", "plants/details/x02/gallery/8.webp", "plants/details/x02/gallery/9.webp", "plants/details/x02/gallery/10.webp"]
       },
     ]
   },
@@ -276,6 +276,7 @@ export const floorsData: Floor[] = [
         bedrooms: 3,
         bathrooms: 2,
         status: 'available',
+        type: 'DUPLEX',
         subtitle: 'Dúplex',
         x: 48.34,
         y: 60.26,
@@ -285,7 +286,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/501.1/furnished.webp"],
         photosUnfurnished: ["plants/details/501.1/unfurnished.webp"],
         photosPlans: ["plants/details/501.1/plans.webp"],
-        gallery: ["plants/details/501/gallery/1.webp", "plants/details/501/gallery/2.webp", "plants/details/501/gallery/3.webp", "plants/details/501/gallery/4.webp", "plants/details/501/gallery/5.webp", "plants/details/501/gallery/6.webp", "plants/details/501/gallery/7.webp", "plants/details/501/gallery/8.webp", "plants/details/501/gallery/9.webp", "plants/details/501/gallery/10.webp", "plants/details/501/gallery/11.webp", "plants/details/501/gallery/12.webp"]
+        gallery: ["plants/details/501/gallery/1.webp", "plants/details/501/gallery/2.webp", "plants/details/501/gallery/3.webp", "plants/details/501/gallery/4.webp", "plants/details/501/gallery/5.webp", "plants/details/501/gallery/6.webp", "plants/details/501/gallery/7.webp", "plants/details/501/gallery/8.webp", "plants/details/501/gallery/9.webp", "plants/details/501/gallery/10.webp", "plants/details/501/gallery/11.webp", "plants/details/501/gallery/12.webp", "plants/details/501/gallery/13.webp", "plants/details/501/gallery/14.webp", "plants/details/501/gallery/15.webp"]
       },
       {
         id: "502",
@@ -295,6 +296,7 @@ export const floorsData: Floor[] = [
         bedrooms: 2,
         bathrooms: 2,
         status: 'available',
+        type: 'DUPLEX',
         subtitle: 'Dúplex',
         x: 46.5,
         y: 42.03,
@@ -304,7 +306,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/502.1/furnished.webp"],
         photosUnfurnished: ["plants/details/502.1/unfurnished.webp"],
         photosPlans: ["plants/details/502.1/plans.webp"],
-        gallery: ["plants/details/502/gallery/1.webp", "plants/details/502/gallery/2.webp", "plants/details/502/gallery/3.webp", "plants/details/502/gallery/4.webp", "plants/details/502/gallery/5.webp", "plants/details/502/gallery/6.webp", "plants/details/502/gallery/7.webp", "plants/details/502/gallery/8.webp", "plants/details/502/gallery/9.webp", "plants/details/502/gallery/10.webp", "plants/details/502/gallery/11.webp", "plants/details/502/gallery/12.webp"]
+        gallery: ["plants/details/502/gallery/1.webp", "plants/details/502/gallery/2.webp", "plants/details/502/gallery/3.webp", "plants/details/502/gallery/4.webp", "plants/details/502/gallery/5.webp", "plants/details/502/gallery/6.webp", "plants/details/502/gallery/7.webp", "plants/details/502/gallery/8.webp", "plants/details/502/gallery/9.webp", "plants/details/502/gallery/10.webp", "plants/details/502/gallery/11.webp", "plants/details/502/gallery/12.webp", "plants/details/502/gallery/13.webp", "plants/details/502/gallery/14.webp", "plants/details/502/gallery/15.webp"]
       },
     ]
   },
@@ -323,6 +325,7 @@ export const floorsData: Floor[] = [
         bedrooms: 3,
         bathrooms: 2,
         status: 'available',
+        type: 'DUPLEX',
         subtitle: 'Dúplex',
         x: 47.59,
         y: 59.12,
@@ -332,7 +335,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/501.2/furnished.webp"],
         photosUnfurnished: ["plants/details/501.2/unfurnished.webp"],
         photosPlans: ["plants/details/501.2/plans.webp"],
-        gallery: ["plants/details/501/gallery/1.webp", "plants/details/501/gallery/2.webp", "plants/details/501/gallery/3.webp", "plants/details/501/gallery/4.webp", "plants/details/501/gallery/5.webp", "plants/details/501/gallery/6.webp", "plants/details/501/gallery/7.webp", "plants/details/501/gallery/8.webp", "plants/details/501/gallery/9.webp", "plants/details/501/gallery/10.webp", "plants/details/501/gallery/11.webp", "plants/details/501/gallery/12.webp"]
+        gallery: ["plants/details/501/gallery/1.webp", "plants/details/501/gallery/2.webp", "plants/details/501/gallery/3.webp", "plants/details/501/gallery/4.webp", "plants/details/501/gallery/5.webp", "plants/details/501/gallery/6.webp", "plants/details/501/gallery/7.webp", "plants/details/501/gallery/8.webp", "plants/details/501/gallery/9.webp", "plants/details/501/gallery/10.webp", "plants/details/501/gallery/11.webp", "plants/details/501/gallery/12.webp", "plants/details/501/gallery/13.webp", "plants/details/501/gallery/14.webp", "plants/details/501/gallery/15.webp"]
       },
       {
         id: "602",
@@ -343,6 +346,7 @@ export const floorsData: Floor[] = [
         bedrooms: 2,
         bathrooms: 2,
         status: 'available',
+        type: 'DUPLEX',
         subtitle: 'Dúplex',
         x: 48.6,
         y: 40.89,
@@ -352,7 +356,7 @@ export const floorsData: Floor[] = [
         photosFurnished: ["plants/details/502.2/furnished.webp"],
         photosUnfurnished: ["plants/details/502.2/unfurnished.webp"],
         photosPlans: ["plants/details/502.2/plans.webp"],
-        gallery: ["plants/details/502/gallery/1.webp", "plants/details/502/gallery/2.webp", "plants/details/502/gallery/3.webp", "plants/details/502/gallery/4.webp", "plants/details/502/gallery/5.webp", "plants/details/502/gallery/6.webp", "plants/details/502/gallery/7.webp", "plants/details/502/gallery/8.webp", "plants/details/502/gallery/9.webp", "plants/details/502/gallery/10.webp", "plants/details/502/gallery/11.webp", "plants/details/502/gallery/12.webp"]
+        gallery: ["plants/details/502/gallery/1.webp", "plants/details/502/gallery/2.webp", "plants/details/502/gallery/3.webp", "plants/details/502/gallery/4.webp", "plants/details/502/gallery/5.webp", "plants/details/502/gallery/6.webp", "plants/details/502/gallery/7.webp", "plants/details/502/gallery/8.webp", "plants/details/502/gallery/9.webp", "plants/details/502/gallery/10.webp", "plants/details/502/gallery/11.webp", "plants/details/502/gallery/12.webp", "plants/details/502/gallery/13.webp", "plants/details/502/gallery/14.webp", "plants/details/502/gallery/15.webp"]
       },
     ]
   }

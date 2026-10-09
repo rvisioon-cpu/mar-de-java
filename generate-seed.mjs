@@ -59,7 +59,7 @@ for (const floor of floorsData) {
     }
     // A duplex spans two floors, which is what makes the unit page offer the
     // level selector between its lower and upper plans.
-    const isDuplex = /^d(ú|u)plex$/i.test(unit.subtitle || '');
+    const isDuplex = unit.type === 'DUPLEX' || /^d(ú|u)plex$/i.test(unit.subtitle || '');
     const typeStr = unit.type === 'storage' ? 'STORAGE' : (isDuplex ? 'DUPLEX' : 'APARTMENT');
     const bedrooms = unit.bedrooms || 'NULL';
     const bathrooms = unit.bathrooms || 'NULL';

@@ -44,6 +44,8 @@ next-env.d.ts
 .open-next
 
 /.claude
+.agents/
+.agents
 
 # drive downloads
 public/drive-download-*
@@ -51,3 +53,10 @@ public/drive-download-*
 # de más de 25 MiB y tumba el build. Los videos se sirven desde R2.
 public/*.mp4
 public/*.mov
+
+# showroom raw and processed media assets
+raw_assets/
+dist_assets/
+public/plants/details/
+test_dist_tmp/
+
