@@ -10,64 +10,11 @@ export async function getProgressUpdates() {
   const db = await getDb();
   
   // Fetch active progress updates ordered by date descending
-  let updates = await db
+  const updates = await db
     .select()
     .from(constructionProgress)
     .where(isNull(constructionProgress.deletedAt))
     .orderBy(desc(constructionProgress.date));
-
-  // Auto-seed if the table is completely empty (no rows, even soft-deleted ones)
-  const allUpdates = await db.select().from(constructionProgress);
-  if (allUpdates.length === 0) {
-    try {
-      await db.insert(constructionProgress).values([
-        {
-          id: "mock-1",
-          title: "Avance de Obra - Marzo",
-          date: new Date(2026, 2, 1), // March 2026
-          mediaUrl: "progress/march_2026.mp4",
-          description: "Registro visual de los avances logrados durante el mes de marzo en Thompson Pueblo Libre.",
-        },
-        {
-          id: "mock-2",
-          title: "Avance de Obra - Abril",
-          date: new Date(2026, 3, 1), // April 2026
-          mediaUrl: "progress/april_2026.mp4",
-          description: "Continuamos con el progreso de la edificación, mostrando los hitos alcanzados en el mes de abril.",
-        }
-      ]);
-
-      // Query again
-      updates = await db
-        .select()
-        .from(constructionProgress)
-        .where(isNull(constructionProgress.deletedAt))
-        .orderBy(desc(constructionProgress.date));
-    } catch (e) {
-      console.error("Error seeding initial construction progress updates:", e);
-      // Fail-safe mock return for local development
-      return [
-        {
-          id: "mock-2",
-          title: "Avance de Obra - Abril",
-          date: new Date(2026, 3, 1),
-          mediaUrl: "progress/april_2026.mp4",
-          description: "Continuamos con el progreso de la edificación, mostrando los hitos alcanzados en el mes de abril.",
-          createdAt: new Date(),
-          deletedAt: null,
-        },
-        {
-          id: "mock-1",
-          title: "Avance de Obra - Marzo",
-          date: new Date(2026, 2, 1),
-          mediaUrl: "progress/march_2026.mp4",
-          description: "Registro visual de los avances logrados durante el mes de marzo en Thompson Pueblo Libre.",
-          createdAt: new Date(),
-          deletedAt: null,
-        }
-      ];
-    }
-  }
 
   return updates;
 }

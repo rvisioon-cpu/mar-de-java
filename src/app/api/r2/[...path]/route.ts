@@ -1,6 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
+// Preserve byte ranges and stream the body; videos can be larger than Worker memory.
+async function getFallbackAsset(request: NextRequest, path: string, rangeHeader: string | null) {
+  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+  const r2PublicUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
+  const urls = r2PublicUrl ? [`${r2PublicUrl.replace(/\/$/, "")}/${encodedPath}`] : [];
+
+  // Public files are available locally even when the emulated R2 bucket is empty.
+  if (process.env.NODE_ENV === "development") {
+    urls.unshift(new URL(`/${encodedPath}`, request.nextUrl.origin).toString());
+  }
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, {
+        headers: rangeHeader ? { range: rangeHeader } : {},
+      });
+      if (!response.ok && response.status !== 416) {
+        await response.body?.cancel();
+        continue;
+      }
+
+      const headers = new Headers();
+      for (const name of ["content-type", "content-range", "content-length", "cache-control", "etag", "last-modified", "accept-ranges"]) {
+        const value = response.headers.get(name);
+        if (value) headers.set(name, value);
+      }
+      return new NextResponse(response.body, { status: response.status, headers });
+    } catch (error) {
+      console.error("Asset fallback failed:", url, error);
+    }
+  }
+
+  return new NextResponse("Not Found", { status: 404 });
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
@@ -8,47 +43,18 @@ export async function GET(
   try {
     const { env } = await getCloudflareContext({ async: true }) as any;
     const resolvedParams = await params;
+    if (resolvedParams.path.some(segment =>
+      !segment || segment === "." || segment === ".." || /[/\\]/.test(segment)
+    ) || resolvedParams.path[0] === "api") {
+      return new NextResponse("Not Found", { status: 404 });
+    }
     const path = resolvedParams.path.join("/");
     const rangeHeader = request.headers.get("range");
 
     if (!env || !env.R2) {
-      // Fallback: en dev el bucket local suele estar vacío; buscar el objeto
-      // en el dominio público de R2 (el fetch server-side no tiene CORS)
-      const r2PublicUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "";
-      if (r2PublicUrl) {
-        const fetchHeaders = new Headers();
-        if (rangeHeader) {
-          fetchHeaders.set("range", rangeHeader);
-        }
-        const publicRes = await fetch(`${r2PublicUrl}/${path}`, {
-          headers: fetchHeaders,
-        });
-
-        if (publicRes.ok || publicRes.status === 206) {
-          const headers = new Headers();
-          const ct = publicRes.headers.get("content-type");
-          if (ct) headers.set("content-type", ct);
-          
-          const cr = publicRes.headers.get("content-range");
-          if (cr) headers.set("content-range", cr);
-          
-          const cl = publicRes.headers.get("content-length");
-          if (cl) headers.set("content-length", cl);
-
-          const cache = publicRes.headers.get("cache-control");
-          if (cache) headers.set("cache-control", cache);
-          else headers.set("cache-control", "public, max-age=3600");
-          
-          headers.set("accept-ranges", "bytes");
-
-          return new NextResponse(publicRes.body, {
-            status: publicRes.status,
-            headers,
-          });
-        }
-      }
-      return new NextResponse("Not Found", { status: 404 });
+      return getFallbackAsset(request, path, rangeHeader);
     }
+
 
     // Si R2 binding está disponible
     let r2Range: any = undefined;
@@ -73,7 +79,8 @@ export async function GET(
     const object = await env.R2.get(path, r2Range ? { range: r2Range } : undefined);
 
     if (object === null) {
-      return new NextResponse("Not Found", { status: 404 });
+      // A binding can exist while its local bucket is empty.
+      return getFallbackAsset(request, path, rangeHeader);
     }
 
     const headers = new Headers();

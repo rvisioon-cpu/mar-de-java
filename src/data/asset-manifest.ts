@@ -99,11 +99,9 @@ export const assetManifest: string[] = [
     ...unitGalleryAssets,
 
     // Amenities
-    'amenities/1.webp',
-    'amenities/2.webp',
-    'amenities/3.webp',
-    'amenities/4.webp',
-    'amenities/5.webp',
-    'amenities/6.webp',
-    'amenities/7.webp',
+    ...Array.from({ length: 14 }, (_, i) => `amenities/${i + 1}.webp`),
+
+    // Videos
+    'videos/video_portada.mp4',
+    'videos/video_general.mp4',
 ];

@@ -23,11 +23,29 @@ export const getAssetUrl = (path: string): string => {
   // Ensure path doesn't start with slash
   const cleanPathNoSlash = cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath;
 
-  // Map icons are bundled with the application under public/ICONOS. They must
-  // stay same-origin even when the rest of the media library is served by R2.
-  if (cleanPathNoSlash.startsWith('ICONOS/')) {
+  // Production media lives in R2. Development can use the bundled images.
+  if (process.env.NODE_ENV === 'production' && (
+    cleanPathNoSlash.startsWith('amenities/') ||
+    cleanPathNoSlash.startsWith('homepage/')
+  )) {
+    return `/api/r2/${cleanPathNoSlash}`;
+  }
+
+  // Bundled static assets served directly from the app's public directory
+  // (stay same-origin even when remote R2 is configured):
+  // - Map icons (ICONOS/)
+  // - Floor plans (plants/floor_*.webp)
+  // - Amenities (amenities/)
+  // - Brand identity (identity/)
+  if (
+    cleanPathNoSlash.startsWith('ICONOS/') ||
+    cleanPathNoSlash.startsWith('plants/floor_') ||
+    cleanPathNoSlash.startsWith('amenities/') ||
+    cleanPathNoSlash.startsWith('identity/')
+  ) {
     return `/${cleanPathNoSlash}`;
   }
+
   
   // Si es un archivo de video, lo servimos obligatoriamente por el proxy same-origin
   // para evitar problemas de CORS que impiden el streaming/Range requests en el navegador.
@@ -53,9 +71,23 @@ export const getCanvasImageUrl = (path: string): string => {
   if (key.startsWith(devR2Domain)) key = key.slice(devR2Domain.length);
   if (ASSET_BASE_URL && key.startsWith(ASSET_BASE_URL)) key = key.slice(ASSET_BASE_URL.length);
   // URLs externas (p. ej. Unsplash) no se pueden proxear: se devuelven tal cual
-  if (key.startsWith('http')) return key;
   const cleanKey = key.startsWith('/') ? key.slice(1) : key;
+  if (process.env.NODE_ENV === 'production' && (
+    cleanKey.startsWith('amenities/') ||
+    cleanKey.startsWith('homepage/')
+  )) {
+    return `/api/r2/${cleanKey}`;
+  }
+  if (
+    cleanKey.startsWith('ICONOS/') ||
+    cleanKey.startsWith('plants/floor_') ||
+    cleanKey.startsWith('amenities/') ||
+    cleanKey.startsWith('identity/')
+  ) {
+    return `/${cleanKey}`;
+  }
   return `/api/r2/${cleanKey}`;
+
 };
 
 export { assetManifest } from '../data/asset-manifest';

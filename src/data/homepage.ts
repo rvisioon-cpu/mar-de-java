@@ -20,7 +20,7 @@ export const homepageData: HomepageData = {
   },
   intro: {
     poster: "homepage/intro.webp",
-    video: "homepage/intro_video.mp4"
+    video: "videos/video_portada.mp4"
   },
   slides: [
     {

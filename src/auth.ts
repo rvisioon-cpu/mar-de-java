@@ -2,30 +2,40 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getDb } from '@/lib/db';
 import { users } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { and, eq, isNull, sql } from 'drizzle-orm';
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "your-super-secret-nextauth-key-change-in-production",
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+  trustHost: true,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Usuario o correo electrónico", type: "text" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (typeof credentials?.email !== 'string' || typeof credentials?.password !== 'string') return null;
+
+        const identifier = credentials.email.trim().toLowerCase();
+        if (!identifier || !credentials.password) return null;
 
         const db = await getDb();
-        const userArr = await db.select().from(users).where(eq(users.email, credentials.email as string));
-        const user = userArr[0];
+        // A name is accepted only when it identifies exactly one active user.
+        // Existing email-based accounts continue to work unchanged.
+        const matches = await db.select().from(users).where(and(
+          isNull(users.deletedAt),
+          identifier.includes('@')
+            ? eq(sql`lower(${users.email})`, identifier)
+            : eq(sql`lower(${users.name})`, identifier)
+        )).limit(2);
+        if (matches.length !== 1) return null;
+        const user = matches[0];
 
-        if (!user || user.deletedAt) return null;
+        const { compare } = await import('bcryptjs');
+        const passwordsMatch = await compare(credentials.password, user.password);
 
-        const { compareSync } = await import('bcryptjs');
-        const passwordsMatch = compareSync(credentials.password as string, user.password);
-        
         if (passwordsMatch) {
           return {
             id: user.id,

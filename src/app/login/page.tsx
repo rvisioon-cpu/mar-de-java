@@ -66,7 +66,7 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-control w-full">
             <label className="label py-1" htmlFor="email">
-              <span className="label-text text-gray-300 font-bold text-xs uppercase tracking-wider">Email</span>
+              <span className="label-text text-gray-300 font-bold text-xs uppercase tracking-wider">Usuario o correo electrónico</span>
             </label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400 pointer-events-none">
@@ -75,9 +75,9 @@ export default function LoginPage() {
               <input
                 id="email"
                 name="email"
-                type="email"
+                type="text"
                 autoComplete="username"
-                placeholder="email@ejemplo.com"
+                placeholder="Admin o email@ejemplo.com"
                 className="input input-bordered w-full pl-10 bg-slate-800/30 border-white/10 text-white placeholder-gray-500 focus:border-brand-orange focus:ring-1 focus:ring-brand-orange text-sm transition-all rounded-xl h-11"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

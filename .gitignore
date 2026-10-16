@@ -53,6 +53,9 @@ public/drive-download-*
 # de más de 25 MiB y tumba el build. Los videos se sirven desde R2.
 public/*.mp4
 public/*.mov
+public/**/*.mp4
+public/**/*.mov
+
 
 # showroom raw and processed media assets
 raw_assets/

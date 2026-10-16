@@ -1,6 +1,7 @@
 "use server";
 
 import { cache } from "react";
+import { defaultFacesSeed } from "@/data/buildingFacesSeed";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { getDb } from "@/lib/db";
 import { buildingFaces } from "@/lib/db/schema";
@@ -74,76 +75,6 @@ function mapDbRowToBuildingFace(row: any): BuildingFace {
   };
 }
 
-const defaultFacesSeed = [
-  {
-    id: 1,
-    name: "Cara Inicial",
-    dayBackground: "building/photos/0.1.webp",
-    dayBackgroundVideo: "building/videos/0.1.mp4",
-    dayIntroVideo: "building/transitions/0.1_a_1.1.mp4",
-    dayToLeftTransition: null,
-    dayToRightTransition: null,
-    nightBackground: "building/photos/0.1.webp",
-    nightBackgroundVideo: "building/videos/0.1.mp4",
-    nightIntroVideo: "building/transitions/0.1_a_1.1.mp4",
-    nightToLeftTransition: null,
-    nightToRightTransition: null,
-    dayToNightTransition: null,
-    nightToDayTransition: null,
-    order: 0,
-  },
-  {
-    id: 2,
-    name: "Cara Izquierda",
-    dayBackground: "building/photos/2.1.webp",
-    dayBackgroundVideo: null,
-    dayIntroVideo: "building/transitions/2.1_a_PISO_6.mp4",
-    dayToLeftTransition: null,
-    dayToRightTransition: "building/transitions/2.1_a_1.1.mp4",
-    nightBackground: "building/photos/2.2.2.webp",
-    nightBackgroundVideo: null,
-    nightIntroVideo: "building/transitions/2.2_a_PISO_6.mp4",
-    nightToLeftTransition: null,
-    nightToRightTransition: "building/transitions/2.2_a_1.2.mp4",
-    dayToNightTransition: "building/transitions/2.1_a_2.2.mp4",
-    nightToDayTransition: "building/transitions/2.2_a_2.1.mp4",
-    order: 1,
-  },
-  {
-    id: 3,
-    name: "Cara Central",
-    dayBackground: "building/photos/1.1.webp",
-    dayBackgroundVideo: null,
-    dayIntroVideo: "building/transitions/1.1_a_PISO_6.mp4",
-    dayToLeftTransition: "building/transitions/1.1_a_2.1.mp4",
-    dayToRightTransition: "building/transitions/1.1_a_3.1.mp4",
-    nightBackground: "building/photos/1.2.webp",
-    nightBackgroundVideo: null,
-    nightIntroVideo: "building/transitions/1.2_a_PISO_6.mp4",
-    nightToLeftTransition: "building/transitions/1.2_A_2.2.mp4",
-    nightToRightTransition: "building/transitions/1.2_a_3.2.mp4",
-    dayToNightTransition: "building/transitions/1.1_a_1.2.mp4",
-    nightToDayTransition: "building/transitions/1.2_a_1.1.mp4",
-    order: 2,
-  },
-  {
-    id: 4,
-    name: "Cara Derecha",
-    dayBackground: "building/photos/3.1.webp",
-    dayBackgroundVideo: null,
-    dayIntroVideo: "building/transitions/3.1_a_PISO_6.mp4",
-    dayToLeftTransition: "building/transitions/3.1_a_1.1.mp4",
-    dayToRightTransition: null,
-    nightBackground: "building/photos/3.2.webp",
-    nightBackgroundVideo: null,
-    nightIntroVideo: "building/transitions/3.2_a_PISO_6.mp4",
-    nightToLeftTransition: "building/transitions/3.2_a_1.2.mp4",
-    nightToRightTransition: null,
-    dayToNightTransition: "building/transitions/3.1_a_3.2.mp4",
-    nightToDayTransition: "building/transitions/3.2_a_3.1.mp4",
-    order: 3,
-  }
-];
 
 export const getBuildingFacesData = cache(async function getBuildingFacesData(): Promise<BuildingFace[]> {
   const db = await getDb();
@@ -159,7 +90,7 @@ export const getBuildingFacesData = cache(async function getBuildingFacesData():
     const allRows = await db.select().from(buildingFaces);
     if (allRows.length === 0) {
       try {
-        await db.insert(buildingFaces).values(defaultFacesSeed);
+        await db.insert(buildingFaces).values(defaultFacesSeed).onConflictDoNothing();
         rows = await db
           .select()
           .from(buildingFaces)

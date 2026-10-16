@@ -29,7 +29,7 @@ const BUILDING_TOUR = {
   title: 'Recorrido General',
   subtitle: 'Áreas comunes',
   thumbnail: 'building/photos/1.1.webp',
-  target: 'https://kuula.co/share/collection/7TdKK?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&gyro=0&initload=0&thumbs=1&inst=es',
+  target: 'https://kuula.co/share/collection/7dhMt?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es',
 };
 
 // page_views references units, so any recorded visit to a unit page blocks the
@@ -107,6 +107,34 @@ for (const floor of floorsData) {
     tourOrder++;
   }
 }
+
+// Multimedia: Videos and Amenities for Mar de Java
+sql += '\n-- Multimedia: Video Portada, Video General, and Amenities\n'
+  + "DELETE FROM media WHERE category IN ('VIDEO_SIDEBAR', 'VIDEO_PORTADA', 'AMENITIES_GALLERY', 'amenities') OR id LIKE 'oa-%' OR id LIKE 'mar-java-%';\n"
+  + "INSERT INTO media (id, title, url, url_night, type, category, is_active) VALUES\n"
+  + "  ('mar-java-video-portada', 'Video Portada', 'videos/video_portada.mp4', NULL, 'video/mp4', 'VIDEO_PORTADA', 1),\n"
+  + "  ('mar-java-video-general', 'Video General', 'videos/video_general.mp4', NULL, 'video/mp4', 'VIDEO_SIDEBAR', 1);\n\n";
+
+const amenities = [
+  'Fachada Principal',
+  'Fachada Nocturna',
+  'Fachada Vista Lateral',
+  'Fachada Vista Panorámica',
+  'Fachada Angular',
+  'Fachada Acceso',
+  'Lobby de Ingreso',
+  'Lobby Recepción',
+  'Lobby Sala de Espera',
+  'Zona Social / Terraza 1',
+  'Zona Social / Terraza 2',
+  'Zona Social / Parrilla',
+  'Área Común D1',
+  'Área Común D2'
+];
+
+sql += 'INSERT INTO media (id, title, url, url_night, type, category, is_active) VALUES\n'
+  + amenities.map((title, i) => `  ('mar-java-amenity-${i + 1}', '${title}', 'amenities/${i + 1}.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1)`).join(',\n')
+  + ';\n';
 
 fs.writeFileSync('seed.sql', sql);
 fs.writeFileSync('src/lib/db/seed.sql', sql);

@@ -11,9 +11,9 @@ const nextConfig: NextConfig = {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  import('@cloudflare/next-on-pages/next-dev')
-    .then(({ setupDevPlatform }) => setupDevPlatform())
-    .catch((err) => console.error('Error in setupDevPlatform:', err));
+  import('@opennextjs/cloudflare')
+    .then(({ initOpenNextCloudflareForDev }) => initOpenNextCloudflareForDev())
+    .catch((err) => console.error('Error in initOpenNextCloudflareForDev:', err));
 }
 
 export default nextConfig;

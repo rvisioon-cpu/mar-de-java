@@ -18,7 +18,7 @@ export interface Tour {
   floorName?: string;
 }
 
-const buildingTarget= 'https://kuula.co/share/collection/7HQY1?logo=1&card=1&info=0&logosize=175&fs=1&vr=1&zoom=1&initload=0&thumbs=3&alpha=0.91&inst=es';
+const buildingTarget= 'https://kuula.co/share/collection/7dhMt?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es';
 
 export const getTours = (): Tour[] => {
   const tours: Tour[] = [];
