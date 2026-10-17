@@ -15,7 +15,7 @@ ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = u
 UPDATE units SET identifier = '201', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.71,"y":44.88,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 64.3 71.2 L 64.0 50.8 L 52.5 50.8 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_201';
 UPDATE units SET identifier = '202', bedrooms = 3, bathrooms = 2.5, area_sqm = 102.1, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_202';
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
-VALUES ('unit_2_203', 'floor_2', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.8,"y":56.26,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 50.8 L 64.0 50.8 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/203.1/furnished.webp"]', '["plants/details/203.1/unfurnished.webp"]', '["plants/details/203.1/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
+VALUES ('unit_2_203', 'floor_2', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.8,"y":56.26,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 50.8 L 64.0 50.8 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/203.1/furnished.webp"]', '["plants/details/203.1/unfurnished.webp"]', '["plants/details/203.1/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
 ON CONFLICT(id) DO UPDATE SET
   floor_id = excluded.floor_id,
   identifier = excluded.identifier,
@@ -24,6 +24,7 @@ ON CONFLICT(id) DO UPDATE SET
   bathrooms = excluded.bathrooms,
   area_sqm = excluded.area_sqm,
   coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
   photos_furnished = excluded.photos_furnished,
   photos_unfurnished = excluded.photos_unfurnished,
   photos_plans = excluded.photos_plans,
@@ -35,7 +36,7 @@ ON CONFLICT(id) DO UPDATE SET
 UPDATE units SET identifier = '301', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.71,"y":44.77,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 64.3 71.2 L 64.0 50.2 L 52.5 50.2 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_301';
 UPDATE units SET identifier = '302', bedrooms = 3, bathrooms = 2.5, area_sqm = 101.31, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_302';
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
-VALUES ('unit_3_303', 'floor_3', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.7,"y":56.11,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 48.8 55.6 L 48.8 50.2 L 64.0 50.2 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/203.2/furnished.webp"]', '["plants/details/203.2/unfurnished.webp"]', '["plants/details/203.2/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
+VALUES ('unit_3_303', 'floor_3', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.7,"y":56.11,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 48.8 55.6 L 48.8 50.2 L 64.0 50.2 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/203.2/furnished.webp"]', '["plants/details/203.2/unfurnished.webp"]', '["plants/details/203.2/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
 ON CONFLICT(id) DO UPDATE SET
   floor_id = excluded.floor_id,
   identifier = excluded.identifier,
@@ -44,6 +45,7 @@ ON CONFLICT(id) DO UPDATE SET
   bathrooms = excluded.bathrooms,
   area_sqm = excluded.area_sqm,
   coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
   photos_furnished = excluded.photos_furnished,
   photos_unfurnished = excluded.photos_unfurnished,
   photos_plans = excluded.photos_plans,
