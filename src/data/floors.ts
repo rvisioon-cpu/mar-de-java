@@ -233,9 +233,9 @@ export const floorsData: Floor[] = [
         bathrooms: 2.5,
         status: 'available',
         subtitle: 'Flat',
-        x: 32.7,
-        y: 58.67,
-        path: "M 13.5 26.2 L 43.5 26.2 L 43.5 55.6 L 49.5 55.6 L 49.5 70.5 L 48.6 70.5 L 48.6 86.2 L 20.7 89.2 L 21.2 74.8 L 19.6 74.8 L 21.2 37.2 L 13.0 37.2 Z",
+        x: 33.06,
+        y: 58.65,
+        path: "M 48.58 85.39 L 21.43 89.68 L 21.95 73.44 L 19.75 73.62 L 21.11 37.3 L 13.55 36.65 L 14.18 26.84 L 43.07 26.66 L 42.91 56.26 L 50.89 56.63 L 50.89 70.54 L 48.42 70.73 Z",
         assetId: "102",
         tourUrl: "https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es",
         photosFurnished: ["plants/details/102/furnished.webp"],
@@ -243,6 +243,30 @@ export const floorsData: Floor[] = [
         photosPlans: ["plants/details/102/plans.webp"],
         gallery: ["plants/details/102/gallery/1.webp", "plants/details/102/gallery/2.webp", "plants/details/102/gallery/3.webp", "plants/details/102/gallery/4.webp", "plants/details/102/gallery/5.webp", "plants/details/102/gallery/6.webp", "plants/details/102/gallery/7.webp", "plants/details/102/gallery/8.webp", "plants/details/102/gallery/9.webp", "plants/details/102/gallery/10.webp", "plants/details/102/gallery/11.webp", "plants/details/102/gallery/12.webp"]
       },
+      {
+        id: "1",
+        floorId: "1",
+        price: 0,
+        dimensions: 0,
+        status: 'available',
+        type: 'storage',
+        subtitle: 'Estacionamiento',
+        x: 16.99,
+        y: 50.02,
+        path: "M 20.12 57.94 L 13.24 57.94 L 14.13 41.97 L 20.48 42.25 Z"
+      },
+      {
+        id: "2",
+        floorId: "1",
+        price: 0,
+        dimensions: 0,
+        status: 'available',
+        type: 'storage',
+        subtitle: 'Estacionamiento',
+        x: 16.34,
+        y: 70.54,
+        path: "M 20.01 78.48 L 19.96 62.32 L 13.29 62.14 L 12.08 79.23 Z"
+      }
     ]
   },
   {
