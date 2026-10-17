@@ -156,8 +156,7 @@ const UnitPage = () => {
             const dynamicImages = [];
             // Probe 1..10
             for (let i = 1; i <= 10; i++) {
-                dynamicImages.push(`plants/details/${cleanAssetId}/gallery/${i}.jpg`);
-                dynamicImages.push(`plants/details/${cleanAssetId}/gallery/${i}.png`); // Fallback extension
+                dynamicImages.push(`plants/details/${cleanAssetId}/gallery/${i}.webp`);
             }
 
             return dynamicImages.map(path => ({
@@ -191,7 +190,7 @@ const UnitPage = () => {
         }
 
         const cleanAssetId = assetId.replace(/^unit_\d+_/, '');
-        const extensions = ['jpg', 'jpeg', 'png'];
+        const extensions = ['webp', 'jpg', 'jpeg', 'png'];
         for (const ext of extensions) {
             const relativePath = `plants/details/${cleanAssetId}/${type}.${ext}`;
             if (assetManifest.includes(relativePath)) {

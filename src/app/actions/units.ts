@@ -102,7 +102,7 @@ export const getFloorsData = cache(async function getFloorsData() {
           bedrooms: u.bedrooms || undefined,
           bathrooms: u.bathrooms || undefined,
           status,
-          type: u.type === 'STORAGE' ? ('storage' as const) : ('apartment' as const),
+          type: u.type === 'STORAGE' ? ('storage' as const) : u.type === 'DUPLEX' ? ('DUPLEX' as const) : ('apartment' as const),
           subtitle,
           description: '',
           images: u.gallery ? (u.gallery as string[]) : [],
@@ -332,6 +332,26 @@ export async function updateUnit(
   const [original] = await db.select().from(units).where(eq(units.id, id));
   if (!original) throw new Error("Unidad no encontrada.");
 
+  if (
+    data.state &&
+    (data.type === "DUPLEX" || original.type === "DUPLEX") &&
+    original.identifier
+  ) {
+    await db
+      .update(units)
+      .set({
+        state: data.state,
+        updatedAt: new Date(),
+      })
+      .where(
+        and(
+          eq(units.type, "DUPLEX"),
+          eq(units.identifier, original.identifier),
+          isNull(units.deletedAt)
+        )
+      );
+  }
+
   const [updatedUnit] = await db
     .update(units)
     .set({
@@ -357,6 +377,9 @@ export async function updateUnit(
   });
 
   revalidatePath("/dashboard/units");
+  revalidatePath("/plantas", "layout");
+  revalidatePath("/unidad", "layout");
+  revalidatePath("/showroom", "layout");
   return updatedUnit;
 }
 
@@ -391,6 +414,22 @@ export async function updateUnitState(id: string, newState: string) {
     }
   }
 
+  if (original.type === "DUPLEX" && original.identifier) {
+    await db
+      .update(units)
+      .set({
+        state: newState,
+        updatedAt: new Date(),
+      })
+      .where(
+        and(
+          eq(units.type, "DUPLEX"),
+          eq(units.identifier, original.identifier),
+          isNull(units.deletedAt)
+        )
+      );
+  }
+
   const [updatedUnit] = await db
     .update(units)
     .set({
@@ -408,6 +447,9 @@ export async function updateUnitState(id: string, newState: string) {
   });
 
   revalidatePath("/dashboard/units");
+  revalidatePath("/plantas", "layout");
+  revalidatePath("/unidad", "layout");
+  revalidatePath("/showroom", "layout");
   return updatedUnit;
 }
 

@@ -75,9 +75,10 @@ ON CONFLICT(id) DO UPDATE SET
   updated_at = unixepoch();
 
 -- Piso 5
-UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":34.26,"y":50.84,"path":"M 26.84 73.62 L 21.59 73.81 L 21.64 79.13 L 18.96 79.97 L 21.17 13.77 L 50.74 13.49 L 50.74 25.44 L 43.33 25.91 L 43.12 48.04 L 39.34 48.23 L 39.34 55.42 L 37.66 55.7 L 37.5 59.52 L 27.63 59.71 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_501';
+UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":36.01,"y":25.43,"path":"M 43.33 47.95 L 39.55 48.04 L 39.23 44.77 L 35.98 44.68 L 36.29 30.58 L 27 30.58 L 26.89 31.61 L 20.69 31.89 L 21.69 14.43 L 50.63 13.87 L 50.68 26.19 L 43.28 25.91 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_501';
+
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
-VALUES ('unit_5_403', 'floor_5', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":43.39,"y":61.59,"path":"M 23.84 77.64 L 23.74 74 L 27.36 74.46 L 27.73 59.71 L 37.92 59.9 L 38.08 56.16 L 39.39 55.79 L 39.39 48.32 L 43.12 48.51 L 43.28 55.6 L 48.32 55.79 L 48.48 53.92 L 62.18 53.64 L 62.34 57.28 L 62.03 69.14 L 61.66 73.06 L 48.69 74.09 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/403.2/furnished.webp"]', '["plants/details/403.2/unfurnished.webp"]', '["plants/details/403.2/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
+VALUES ('unit_5_403', 'floor_5', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":27.61,"y":51.13,"path":"M 39.05 55.76 L 39.25 45.17 L 35.69 44.95 L 35.97 30.81 L 27.09 30.74 L 27.01 32.16 L 20.57 31.95 L 18.84 79.89 L 23.48 78.3 L 23.86 74.07 L 26.93 74.52 L 27.48 59.76 L 37.66 59.91 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/403.2/furnished.webp"]', '["plants/details/403.2/unfurnished.webp"]', '["plants/details/403.2/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
 ON CONFLICT(id) DO UPDATE SET
   floor_id = excluded.floor_id,
   identifier = excluded.identifier,
@@ -93,7 +94,47 @@ ON CONFLICT(id) DO UPDATE SET
   gallery = excluded.gallery,
   deleted_at = NULL,
   updated_at = unixepoch();
-UPDATE units SET identifier = '503', bedrooms = 3, bathrooms = 4, area_sqm = 116.88, coordinates = '{"x":64.38,"y":45.32,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 62.3 71.2 L 62.0 53.5 L 52.5 53.5 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_502';
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_5_502', 'floor_5', '502', 'APARTMENT', 3, 2.5, 116.28, '{"x":68.42,"y":42.55,"path":"M 62.97 13.96 L 79.1 13.96 L 81.35 67.31 L 75.05 67.16 L 75.05 69.32 L 62.42 70.82 L 62.09 58.06 L 62.63 58.06 L 62.51 53.66 L 52.9 53.43 L 52.56 38.14 L 50.67 38.14 L 50.84 28.51 L 65.78 28.74 L 65.34 16.39 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/x01/furnished.webp"]', '["plants/details/x01/unfurnished.webp"]', '["plants/details/x01/plans.webp"]', '["plants/details/x01/gallery/1.webp","plants/details/x01/gallery/2.webp","plants/details/x01/gallery/3.webp","plants/details/x01/gallery/4.webp","plants/details/x01/gallery/5.webp","plants/details/x01/gallery/6.webp","plants/details/x01/gallery/7.webp","plants/details/x01/gallery/8.webp","plants/details/x01/gallery/9.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_5_503', 'floor_5', '503', 'DUPLEX', 3, 4, 116.88, '{"x":44.56,"y":64.56,"path":"M 48.82 53.89 L 48.71 56.12 L 43.15 55.81 L 43.19 48.52 L 39.36 48.58 L 39.19 55.87 L 37.66 56.06 L 37.62 60.07 L 27.44 59.83 L 27.06 74.72 L 23.86 74.78 L 23.76 78.12 L 35.05 76.26 L 35.12 74.41 L 43.4 73.24 L 48.33 72.99 L 62.1 71.38 L 61.99 57.85 L 62.38 57.91 L 62.38 53.58 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', '["plants/details/502.1/furnished.webp"]', '["plants/details/502.1/unfurnished.webp"]', '["plants/details/502.1/plans.webp"]', '["plants/details/502/gallery/1.webp","plants/details/502/gallery/2.webp","plants/details/502/gallery/3.webp","plants/details/502/gallery/4.webp","plants/details/502/gallery/5.webp","plants/details/502/gallery/6.webp","plants/details/502/gallery/7.webp","plants/details/502/gallery/8.webp","plants/details/502/gallery/9.webp","plants/details/502/gallery/10.webp","plants/details/502/gallery/11.webp","plants/details/502/gallery/12.webp","plants/details/502/gallery/13.webp","plants/details/502/gallery/14.webp","plants/details/502/gallery/15.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+
+UPDATE tours SET unit_id = 'unit_5_503' WHERE id = 'tour-503';
+INSERT OR IGNORE INTO tours (id, title, subtitle, thumbnail_url, type, target_url, unit_id, is_active, "order")
+VALUES ('tour-502', 'Unidad 502', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_5_502', 1, 12);
+
 
 -- Piso 6
 UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":36.49,"y":40.77,"path":"M 27.84 75.86 L 19.54 77.26 L 22.16 15.73 L 48.06 13.96 L 47.9 25.54 L 42.33 25.72 L 42.23 27.78 L 43.59 27.5 L 42.96 59.15 L 28.31 59.24 Z"}', updated_at = unixepoch() WHERE id = 'unit_6_601';

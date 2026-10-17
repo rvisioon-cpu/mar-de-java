@@ -450,9 +450,19 @@ export default function UnitsDashboard({
       try {
         const updated = await updateUnitState(unitId, newState);
         setUnits(
-          units.map((u) =>
-            u.id === updated.id ? { ...u, state: updated.state } : u
-          )
+          units.map((u) => {
+            if (u.id === updated.id) {
+              return { ...u, state: updated.state };
+            }
+            if (
+              unitToMove.type === "DUPLEX" &&
+              u.type === "DUPLEX" &&
+              u.identifier === unitToMove.identifier
+            ) {
+              return { ...u, state: updated.state };
+            }
+            return u;
+          })
         );
         showNotification(
           "success",

@@ -51,9 +51,11 @@ export const getGalleryCandidates = (prefix: string, count: number = 20): Galler
         
         // Variations to try
         const variations = [
-            `${num}.png`,      // 1.png
-            `${num}.jpg`,      // 1.jpg
-            `${num}.jpeg`,     // 1.jpeg
+            `${num}.webp`,      // 1.webp
+            `${paddedNum}.webp`, // 01.webp
+            `${num}.png`,       // 1.png
+            `${num}.jpg`,       // 1.jpg
+            `${num}.jpeg`,      // 1.jpeg
             `${paddedNum}.png`, // 01.png
             `${paddedNum}.jpg`, // 01.jpg
         ];
