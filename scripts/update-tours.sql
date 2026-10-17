@@ -25,6 +25,7 @@ UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMH?logo=-1&car
 -- Each duplex is one apartment across two floors, so both of its unit rows
 -- offer the same tour.
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_2_203', 'unit_3_303');
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_4_403', 'unit_5_403');
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_5_501', 'unit_6_601');
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', updated_at = unixepoch() WHERE id IN ('unit_5_502', 'unit_6_602');
 
@@ -41,5 +42,6 @@ INSERT INTO tours (id, title, subtitle, thumbnail_url, type, target_url, unit_id
   ('tour-302', 'Unidad 302', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMD?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_3_302', 1, 7),
   ('tour-401', 'Unidad 401', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_401', 1, 8),
   ('tour-402', 'Unidad 402', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMH?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_402', 1, 9),
-  ('tour-501', 'Unidad 501', 'Dúplex', 'plants/details/501/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_5_501', 1, 10),
-  ('tour-503', 'Unidad 503', 'Dúplex', 'plants/details/502/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', 'unit_5_502', 1, 11);
+  ('tour-403', 'Unidad 403', 'Dúplex', 'plants/details/403/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_403', 1, 10),
+  ('tour-501', 'Unidad 501', 'Dúplex', 'plants/details/501/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_5_501', 1, 11),
+  ('tour-503', 'Unidad 503', 'Dúplex', 'plants/details/502/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', 'unit_5_502', 1, 12);

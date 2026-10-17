@@ -57,7 +57,7 @@ ON CONFLICT(id) DO UPDATE SET
 UPDATE units SET identifier = '401', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.38,"y":45.32,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 62.3 71.2 L 62.0 53.5 L 52.5 53.5 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_401';
 UPDATE units SET identifier = '402', bedrooms = 3, bathrooms = 2.5, area_sqm = 108.22, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_402';
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
-VALUES ('unit_4_403', 'floor_4', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":47.3,"y":56.94,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 53.5 L 62.0 53.5 L 62.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/403.1/furnished.webp"]', '["plants/details/403.1/unfurnished.webp"]', '["plants/details/403.1/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
+VALUES ('unit_4_403', 'floor_4', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":47.3,"y":56.94,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 53.5 L 62.0 53.5 L 62.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/403.1/furnished.webp"]', '["plants/details/403.1/unfurnished.webp"]', '["plants/details/403.1/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
 ON CONFLICT(id) DO UPDATE SET
   floor_id = excluded.floor_id,
   identifier = excluded.identifier,
@@ -66,6 +66,7 @@ ON CONFLICT(id) DO UPDATE SET
   bathrooms = excluded.bathrooms,
   area_sqm = excluded.area_sqm,
   coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
   photos_furnished = excluded.photos_furnished,
   photos_unfurnished = excluded.photos_unfurnished,
   photos_plans = excluded.photos_plans,
@@ -76,7 +77,7 @@ ON CONFLICT(id) DO UPDATE SET
 -- Piso 5
 UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":34.26,"y":50.84,"path":"M 26.84 73.62 L 21.59 73.81 L 21.64 79.13 L 18.96 79.97 L 21.17 13.77 L 50.74 13.49 L 50.74 25.44 L 43.33 25.91 L 43.12 48.04 L 39.34 48.23 L 39.34 55.42 L 37.66 55.7 L 37.5 59.52 L 27.63 59.71 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_501';
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
-VALUES ('unit_5_403', 'floor_5', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":43.39,"y":61.59,"path":"M 23.84 77.64 L 23.74 74 L 27.36 74.46 L 27.73 59.71 L 37.92 59.9 L 38.08 56.16 L 39.39 55.79 L 39.39 48.32 L 43.12 48.51 L 43.28 55.6 L 48.32 55.79 L 48.48 53.92 L 62.18 53.64 L 62.34 57.28 L 62.03 69.14 L 61.66 73.06 L 48.69 74.09 Z"}', 'AVAILABLE', NULL, '["plants/details/403.2/furnished.webp"]', '["plants/details/403.2/unfurnished.webp"]', '["plants/details/403.2/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
+VALUES ('unit_5_403', 'floor_5', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":43.39,"y":61.59,"path":"M 23.84 77.64 L 23.74 74 L 27.36 74.46 L 27.73 59.71 L 37.92 59.9 L 38.08 56.16 L 39.39 55.79 L 39.39 48.32 L 43.12 48.51 L 43.28 55.6 L 48.32 55.79 L 48.48 53.92 L 62.18 53.64 L 62.34 57.28 L 62.03 69.14 L 61.66 73.06 L 48.69 74.09 Z"}', 'AVAILABLE', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', '["plants/details/403.2/furnished.webp"]', '["plants/details/403.2/unfurnished.webp"]', '["plants/details/403.2/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
 ON CONFLICT(id) DO UPDATE SET
   floor_id = excluded.floor_id,
   identifier = excluded.identifier,
@@ -85,6 +86,7 @@ ON CONFLICT(id) DO UPDATE SET
   bathrooms = excluded.bathrooms,
   area_sqm = excluded.area_sqm,
   coordinates = excluded.coordinates,
+  tour_url = excluded.tour_url,
   photos_furnished = excluded.photos_furnished,
   photos_unfurnished = excluded.photos_unfurnished,
   photos_plans = excluded.photos_plans,
@@ -136,4 +138,45 @@ ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = u
 
 INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
 VALUES ('unit_S1_12', 'floor_S1', '12', 'STORAGE', NULL, NULL, NULL, '{"x":22.14,"y":28.07,"path":"M 27.81 33.07 L 28.05 26.64 L 24.87 26.64 L 24.97 22.68 L 16.23 22.74 L 15.82 29.65 L 19.33 30.25 L 20.01 32.89 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+-- Sótano 2 (Estacionamientos 13 al 22)
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_13', 'floor_S2', '13', 'STORAGE', NULL, NULL, NULL, '{"x":72.95,"y":44.63,"path":"M 79.54 50.51 L 79.11 38.2 L 66.4 38.87 L 66.73 50.93 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_14', 'floor_S2', '14', 'STORAGE', NULL, NULL, NULL, '{"x":73.33,"y":56.21,"path":"M 79.87 61.88 L 79.68 50.59 L 66.78 50.76 L 66.97 61.63 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_15', 'floor_S2', '15', 'STORAGE', NULL, NULL, NULL, '{"x":73.59,"y":67.53,"path":"M 80.29 73.26 L 80.06 61.71 L 66.88 61.8 L 67.11 73.35 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_16', 'floor_S2', '16', 'STORAGE', NULL, NULL, NULL, '{"x":74.00,"y":79.27,"path":"M 80.86 84.13 L 80.44 73.43 L 67.21 73.6 L 67.49 85.9 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_17', 'floor_S2', '17', 'STORAGE', NULL, NULL, NULL, '{"x":19.27,"y":87.34,"path":"M 25.92 92.06 L 26.3 81.69 L 12.83 81.18 L 12.03 94.42 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_18', 'floor_S2', '18', 'STORAGE', NULL, NULL, NULL, '{"x":19.72,"y":75.46,"path":"M 26.2 80.43 L 26.58 70.31 L 13.26 70.4 L 12.83 80.68 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_19', 'floor_S2', '19', 'STORAGE', NULL, NULL, NULL, '{"x":20.35,"y":65.19,"path":"M 26.77 70.23 L 26.82 60.2 L 14.21 60.37 L 13.59 69.97 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_20', 'floor_S2', '20', 'STORAGE', NULL, NULL, NULL, '{"x":20.74,"y":55.10,"path":"M 27.01 60.11 L 27.29 50.17 L 14.68 50.08 L 13.97 60.03 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_21', 'floor_S2', '21', 'STORAGE', NULL, NULL, NULL, '{"x":21.24,"y":44.31,"path":"M 27.72 38.71 L 15.49 38.96 L 14.59 49.92 L 27.15 49.66 Z"}', 'AVAILABLE')
+ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();
+
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state)
+VALUES ('unit_S2_22', 'floor_S2', '22', 'STORAGE', NULL, NULL, NULL, '{"x":22.02,"y":28.11,"path":"M 27.96 32.3 L 28.19 23.11 L 16.29 22.95 L 15.63 34.07 Z"}', 'AVAILABLE')
 ON CONFLICT(id) DO UPDATE SET coordinates = excluded.coordinates, updated_at = unixepoch();

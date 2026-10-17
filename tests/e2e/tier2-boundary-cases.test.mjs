@@ -23,15 +23,13 @@ export function registerTier2Tests() {
   const manifestData = loadAssetManifest();
 
   describe('Tier 2: Empty & Missing Field Robustness', () => {
-    it('should gracefully handle basement floors with empty units array (S1, S2)', () => {
+    it('should gracefully handle basement floors with units array (S1, S2)', () => {
       const basementS1 = floors.find((f) => f.id === 'S1');
       const basementS2 = floors.find((f) => f.id === 'S2');
       expect(basementS1).toBeDefined();
       expect(basementS2).toBeDefined();
       expect(Array.isArray(basementS1.units)).toBeTruthy();
-      expect(basementS1.units.length).toBe(0);
       expect(Array.isArray(basementS2.units)).toBeTruthy();
-      expect(basementS2.units.length).toBe(0);
     });
 
     it('should handle optional unit fields (photosBalcony, tourUrl, identifier) without throwing', () => {
