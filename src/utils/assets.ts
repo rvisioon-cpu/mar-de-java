@@ -55,7 +55,7 @@ export const getAssetUrl = (path: string): string => {
     return `/api/r2/${cleanPathNoSlash}`;
   }
   
-  return `${ASSET_BASE_URL}/${cleanPathNoSlash}`;
+  return `/api/r2/${cleanPathNoSlash}`;
 };
 
 // URL segura para cargar medios dentro de un canvas (Konva/toDataURL).

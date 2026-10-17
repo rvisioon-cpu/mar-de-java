@@ -8,7 +8,7 @@ export default function ForcedLandscapeWrapper({ children }: { children: React.R
   const pathname = usePathname();
 
   // Keep the public landing page upright so its copy remains readable on phones.
-  const isExcluded = pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login') || pathname?.startsWith('/ubicacion');
+  const isExcluded = pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login');
 
   const shouldForceLandscape = isForcedLandscape && !isExcluded;
 

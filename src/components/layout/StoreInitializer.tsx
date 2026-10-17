@@ -4,14 +4,16 @@ import { useEffect, useRef } from "react";
 import { useStore } from "@/store/useStore";
 import { getFloorsData } from "@/app/actions/units";
 import { getBuildingFacesData } from "@/app/actions/building";
+import type { BuildingFace } from "@/data/buildingData";
 import type { Floor } from "@/data/floors";
 
 interface StoreInitializerProps {
   initialFloorsData: Floor[];
-  initialBuildingFacesData: any[];
+  initialBuildingFacesData: BuildingFace[];
+  children: React.ReactNode;
 }
 
-export default function StoreInitializer({ initialFloorsData, initialBuildingFacesData }: StoreInitializerProps) {
+export default function StoreInitializer({ initialFloorsData, initialBuildingFacesData, children }: StoreInitializerProps) {
   const initialized = useRef(false);
 
   // Sync state during SSR / first render
@@ -38,7 +40,7 @@ export default function StoreInitializer({ initialFloorsData, initialBuildingFac
     if (!initialBuildingFacesData || initialBuildingFacesData.length === 0) {
       getBuildingFacesData()
         .then((data) => {
-          useStore.setState({ buildingFacesData: data as any[] });
+          useStore.setState({ buildingFacesData: data });
         })
         .catch((err) => {
           console.error("Failed to sync building faces data in background:", err);
@@ -46,6 +48,6 @@ export default function StoreInitializer({ initialFloorsData, initialBuildingFac
     }
   }, [initialFloorsData, initialBuildingFacesData]);
 
-  return null;
+  return <>{children}</>;
 }
 

@@ -6,7 +6,7 @@
  * and fall back to env.R2 when deployed on Cloudflare Pages.
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, copyFileSync } from 'fs';
 import { join } from 'path';
 
 const workerPath = join('.open-next', 'assets', '_worker.js');
@@ -28,6 +28,9 @@ if (pathname === '/api/map-config') {
     { headers: { 'cache-control': 'no-store' } }
   );
 }
+
+const mediaResponse = await serveR2Media(request, env, ctx);
+if (mediaResponse) return mediaResponse;
 
 const hasExtension = /\\.[a-zA-Z0-9]+$/.test(pathname);
 const isStaticPrefix = 
@@ -160,5 +163,6 @@ const patched = original.replace(
   `// Patched by patch-worker.mjs\n${patch}`
 );
 
-writeFileSync(workerPath, patched);
+copyFileSync('scripts/worker/r2-media.mjs', join('.open-next', 'assets', 'r2-media.mjs'));
+writeFileSync(workerPath, `import { serveR2Media } from './r2-media.mjs';\n${patched}`);
 console.log('✅ Worker patched: static assets will be served via env.ASSETS and env.R2 fallback');

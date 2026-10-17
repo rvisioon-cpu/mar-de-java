@@ -12,7 +12,7 @@ function prepare(directory) {
     }
     const key = relative(root, path).split(sep).join('/');
     // These files are served by the R2 binding, never bundled into Pages.
-    if (/\.(mp4|webm|ogg|mov|avi)$/i.test(key) || /^(amenities|homepage)\//.test(key)) {
+    if (/\.(mp4|webm|ogg|mov|avi)$/i.test(key) || /^(amenities|homepage|building)\//.test(key)) {
       rmSync(path);
       removed++;
     } else if (statSync(path).size > 25 * 1024 * 1024) {

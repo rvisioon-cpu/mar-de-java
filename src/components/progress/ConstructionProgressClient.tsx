@@ -7,6 +7,7 @@ import gsap from "gsap";
 import FullScreenToggle from "@/components/UI/FullScreenToggle";
 import { getAssetUrl } from "@/utils/assets";
 import config from "@/config/config";
+import styles from "./ConstructionProgressClient.module.css";
 
 export interface ProgressUpdateClient {
   id: string;
@@ -105,39 +106,38 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
   }
 
   return (
-    <div className="h-full w-full bg-black text-white relative overflow-hidden font-sans">
+    <div className={`${styles.container} @container bg-black text-white relative overflow-hidden font-sans`}>
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-      {/* Header / Navigation */}
-      <div className="absolute top-6 left-6 z-50 flex items-center gap-4">
-        <button
-          onClick={() => setIsSidebarOpen(true)}
-          className="p-2 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full transition-all cursor-pointer shadow-lg"
-        >
-          <Menu size={24} />
-        </button>
-        <div className="flex flex-col">
-          <h1 className="text-sm font-bold uppercase tracking-[0.2em]">Avance de Obra</h1>
-          <p className="text-[10px] text-gray-400 uppercase tracking-widest font-secondary">
-            {config.company?.buildingName}
-          </p>
+      <header className={`${styles.header} relative z-50 flex items-center justify-between gap-4 border-b border-white/10`}>
+        <div className="flex min-w-0 items-center gap-3">
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            aria-label="Abrir menú"
+            className="p-2 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full transition-all cursor-pointer shadow-lg shrink-0"
+          >
+            <Menu size={24} />
+          </button>
+          <div className="min-w-0">
+            <h1 className="text-xs font-bold uppercase tracking-[0.15em]">Avance de Obra</h1>
+            <p className="text-[10px] text-gray-400 uppercase tracking-widest font-secondary truncate">
+              {config.company?.buildingName}
+            </p>
+          </div>
         </div>
-      </div>
-
-      <div className="absolute top-6 right-6 z-50">
         <FullScreenToggle />
-      </div>
+      </header>
 
       {/* Main Content Area */}
-      <div className="relative h-full w-full flex flex-col md:flex-row">
+      <div className={styles.main}>
         {/* Media Container */}
-        <div className="flex-1 relative bg-neutral-900 overflow-hidden group h-[50vh] md:h-full">
+        <div className={`${styles.media} relative bg-neutral-900 overflow-hidden group`}>
           <div ref={mediaRef} className="absolute inset-0 flex items-center justify-center">
             {currentUpdate.mediaType === "image" ? (
               <img
                 src={getAssetUrl(currentUpdate.mediaUrl)}
                 alt={currentUpdate.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             ) : (
               <>
@@ -157,7 +157,7 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
                   onPlaying={() => setIsVideoLoading(false)}
                   onWaiting={() => setIsVideoLoading(true)}
                   onError={() => setIsVideoLoading(false)}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
 
                 {/* Indicador flotante sin opacar ni ocultar el video mientras carga/hace buffering */}
@@ -176,12 +176,13 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
           </div>
 
           {/* Media Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 via-transparent to-black/10" />
 
           {/* Navigation Buttons (Desktop) */}
-          <div className="absolute inset-y-0 left-0 w-24 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-y-0 left-0 w-24 hidden @2xl:flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
             <button
               onClick={handlePrev}
+              aria-label="Avance anterior"
               disabled={currentIndex === 0}
               className={`p-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all ${
                 currentIndex === 0 ? "opacity-0" : "cursor-pointer hover:scale-110"
@@ -190,9 +191,10 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
               <ChevronLeft size={32} />
             </button>
           </div>
-          <div className="absolute inset-y-0 right-0 w-24 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-y-0 right-0 w-24 hidden @2xl:flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
             <button
               onClick={handleNext}
+              aria-label="Siguiente avance"
               disabled={currentIndex === updates.length - 1}
               className={`p-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all ${
                 currentIndex === updates.length - 1 ? "opacity-0" : "cursor-pointer hover:scale-110"
@@ -204,30 +206,31 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
         </div>
 
         {/* Info Panel */}
-        <div className="w-full md:w-[400px] lg:w-[450px] bg-black/90 backdrop-blur-3xl border-l border-white/10 p-8 lg:p-12 flex flex-col justify-between relative z-20 overflow-y-auto">
-          <div ref={contentRef} className="space-y-6 md:mt-24">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-primary/20 border border-brand-primary/30 rounded-full text-brand-primary text-[10px] font-bold uppercase tracking-widest">
+        <div className={`${styles.info} bg-black/90 backdrop-blur-3xl flex flex-col justify-between gap-6 relative z-20`}>
+          <div ref={contentRef} className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-primary/20 border border-brand-primary/30 rounded-full text-ocean-200 text-[10px] font-bold uppercase tracking-widest">
               <Calendar size={12} className="text-brand-orange" />
               {currentUpdate.date}
             </div>
 
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-light tracking-tight leading-tight">
+              <h2 className={`${styles.title} font-light tracking-tight leading-tight`}>
                 {currentUpdate.title}
               </h2>
-              <p className="text-gray-400 font-secondary leading-relaxed text-sm lg:text-base whitespace-pre-line">
+              <p className="text-gray-400 font-secondary leading-relaxed text-sm whitespace-pre-line">
                 {currentUpdate.description}
               </p>
             </div>
           </div>
 
           {/* Timeline Navigation (Bottom) */}
-          <div className="mt-12 md:mt-auto pt-8 border-t border-white/5">
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin">
+          <div className="mt-auto pt-4 border-t border-white/10 min-w-0">
+            <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
               {updates.map((update, index) => (
                 <button
                   key={update.id}
                   onClick={() => setCurrentIndex(index)}
+                  aria-current={index === currentIndex ? "step" : undefined}
                   className={`flex-shrink-0 w-32 group cursor-pointer transition-all text-left ${
                     index === currentIndex ? "opacity-100" : "opacity-40 hover:opacity-70"
                   }`}
@@ -239,7 +242,7 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
                   />
                   <p
                     className={`text-[10px] font-bold uppercase tracking-wider mb-1 ${
-                      index === currentIndex ? "text-brand-primary" : "text-white"
+                      index === currentIndex ? "text-ocean-200" : "text-white"
                     }`}
                   >
                     {update.date}
@@ -252,11 +255,12 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
             </div>
 
             {/* Mobile Navigation Controls */}
-            <div className="md:hidden flex justify-between items-center pt-4">
+            <div className="flex justify-between items-center pt-3">
               <button
                 onClick={handlePrev}
+              aria-label="Avance anterior"
                 disabled={currentIndex === 0}
-                className="p-2 bg-white/5 rounded-full disabled:opacity-20"
+                className="p-3 bg-white/10 rounded-full disabled:opacity-20 cursor-pointer disabled:cursor-default"
               >
                 <ChevronLeft size={20} />
               </button>
@@ -265,8 +269,9 @@ export default function ConstructionProgressClient({ initialUpdates }: Construct
               </span>
               <button
                 onClick={handleNext}
+              aria-label="Siguiente avance"
                 disabled={currentIndex === updates.length - 1}
-                className="p-2 bg-white/5 rounded-full disabled:opacity-20"
+                className="p-3 bg-white/10 rounded-full disabled:opacity-20 cursor-pointer disabled:cursor-default"
               >
                 <ChevronRight size={20} />
               </button>

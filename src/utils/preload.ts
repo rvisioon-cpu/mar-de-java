@@ -34,39 +34,80 @@ export const preloadImages = (urls: string[]): Promise<void> => {
   });
 };
 
+// Share a single warm-up per URL across menus, hover handlers and the store.
+// Keep only a few live media elements and release buffers on expiry/eviction.
+interface VideoPreload {
+  promise: Promise<void>;
+  dispose: () => void;
+}
+const videoPreloads = new Map<string, VideoPreload>();
+const MAX_PRELOADED_VIDEOS = 8;
+
 export const preloadVideo = (url: string): Promise<void> => {
-  return new Promise((resolve) => {
-    const video = document.createElement('video');
-    video.preload = 'auto';
-    video.playsInline = true;
-    video.muted = true;
-    video.src = url;
-
-    // Safety timeout: if video takes longer than 6s, just proceed
-    // The user can likely stream it by then
-    const timeoutId = setTimeout(() => {
-        console.warn(`Video preload timeout for ${url} - proceeding anyway`);
-        // We clean up
-        video.oncanplay = null;
-        video.onerror = null;
+  if (!url || typeof document === 'undefined') return Promise.resolve();
+  const key = new URL(url, document.baseURI).href;
+  // A mounted player may already be fetching this URL. Wait for that player
+  // instead of starting a second offscreen download (and never dispose it).
+  const player = Array.from(document.querySelectorAll('video')).find(video =>
+    video.currentSrc === key || video.src === key
+  );
+  if (player) {
+    if (player.readyState >= 3) return Promise.resolve();
+    return new Promise<void>(resolve => {
+      const finish = () => {
+        clearTimeout(timeout);
+        player.removeEventListener('canplay', finish);
+        player.removeEventListener('error', finish);
         resolve();
-    }, 6000);
+      };
+      const timeout = setTimeout(finish, 6000);
+      player.addEventListener('canplay', finish, { once: true });
+      player.addEventListener('error', finish, { once: true });
+    });
+  }
+  const existing = videoPreloads.get(key);
+  if (existing) return existing.promise;
 
-    const onReady = () => {
-        clearTimeout(timeoutId); 
-        resolve();
-    };
+  if (videoPreloads.size >= MAX_PRELOADED_VIDEOS) {
+    const oldest = videoPreloads.entries().next().value;
+    if (oldest) oldest[1].dispose();
+  }
 
-    // 'oncanplay' is much faster than 'oncanplaythrough'.
-    // It fires when there is enough data to start, which is sufficient for UI unblocking.
-    video.oncanplay = onReady;
-    
-    video.onerror = () => {
-        console.warn(`Failed to preload video: ${url}`);
-        // If it fails, we shouldn't block the user
-        onReady();
-    };
-
+  const video = document.createElement('video');
+  let resolve!: () => void;
+  const promise = new Promise<void>(done => { resolve = done; });
+  let expiry: ReturnType<typeof setTimeout>;
+  const clearVideo = () => {
+    video.oncanplay = null;
+    video.onerror = null;
+    video.pause();
+    video.removeAttribute('src');
     video.load();
-  });
+  };
+  const dispose = () => {
+    clearTimeout(timeout);
+    clearTimeout(expiry);
+    clearVideo();
+    videoPreloads.delete(key);
+    resolve();
+  };
+  const finish = (ready: boolean) => {
+    clearTimeout(timeout);
+    video.oncanplay = null;
+    video.onerror = null;
+    if (!ready) clearVideo();
+    // Failed warm-ups get a short cooldown rather than a permanent success.
+    expiry = setTimeout(dispose, ready ? 60_000 : 5_000);
+    resolve();
+  };
+  videoPreloads.set(key, { promise, dispose });
+  video.preload = 'auto';
+  video.playsInline = true;
+  video.muted = true;
+  video.oncanplay = () => finish(true);
+  video.onerror = () => finish(false);
+  const timeout = setTimeout(() => finish(false), 6000);
+  video.src = key;
+  video.load();
+  return promise;
 };

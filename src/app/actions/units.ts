@@ -41,27 +41,18 @@ export async function getFloors() {
 }
 
 export const getFloorsData = cache(async function getFloorsData() {
-  let isSuperAdmin = false;
-  try {
-    const session = await auth();
-    isSuperAdmin = session?.user?.role === "SUPER_ADMIN";
-  } catch (e) {
-    // Ignore runtime/environment issues during local dev/tests
-  }
-
+  const sessionPromise = auth().catch(() => null);
   const db = await getDb();
-  
-  const allFloors = await db
-    .select()
-    .from(floors)
-    .where(isNull(floors.deletedAt))
-    .orderBy(floors.level);
-
-  const allUnits = await db
-    .select()
-    .from(units)
-    .where(isNull(units.deletedAt))
-    .orderBy(units.identifier);
+  // D1 batches independent reads in a single round trip. Session lookup runs
+  // alongside the reads; role filtering is still applied before returning data.
+  const [session, [allFloors, allUnits]] = await Promise.all([
+    sessionPromise,
+    db.batch([
+      db.select().from(floors).where(isNull(floors.deletedAt)).orderBy(floors.level),
+      db.select().from(units).where(isNull(units.deletedAt)).orderBy(units.identifier),
+    ]),
+  ]);
+  const isSuperAdmin = session?.user?.role === "SUPER_ADMIN";
 
   return allFloors.map(f => {
     const rawFloorId = f.id.replace('floor_', '');

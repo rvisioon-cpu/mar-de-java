@@ -17,7 +17,7 @@ bucket_name = "mar-java-showroom"
 
 # Preserve the public runtime settings from the existing Pages deployment.
 [vars]
-NEXTAUTH_URL = "https://mar-de-java.pages.dev"
+NEXTAUTH_URL = "https://mardejava.pe"
 NEXT_PUBLIC_ASSET_BASE_URL = "mapbox://styles/rvisioon/cmooevopa000101rw0d9b7rrp"
 NEXT_PUBLIC_R2_PUBLIC_URL = "https://pub-969e43023d6b439997d1d0718f6cf14e.r2.dev"
 R2_BUCKET_NAME = "mar-java-showroom"

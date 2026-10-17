@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import MapComponent from '@/components/map/Map';
+import dynamic from 'next/dynamic';
+const MapComponent = dynamic(() => import('@/components/map/Map'), {
+    ssr: false,
+    loading: () => <div className="absolute inset-0 flex items-center justify-center bg-gray-200" role="status">Cargando mapa…</div>,
+});
 import Sidebar from '@/components/layout/Sidebar';
 import { Search, MapPin, Menu, ChevronDown, ChevronUp, Car, Footprints, Bike, Navigation, X, Map as MapIcon, Play, Building2 } from 'lucide-react';
 import { type LocationFeature } from '@/data/locations';
@@ -123,12 +127,14 @@ const DirectionsPage = () => {
     }, [locations]);
 
     // Initialize panel open on desktop
-    const [isPanelOpen, setIsPanelOpen] = useState(() => {
-        if (typeof window !== 'undefined') {
-            return window.innerWidth >= 768;
-        }
-        return false;
-    });
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
+    useEffect(() => {
+        // Match the prerendered first frame, then choose the desktop panel
+        // after hydration instead of rendering different server/client markup.
+        const frame = requestAnimationFrame(() => setIsPanelOpen(window.innerWidth >= 768));
+        return () => cancelAnimationFrame(frame);
+    }, []);
+
 
     const [searchMode, setSearchMode] = useState<'explore' | 'directions'>('explore');
     const [originLocation, setOriginLocation] = useState<[number, number] | null>(null);
@@ -277,6 +283,11 @@ const DirectionsPage = () => {
         return `${mins} min`;
     };
 
+    const mapPadding = useMemo(() => {
+        const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+        return { top: 0, bottom: 0, left: isPanelOpen && isDesktop ? 480 : 0, right: 0 };
+    }, [isPanelOpen]);
+
     return (
         <div
             className="w-full relative overflow-hidden bg-gray-200"
@@ -285,7 +296,7 @@ const DirectionsPage = () => {
             }}
         >
             <div className="absolute inset-0 z-0">
-                <MapComponent
+                {(!ENABLE_INTRO_VIDEO || showExploreButton || viewMode === 'map') && <MapComponent
                     mapboxToken={mapboxToken}
                     destination={destination}
                     origin={originLocation}
@@ -301,17 +312,8 @@ const DirectionsPage = () => {
                     openLandmarkSlug={openLandmarkSlug}
                     onLandmarkOpen={setOpenLandmarkSlug}
                     onProjectOpen={handleProjectOpen}
-                    padding={useMemo(() => {
-                        // Only push map on desktop where panel is sidebar
-                        const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
-                        return {
-                            top: 0,
-                            bottom: 0,
-                            left: (isPanelOpen && isDesktop) ? 480 : 0,
-                            right: 0
-                        };
-                    }, [isPanelOpen])}
-                />
+                    padding={mapPadding}
+                />}
             </div>
 
             {/* Top Left Controls Container */}

@@ -4,6 +4,8 @@ import { useStore } from '@/store/useStore';
 import gsap from 'gsap';
 import { preloadImages } from '@/utils/preload';
 import { getEntryFloorId } from '@/data/floors';
+import { showroomConfig } from '@/data/showroom';
+import { getAssetUrl } from '@/utils/assets';
 
 interface SceneControllerProps {
   isHighlighted?: boolean;
@@ -54,7 +56,9 @@ export default function SceneController({ isHighlighted }: SceneControllerProps)
 
   const currentFaceData = buildingFacesData[currentFace] || buildingFacesData[0];
   const currentAssetSet = currentFaceData ? currentFaceData[timeOfDay] : null;
-  const targetBackground = currentAssetSet?.background;
+  const targetBackground = currentFace === 0
+    ? getAssetUrl(showroomConfig.opening.idlePoster)
+    : currentAssetSet?.background;
 
   // Keep both rotation neighbors (and the current face's alt time-of-day)
   // decoded and warm at all times, re-running every time the user actually
@@ -199,7 +203,7 @@ export default function SceneController({ isHighlighted }: SceneControllerProps)
             ))}
 
             {/* Background Video Layer - Fades in when ready */}
-            {currentAssetSet?.backgroundVideo && (
+            {currentFace !== 0 && currentAssetSet?.backgroundVideo && (
               <video
                 key={`${currentFace}-${timeOfDay}-${currentAssetSet.backgroundVideo}`}
                 src={currentAssetSet.backgroundVideo}

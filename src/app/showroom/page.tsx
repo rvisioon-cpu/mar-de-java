@@ -10,7 +10,7 @@ import { getAssetUrl } from '@/utils/assets';
 import Loader from '@/components/UI/Loader';
 import FullScreenToggle from '@/components/UI/FullScreenToggle';
 import { showroomConfig } from '@/data/showroom';
-import config from '@/config/config';
+import BuildingOpening from '@/components/360/BuildingOpening';
 
 const ShowroomContent = () => {
   const router = useRouter();
@@ -74,16 +74,7 @@ const ShowroomContent = () => {
       if (transition && faces.length > 0) {
         const face0 = faces[0];
 
-        if (transition === 'intro') {
-          // Showroom: Matches Homepage "Entrar" video
-          const introVideoUrl = getAssetUrl('videos/walks/trans_intro_to_0.mp4');
-
-          useStore.setState({
-            viewState: 'TRANSITION_VIDEO',
-            transitionUrl: introVideoUrl,
-            targetDestination: 'Lobby'
-          });
-        } else if (transition === 'floors') {
+        if (transition === 'floors') {
           // Plantas: enters the building with the "Cara Central" walk (Day/Night
           // sensitive). Face 0 is the cover, whose introVideo only rotates to the
           // central face — index 2 is the same face the store rotates to from it.
@@ -288,43 +279,12 @@ const ShowroomContent = () => {
         </div>
       )}
 
-      {/* Initial-face luxury cover — a large brand logo filling the upper-left
-          area, with a refined "Ingresar" CTA below it. The logo width, and the
-          logo/button left+top offsets, are the knobs to nudge the placement.
-          Only menu & fullscreen stay in the corners. */}
-      {viewState === 'IDLE' && isInitialFace && (
-        <div className="fixed inset-0 z-40 pointer-events-none">
-          {/* Soft scrim over the left area so the white mark reads on the render */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_54%_60%_at_30%_42%,rgba(4,22,32,0.5),rgba(4,22,32,0)_66%)]" />
-
-          {/* Logo — fills the upper-left area */}
-          <img
-            src="/identity/identity_logo_white.png"
-            alt={config.appName}
-            className="absolute left-[12%] top-[25%] w-[42vw] min-w-[260px] max-w-[820px] object-contain drop-shadow-[0_6px_40px_rgba(0,0,0,0.55)] animate-fade-in"
-          />
-
-          {/* Luxury "Ingresar" CTA — centered below the logo */}
-          <button
-            onClick={() => { setLoadingAction('enter'); startTransition('Floors'); }}
-            onMouseEnter={() => setIsHoveringIngresar(true)}
-            onMouseLeave={() => setIsHoveringIngresar(false)}
-            disabled={isLoadingAssets}
-            className="group pointer-events-auto absolute left-[30%] top-[51%] -translate-x-1/2 inline-flex items-center justify-center gap-5 lg:gap-6 overflow-hidden border-2 border-white/70 px-16 py-5 lg:px-24 lg:py-6 backdrop-blur-md bg-black/30 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-white hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed animate-fade-in cursor-pointer"
-          >
-            {/* White fill sweeps up on hover */}
-            <span className="absolute inset-0 z-0 translate-y-full bg-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
-            
-            <span className="relative z-10 text-base lg:text-xl font-medium uppercase tracking-[0.4em] text-white transition-colors duration-500 group-hover:text-ocean-950 drop-shadow-md whitespace-nowrap">
-              {loadingAction === 'enter' ? <Loader className="w-5 h-5 lg:w-6 lg:h-6" /> : 'Ingresar'}
-            </span>
-            {loadingAction !== 'enter' && (
-              <svg className="relative z-10 h-5 w-5 lg:h-6 lg:w-6 text-white transition-all duration-500 group-hover:text-ocean-950 group-hover:translate-x-2 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            )}
-          </button>
-        </div>
+      {isInitialFace && transitionParam !== 'floors' && (
+        <BuildingOpening
+          key={transitionParam || 'opening'}
+          isIdle={viewState === 'IDLE'}
+          onEnter={() => { void startTransition('Floors'); }}
+        />
       )}
     </div>
   );

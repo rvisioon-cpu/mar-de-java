@@ -1,4 +1,8 @@
 "use client";
+
+import { identityAssets } from "@/data/identity";
+import { getAssetUrl } from "@/utils/assets";
+
 import { useState, useEffect } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -10,8 +14,8 @@ const UseLandscape = () => {
     const pathname = usePathname();
     const [isPortrait, setIsPortrait] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
-    const [showOverlay, setShowOverlay] = useState(false);
-    
+    const isForcedLandscape = useStore(state => state.isForcedLandscape);
+
     const setForcedLandscape = useStore(state => state.setForcedLandscape);
 
     useEffect(() => {
@@ -19,7 +23,7 @@ const UseLandscape = () => {
             // Check if device is mobile based on user agent or touch capability + screen width
             // A simple heuristic: narrow width and touch
             const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 1024 && 'ontouchstart' in window);
-            
+
             setIsMobile(mobile);
 
             // Check orientation
@@ -40,10 +44,15 @@ const UseLandscape = () => {
     }, []);
 
     useEffect(() => {
+        // Ubicación owns this state: its intro rotates, then the map returns
+        // to portrait. Do not overwrite that decision from the global prompt.
+        if (pathname?.startsWith('/ubicacion')) {
+            return;
+        }
+
         // Keep the public landing page readable in portrait mode. The immersive
         // showroom still uses the landscape prompt and rotation below.
-        if (pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login') || pathname?.startsWith('/ubicacion')) {
-            setShowOverlay(false);
+        if (pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login')) {
             setForcedLandscape(false);
             return;
         }
@@ -53,40 +62,38 @@ const UseLandscape = () => {
 
             if (alreadyShown) {
                 // Already shown this session — skip overlay, go straight to forced landscape
-                setShowOverlay(false);
                 setForcedLandscape(true);
                 return;
             }
 
             // First time this session — show the overlay
-            setShowOverlay(true);
             setForcedLandscape(false);
-            
+
             const timer = setTimeout(() => {
-                setShowOverlay(false);
                 setForcedLandscape(true);
                 sessionStorage.setItem(SESSION_KEY, 'true');
             }, 3000);
 
             return () => clearTimeout(timer);
         } else {
-            setShowOverlay(false);
             setForcedLandscape(false);
         }
     }, [isMobile, isPortrait, setForcedLandscape, pathname]);
 
+    const isOrientationManagedByPage = pathname === '/' || pathname?.startsWith('/dashboard') || pathname?.startsWith('/login') || pathname?.startsWith('/ubicacion');
+    const showOverlay = !isOrientationManagedByPage && isMobile && isPortrait && !isForcedLandscape;
     if (!showOverlay) return null;
 
     return (
       <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-8 text-center overscroll-none touch-none">
-            
+
             {/* Pulsating Logo */}
             <div className="mb-12 relative">
                 <div className="absolute inset-0 bg-brand-orange/20 blur-xl rounded-full animate-pulse" />
-                <img 
-                    src="/identity/identity_logo_ISOTIPO.png" 
-                    alt="Logo" 
-                    className="w-24 h-24 object-contain relative z-10 animate-pulse" // Simple pulse for now
+                <img
+                    src={getAssetUrl(identityAssets.logoWhite)}
+                    alt="Logo"
+                    className="w-52 h-24 object-contain relative z-10 animate-pulse" // Simple pulse for now
                 />
             </div>
 

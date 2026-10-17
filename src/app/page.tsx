@@ -4,17 +4,15 @@ import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import Sidebar from '@/components/layout/Sidebar';
 import { getAssetUrl } from '@/utils/assets';
-import { useStore } from '@/store/useStore';
 import { preloadVideo, preloadImages } from '@/utils/preload';
-import Loader from '@/components/UI/Loader';
 import FullScreenToggle from '@/components/UI/FullScreenToggle';
 import { homepageData } from '@/data/homepage';
+import { showroomConfig } from '@/data/showroom';
 import { getActiveMedia } from '@/app/actions/media';
 
 const Homepage = () => {
   const router = useRouter();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [isPlayingIntro, setIsPlayingIntro] = useState(false);
   const [introVideo, setIntroVideo] = useState(getAssetUrl(homepageData.intro.video));
 
   useEffect(() => {
@@ -30,21 +28,12 @@ const Homepage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textRefs = useRef<(HTMLElement | null)[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasPreloadedBuilding = useRef(false);
 
   // Timeline Ref to control animation
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    // Preload the poster immediately to avoid gray screen
-    const img = new Image();
-    img.src = getAssetUrl(homepageData.intro.poster);
-
-    // Background preloading of transition assets so they are ready when the user enters the showroom
-    preloadVideo(getAssetUrl('building/transitions/0.1_a_1.1.mp4')).catch(() => { });
-    preloadImages([
-      getAssetUrl('building/photos/0.1.webp')
-    ]).catch(() => { });
-
     // Create timeline but don't auto-repeat infinitely (we handle restart via video sync)
     const tl = gsap.timeline({ defaults: { ease: "power2.out" }, paused: false });
     tlRef.current = tl;
@@ -68,7 +57,6 @@ const Homepage = () => {
     // 3. Text Cycle
     // Using data-driven slides
     homepageData.slides.forEach((slide, index) => {
-      const isLast = index === homepageData.slides.length - 1;
 
       // Appear
       if (index === 0) {
@@ -102,10 +90,6 @@ const Homepage = () => {
   }, []);
 
   const handleStartIntro = () => {
-    router.push('/showroom');
-  };
-
-  const handleVideoEnd = () => {
     router.push('/showroom');
   };
 
@@ -144,10 +128,10 @@ const Homepage = () => {
           onEnded={handleBackgroundVideoEnded}
           // Prioritize loading intro assets as soon as the main video can play
           onCanPlay={() => {
-            // 1. Silent preload of the "Enter" transition video
-            preloadVideo(getAssetUrl('videos/walks/trans_intro_to_0.mp4')).catch(() => { });
-            // 2. Silent preload of the first building face (Daylight)
-            preloadImages([getAssetUrl('building/photos/face_0_daylight.png')]).catch(() => { });
+            if (hasPreloadedBuilding.current) return;
+            hasPreloadedBuilding.current = true;
+            preloadVideo(getAssetUrl(showroomConfig.opening.video));
+            preloadImages([getAssetUrl(showroomConfig.opening.poster)]);
           }}
         >
           <source src={introVideo} type="video/mp4" />
@@ -200,9 +184,9 @@ const Homepage = () => {
           <button
             ref={buttonRef}
             onClick={handleStartIntro}
-            disabled={isPlayingIntro || isSidebarOpen}
+            disabled={isSidebarOpen}
             className={`absolute bottom-[5%] sm:bottom-[8%] lg:bottom-[10%] left-1/2 -translate-x-1/2 z-20 group px-6 sm:px-8 lg:px-12 py-2.5 sm:py-3 lg:py-4 bg-brand-primary/80 hover:bg-brand-primary backdrop-blur-xl border border-white/20 text-white text-[11px] sm:text-xs lg:text-sm font-medium tracking-widest uppercase rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shadow-lg hover:shadow-xl font-secondary
-                    ${(isPlayingIntro || isSidebarOpen) ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+                    ${(isSidebarOpen) ? 'opacity-0 pointer-events-none' : 'opacity-100'}
                 `}
           >
             <span className="relative z-10 font-bold tracking-[0.2em] flex items-center gap-2">
@@ -236,19 +220,7 @@ const Homepage = () => {
 
       </div>
 
-      {/* Intro Transition Video Overlay */}
-      {isPlayingIntro && (
-        <div className="absolute inset-0 z-50 bg-black">
-          <video
-            autoPlay
-            className="w-full h-full object-cover"
-            playsInline
-            onEnded={handleVideoEnd}
-          >
-            <source src={getAssetUrl('videos/walks/trans_intro_to_0.mp4')} type="video/mp4" />
-          </video>
-        </div>
-      )}
+
     </div>
   );
 };

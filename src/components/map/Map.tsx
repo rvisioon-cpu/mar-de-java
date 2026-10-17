@@ -20,6 +20,7 @@ import MapLibreMap, {
   Popup as MapLibrePopup,
 } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin } from 'lucide-react';
 import { locationsData, OTHER_PROJECTS_CATEGORY, PROJECT_LOCATION } from '@/data/locations';
 import { getAssetUrl } from '@/utils/assets';

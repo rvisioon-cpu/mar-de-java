@@ -1,5 +1,8 @@
 "use client";
 
+import { identityAssets } from "@/data/identity";
+import { getAssetUrl } from "@/utils/assets";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -54,15 +57,11 @@ export default function Sidebar({ role }: SidebarProps) {
   return (
     <div className="w-64 bg-base-100 shadow-md flex flex-col h-full">
       <div className="px-6 h-[72px] border-b flex items-center gap-3">
-        <img 
-          src="/identity/identity_logo_ISOTIPO.png" 
-          alt="Mar de Java Logo" 
-          className="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(245,156,29,0.25)]"
+        <img
+          src={getAssetUrl(identityAssets.logo)}
+          alt="Mar de Java Logo"
+          className="w-40 h-12 object-contain drop-shadow-[0_0_8px_rgba(245,156,29,0.25)]"
         />
-        <h2 className="text-lg font-bold font-primary tracking-wide text-base-content flex items-center">
-          <span className="opacity-70 font-light mr-1">Océano</span>
-          <span className="font-extrabold text-brand-orange">Java</span>
-        </h2>
       </div>
       <div className="flex-1 overflow-y-auto py-4">
         <ul className="menu bg-base-100 w-full">

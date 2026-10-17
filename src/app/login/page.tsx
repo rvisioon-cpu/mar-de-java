@@ -1,5 +1,8 @@
 "use client";
 
+import { identityAssets } from "@/data/identity";
+import { getAssetUrl } from "@/utils/assets";
+
 import { signIn } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
@@ -44,14 +47,14 @@ export default function LoginPage() {
 
       {/* Login Card Container */}
       <div className="relative z-10 w-full max-w-[420px] p-8 md:p-10 mx-4 bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
-        
+
         {/* Logo Section */}
         <div className="flex flex-col items-center mb-8">
-          <div className="relative w-20 h-20 mb-4 flex items-center justify-center p-3 rounded-2xl bg-slate-800/40 border border-white/5 shadow-inner">
-            <img 
-              src="/identity/identity_logo_ISOTIPO.png" 
-              alt="Mar de Java Isotipo Logo"
-              className="w-14 h-14 object-contain drop-shadow-[0_0_12px_rgba(245,156,29,0.25)]"
+          <div className="relative w-44 h-24 mb-4 flex items-center justify-center p-3 rounded-2xl bg-slate-800/40 border border-white/5 shadow-inner">
+            <img
+              src={getAssetUrl(identityAssets.logoWhite)}
+              alt="Mar de Java"
+              className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(245,156,29,0.25)]"
             />
           </div>
           <h2 className="text-xl font-bold font-primary text-white tracking-wide uppercase">
@@ -123,8 +126,8 @@ export default function LoginPage() {
           )}
 
           <div className="form-control pt-4">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn w-full h-11 min-h-[44px] bg-brand-orange hover:bg-brand-dark-orange text-white border-none font-bold tracking-wider uppercase text-sm rounded-xl transition-all shadow-[0_4px_20px_rgba(245,156,29,0.2)] hover:shadow-[0_6px_25px_rgba(245,156,29,0.3)] hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
               disabled={isPending}
             >

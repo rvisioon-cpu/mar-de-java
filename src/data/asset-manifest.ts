@@ -53,6 +53,8 @@ export const assetManifest: string[] = [
 
     // Building Assets
     'building/photos/0.1.webp',
+    'building/photos/0.2.webp',
+    'building/videos/cover-loop.mp4',
     'building/videos/0.1.mp4',
     'building/transitions/0.1_a_1.1.mp4',
     'building/photos/1.1.webp',
