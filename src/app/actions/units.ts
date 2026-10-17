@@ -78,17 +78,19 @@ export const getFloorsData = cache(async function getFloorsData() {
           su => su.id === cleanUnitId || su.id === u.identifier || (su.identifier && su.identifier === u.identifier)
         );
 
-        let subtitle = 'Flat';
-        if (u.type === 'STORAGE') {
-          subtitle = 'Bodega';
-        } else if (u.type === 'DUPLEX') {
-          // Marks the unit as spanning two floors, which is what makes the unit
-          // page show the level selector between its lower and upper plans.
-          subtitle = 'Dúplex';
-        } else if (u.identifier === 'Terraza') {
-          subtitle = 'Terraza';
-        } else if (u.identifier === '801') {
-          subtitle = 'Duplex';
+        let subtitle = staticUnit?.subtitle || 'Flat';
+        if (!staticUnit?.subtitle) {
+          if (u.type === 'STORAGE') {
+            subtitle = 'Estacionamiento';
+          } else if (u.type === 'DUPLEX') {
+            // Marks the unit as spanning two floors, which is what makes the unit
+            // page show the level selector between its lower and upper plans.
+            subtitle = 'Dúplex';
+          } else if (u.identifier === 'Terraza') {
+            subtitle = 'Terraza';
+          } else if (u.identifier === '801') {
+            subtitle = 'Duplex';
+          }
         }
 
         return {
