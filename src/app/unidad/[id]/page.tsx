@@ -27,18 +27,19 @@ const UnitPage = () => {
     const floor = floorsData.find(f => f.units.some(u => u.id === unitId));
     const unit = floor?.units.find(u => u.id === unitId);
 
-    const isDuplex = unit && (unit.subtitle === 'Dúplex' || unit.subtitle === 'Duplex' || ['801', '802'].includes(unit.identifier || ''));
-    const isPiso1 = unit && floor?.id === '5';
+    const isDuplex = unit && (unit.type === 'DUPLEX' || unit.subtitle === 'Dúplex' || unit.subtitle === 'Duplex' || ['801', '802'].includes(unit.identifier || ''));
+    let isPiso1 = Boolean(unit && floor?.id === '5');
 
-    // Find the other level unit
-    let otherLevelUnit: any = undefined;
-    if (unit && isDuplex) {
-        const targetFloorId = floor?.id === '5' ? '6' : '5';
-        for (const f of floorsData) {
-            if (f.id === targetFloorId) {
-                otherLevelUnit = f.units.find(u => u.identifier === unit.identifier);
-                break;
-            }
+    // Find the other level unit dynamically across all floors for this duplex identifier
+    let otherLevelUnit: Unit | undefined = undefined;
+    if (unit && floor && isDuplex) {
+        const targetIdentifier = unit.identifier || unit.id;
+        const matchingLevels = floorsData
+            .flatMap(f => f.units.filter(u => (u.identifier || u.id) === targetIdentifier).map(u => ({ floor: f, unit: u })))
+            .sort((a, b) => a.floor.level - b.floor.level);
+        if (matchingLevels.length >= 2) {
+            isPiso1 = matchingLevels[0].unit.id === unit.id && matchingLevels[0].floor.id === floor.id;
+            otherLevelUnit = isPiso1 ? matchingLevels[1].unit : matchingLevels[0].unit;
         }
     }
 

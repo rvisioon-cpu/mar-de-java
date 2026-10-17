@@ -1,17 +1,90 @@
--- Unit polygons traced with the PathBuilder, copied from src/data/floors.ts.
--- The generated seed carries them too, so this script is only for patching a
--- database in place — no wipe, unlike seeding.
--- D1 is the source of truth for coordinates; the static file stays as the fallback.
+-- Update unit polygon coordinates, bedrooms, bathrooms, area_sqm, and identifiers
+-- for Residencial Mar de Java (Floors 1 to 6), and upsert Duplex 203 & Duplex 403.
 
-UPDATE units SET coordinates = '{"x":57.43,"y":59.4,"path":"M 14.49 52.6 L 14.33 77.8 L 80.91 72.69 L 80.75 61.16 L 85.2 61.34 L 85.51 51.12 L 75.05 51.3 L 75.1 61.16 L 61.51 61.06 L 61.3 51.95 L 47.7 52.32 L 47.91 62.37 L 37.34 62.27 L 36.92 52.42 Z"}', updated_at = unixepoch() WHERE id = 'unit_1_101';
-UPDATE units SET coordinates = '{"x":62.7,"y":45.04,"path":"M 41.63 44.33 L 47.8 44.51 L 47.8 51.95 L 61.24 51.95 L 61.45 61.16 L 75.16 61.16 L 75 51.21 L 85.46 51.02 L 85.93 39.31 L 84.15 39.31 L 83.94 27.41 L 43.36 26.85 L 43.51 40.14 L 41.42 40.24 Z"}', updated_at = unixepoch() WHERE id = 'unit_1_102';
-UPDATE units SET coordinates = '{"x":47.89,"y":59.76,"path":"M 81.38 73.52 L 81.17 61.34 L 71.18 61.44 L 70.92 51.3 L 61.45 51.12 L 61.4 58.83 L 47.75 59.39 L 47.8 62.09 L 37.55 62.27 L 37.5 52.42 L 19.82 52.79 L 19.72 56.14 L 16.42 56.42 L 16.47 77.62 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_201';
-UPDATE units SET coordinates = '{"x":47.45,"y":41.42,"path":"M 84.41 39.4 L 84.26 26.94 L 50 26.66 L 49.79 39.96 L 39.44 39.96 L 39.59 26.29 L 16.21 25.55 L 16.58 51.3 L 19.56 51.02 L 19.56 52.98 L 37.55 52.23 L 37.76 43.96 L 61.14 44.42 L 61.45 51.02 L 71.08 51.12 L 70.87 39.96 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_202';
-UPDATE units SET coordinates = '{"x":47.89,"y":59.76,"path":"M 81.38 73.52 L 81.17 61.34 L 71.18 61.44 L 70.92 51.3 L 61.45 51.12 L 61.4 58.83 L 47.75 59.39 L 47.8 62.09 L 37.55 62.27 L 37.5 52.42 L 19.82 52.79 L 19.72 56.14 L 16.42 56.42 L 16.47 77.62 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_301';
-UPDATE units SET coordinates = '{"x":47.45,"y":41.42,"path":"M 84.41 39.4 L 84.26 26.94 L 50 26.66 L 49.79 39.96 L 39.44 39.96 L 39.59 26.29 L 16.21 25.55 L 16.58 51.3 L 19.56 51.02 L 19.56 52.98 L 37.55 52.23 L 37.76 43.96 L 61.14 44.42 L 61.45 51.02 L 71.08 51.12 L 70.87 39.96 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_302';
-UPDATE units SET coordinates = '{"x":47.89,"y":59.76,"path":"M 81.38 73.52 L 81.17 61.34 L 71.18 61.44 L 70.92 51.3 L 61.45 51.12 L 61.4 58.83 L 47.75 59.39 L 47.8 62.09 L 37.55 62.27 L 37.5 52.42 L 19.82 52.79 L 19.72 56.14 L 16.42 56.42 L 16.47 77.62 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_401';
-UPDATE units SET coordinates = '{"x":47.45,"y":41.42,"path":"M 84.41 39.4 L 84.26 26.94 L 50 26.66 L 49.79 39.96 L 39.44 39.96 L 39.59 26.29 L 16.21 25.55 L 16.58 51.3 L 19.56 51.02 L 19.56 52.98 L 37.55 52.23 L 37.76 43.96 L 61.14 44.42 L 61.45 51.02 L 71.08 51.12 L 70.87 39.96 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_402';
-UPDATE units SET coordinates = '{"x":48.34,"y":60.26,"path":"M 81.37 73.16 L 81.11 61.32 L 71.35 61.24 L 70.97 51.21 L 61.42 51.21 L 61.46 58.9 L 47.84 59.28 L 47.79 62.22 L 37.69 62.45 L 37.56 52.57 L 19.91 53.32 L 19.65 55.96 L 16.39 56.41 L 16.3 77.54 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_501';
-UPDATE units SET coordinates = '{"x":46.5,"y":42.03,"path":"M 84.47 39.31 L 84.21 27.13 L 49.84 26.66 L 50 39.59 L 39.75 39.77 L 39.7 26.38 L 16.37 25.64 L 16.68 50.84 L 19.67 50.65 L 19.82 52.7 L 30.23 52.7 L 37.76 52.6 L 37.6 44.24 L 61.04 44.33 L 61.45 50.93 L 71.08 51.21 L 70.87 39.77 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_502';
-UPDATE units SET coordinates = '{"x":47.59,"y":59.12,"path":"M 80.89 61.74 L 81.06 73.96 L 16.2 77.57 L 16.5 56.22 L 19.75 56.13 L 19.75 52.61 L 35.71 52.79 L 35.76 57.57 L 47.57 57.39 L 47.87 59.1 L 61.35 59.19 L 61.45 51.35 L 71.08 51.17 L 71.28 60.9 Z"}', updated_at = unixepoch() WHERE id = 'unit_6_601';
-UPDATE units SET coordinates = '{"x":48.6,"y":40.89,"path":"M 84.31 40.38 L 84.07 28.19 L 70.81 27.93 L 70.66 26.87 L 49.85 26.52 L 49.8 39.94 L 39.72 39.94 L 39.67 26.16 L 16.33 25.63 L 16.68 51.5 L 19.76 51.15 L 20.01 52.74 L 35.25 52.47 L 35.25 48.85 L 37.54 48.85 L 37.59 44.09 L 61.22 44.26 L 61.47 51.06 L 71.01 50.71 L 70.91 40.64 Z"}', updated_at = unixepoch() WHERE id = 'unit_6_602';
+-- Piso 1
+UPDATE units SET identifier = '101', bedrooms = 3, bathrooms = 2.5, area_sqm = 110.89, coordinates = '{"x":62.3,"y":46.81,"path":"M 65.3 13.0 L 79.2 13.0 L 81.8 81.8 L 58.5 84.3 L 58.3 56.8 L 54.7 56.8 L 54.7 50.2 L 52.5 50.2 L 52.5 31.0 L 65.5 31.0 Z"}', updated_at = unixepoch() WHERE id = 'unit_1_101';
+UPDATE units SET identifier = '102', bedrooms = 3, bathrooms = 2.5, area_sqm = 108.06, coordinates = '{"x":32.7,"y":58.67,"path":"M 13.5 26.2 L 43.5 26.2 L 43.5 55.6 L 49.5 55.6 L 49.5 70.5 L 48.6 70.5 L 48.6 86.2 L 20.7 89.2 L 21.2 74.8 L 19.6 74.8 L 21.2 37.2 L 13.0 37.2 Z"}', updated_at = unixepoch() WHERE id = 'unit_1_102';
+
+-- Piso 2
+UPDATE units SET identifier = '201', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.71,"y":44.88,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 64.3 71.2 L 64.0 50.8 L 52.5 50.8 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_201';
+UPDATE units SET identifier = '202', bedrooms = 3, bathrooms = 2.5, area_sqm = 102.1, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_2_202';
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_2_203', 'floor_2', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.8,"y":56.26,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 50.8 L 64.0 50.8 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/203.1/furnished.webp"]', '["plants/details/203.1/unfurnished.webp"]', '["plants/details/203.1/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+
+-- Piso 3
+UPDATE units SET identifier = '301', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.71,"y":44.77,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 64.3 71.2 L 64.0 50.2 L 52.5 50.2 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_301';
+UPDATE units SET identifier = '302', bedrooms = 3, bathrooms = 2.5, area_sqm = 101.31, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_3_302';
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_3_303', 'floor_3', '203', 'DUPLEX', 2, 2.5, 114.87, '{"x":47.7,"y":56.11,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 48.8 55.6 L 48.8 50.2 L 64.0 50.2 L 64.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/203.2/furnished.webp"]', '["plants/details/203.2/unfurnished.webp"]', '["plants/details/203.2/plans.webp"]', '["plants/details/203/gallery/1.webp","plants/details/203/gallery/2.webp","plants/details/203/gallery/3.webp","plants/details/203/gallery/4.webp","plants/details/203/gallery/5.webp","plants/details/203/gallery/6.webp","plants/details/203/gallery/7.webp","plants/details/203/gallery/8.webp","plants/details/203/gallery/9.webp","plants/details/203/gallery/10.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+
+-- Piso 4
+UPDATE units SET identifier = '401', bedrooms = 3, bathrooms = 2.5, area_sqm = 116.28, coordinates = '{"x":64.38,"y":45.32,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 62.3 71.2 L 62.0 53.5 L 52.5 53.5 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_401';
+UPDATE units SET identifier = '402', bedrooms = 3, bathrooms = 2.5, area_sqm = 108.22, coordinates = '{"x":34.99,"y":47.01,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.8 L 34.5 44.8 L 34.2 76.5 L 25.7 77.3 L 25.5 74.2 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_4_402';
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_4_403', 'floor_4', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":47.3,"y":56.94,"path":"M 34.5 44.8 L 43.5 44.8 L 43.5 55.6 L 49.2 55.6 L 49.2 53.5 L 62.0 53.5 L 62.3 71.2 L 34.2 76.5 Z"}', 'AVAILABLE', NULL, '["plants/details/403.1/furnished.webp"]', '["plants/details/403.1/unfurnished.webp"]', '["plants/details/403.1/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+
+-- Piso 5
+UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":34.48,"y":43.56,"path":"M 21.2 13.2 L 50.8 13.2 L 50.8 25.8 L 43.5 25.8 L 43.5 44.5 L 30.2 44.5 L 30.2 59.8 L 27.2 59.8 L 27.2 74.5 L 20.2 74.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_501';
+INSERT INTO units (id, floor_id, identifier, type, bedrooms, bathrooms, area_sqm, coordinates, state, tour_url, photos_furnished, photos_unfurnished, photos_plans, gallery)
+VALUES ('unit_5_403', 'floor_5', '403', 'DUPLEX', 3, 2.5, 104.52, '{"x":42.37,"y":57.52,"path":"M 30.2 44.5 L 43.5 44.5 L 43.5 55.6 L 48.8 55.6 L 48.8 53.5 L 62.0 53.5 L 62.3 71.2 L 27.2 77.2 L 27.2 59.8 L 30.2 59.8 Z"}', 'AVAILABLE', NULL, '["plants/details/403.2/furnished.webp"]', '["plants/details/403.2/unfurnished.webp"]', '["plants/details/403.2/plans.webp"]', '["plants/details/403/gallery/1.webp","plants/details/403/gallery/2.webp","plants/details/403/gallery/3.webp","plants/details/403/gallery/4.webp","plants/details/403/gallery/5.webp","plants/details/403/gallery/6.webp","plants/details/403/gallery/7.webp","plants/details/403/gallery/8.webp","plants/details/403/gallery/9.webp","plants/details/403/gallery/10.webp"]')
+ON CONFLICT(id) DO UPDATE SET
+  floor_id = excluded.floor_id,
+  identifier = excluded.identifier,
+  type = excluded.type,
+  bedrooms = excluded.bedrooms,
+  bathrooms = excluded.bathrooms,
+  area_sqm = excluded.area_sqm,
+  coordinates = excluded.coordinates,
+  photos_furnished = excluded.photos_furnished,
+  photos_unfurnished = excluded.photos_unfurnished,
+  photos_plans = excluded.photos_plans,
+  gallery = excluded.gallery,
+  deleted_at = NULL,
+  updated_at = unixepoch();
+UPDATE units SET identifier = '503', bedrooms = 3, bathrooms = 4, area_sqm = 116.88, coordinates = '{"x":64.38,"y":45.32,"path":"M 65.3 13.2 L 79.2 13.2 L 81.0 68.0 L 75.3 68.0 L 75.3 70.3 L 62.3 71.2 L 62.0 53.5 L 52.5 53.5 L 52.5 38.0 L 50.8 38.0 L 50.8 28.5 L 65.5 28.5 Z"}', updated_at = unixepoch() WHERE id = 'unit_5_502';
+
+-- Piso 6
+UPDATE units SET identifier = '501', bedrooms = 3, bathrooms = 4, area_sqm = 113.98, coordinates = '{"x":37.95,"y":45.67,"path":"M 21.2 13.2 L 48.5 13.2 L 48.5 25.8 L 43.5 25.8 L 43.5 55.6 L 48.8 55.6 L 48.8 58.0 L 56.5 58.0 L 56.5 73.5 L 19.5 77.5 L 20.0 55.0 L 20.6 35.0 Z"}', updated_at = unixepoch() WHERE id = 'unit_6_601';
+UPDATE units SET identifier = '503', bedrooms = 3, bathrooms = 4, area_sqm = 116.88, coordinates = '{"x":61.43,"y":42.38,"path":"M 68.2 13.2 L 79.2 13.2 L 80.8 69.5 L 56.5 73.5 L 56.5 58.0 L 51.5 58.0 L 51.5 38.0 L 50.8 38.0 L 50.8 31.2 L 68.5 31.2 Z"}', updated_at = unixepoch() WHERE id = 'unit_6_602';

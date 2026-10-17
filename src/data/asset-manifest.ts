@@ -9,7 +9,7 @@
 // transition videos between them. Flats that repeat on several floors share one
 // folder: x01 = 201/301/401, x02 = 202/302/402. The duplexes have one folder per
 // level (501.1 lower, 501.2 upper) but a single shared gallery.
-const unitViewFolders = ['101', '102', 'x01', 'x02', '501.1', '501.2', '502.1', '502.2'];
+const unitViewFolders = ['101', '102', 'x01', 'x02', '203.1', '203.2', '403.1', '403.2', '501.1', '501.2', '502.1', '502.2'];
 
 const unitTransitions = [
     'furnished_to_unfurnished',
@@ -25,6 +25,8 @@ const unitGalleries: Record<string, number> = {
     '102': 12,
     'x01': 9,
     'x02': 10,
+    '203': 10,
+    '403': 10,
     '501': 15,
     '502': 15,
 };

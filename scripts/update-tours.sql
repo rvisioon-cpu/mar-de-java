@@ -40,4 +40,4 @@ INSERT INTO tours (id, title, subtitle, thumbnail_url, type, target_url, unit_id
   ('tour-401', 'Unidad 401', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_401', 1, 7),
   ('tour-402', 'Unidad 402', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMH?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_402', 1, 8),
   ('tour-501', 'Unidad 501', 'Dúplex', 'plants/details/501/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_5_501', 1, 9),
-  ('tour-502', 'Unidad 502', 'Dúplex', 'plants/details/502/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', 'unit_5_502', 1, 10);
+  ('tour-503', 'Unidad 503', 'Dúplex', 'plants/details/502/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', 'unit_5_502', 1, 10);
