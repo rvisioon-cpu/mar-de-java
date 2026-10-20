@@ -1,7 +1,7 @@
 "use client";
-import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { type Floor, type Unit } from '@/data/floors';
+import { useState, useRef, useEffect, Suspense } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { type Unit } from '@/data/floors';
 import FloorSelector from '@/components/layout/FloorSelector';
 import Sidebar from '@/components/layout/Sidebar';
 import ConsultationModal from '@/components/UI/modals/ConsultationModal';
@@ -9,8 +9,6 @@ import UnitPopover from '@/components/floor/UnitPopover';
 import UnitCard from '@/components/floor/UnitCard';
 import MobileFloorNav from '@/components/floor/MobileFloorNav';
 import FullScreenToggle from '@/components/UI/FullScreenToggle';
-import PathBuilder from '@/components/floor/PathBuilder';
-import { Ruler } from 'lucide-react';
 import { preloadImages } from '@/utils/preload';
 import { useStore } from '@/store/useStore';
 import { getAssetUrl } from '@/utils/assets';
@@ -19,7 +17,6 @@ const FloorContent = () => {
   const params = useParams();
   const floorId = params.floorId as string;
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const floorsData = useStore((state) => state.floorsData);
   const isForcedLandscape = useStore((state) => state.isForcedLandscape);
@@ -38,24 +35,8 @@ const FloorContent = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [lastTouchDistance, setLastTouchDistance] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const planWrapperRef = useRef<HTMLDivElement>(null);
-
-  // --- Interactive Coordinate Drawer State ---
-  const [isDrawingMode, setIsDrawingMode] = useState(false);
-  const [drawPoints, setDrawPoints] = useState<{ x: number; y: number }[]>([]);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
-  const [activeDrawUnitId, setActiveDrawUnitId] = useState<string | null>(null);
-
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const floor = floorsData.find((f) => f.id === floorId);
-
-  // Auto-activate drawing mode if ?draw=true is in URL
-  useEffect(() => {
-    if (searchParams.get('draw') === 'true') {
-      setIsDrawingMode(true);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     setScale(MIN_SCALE);
@@ -87,27 +68,6 @@ const FloorContent = () => {
     }
   }, [floorId, floor, floorsData]);
 
-  // Calculate SVG Path string from drawPoints
-  const generatedPath = useMemo(() => {
-    if (drawPoints.length === 0) return '';
-    return (
-      drawPoints.reduce((acc, point, index) => {
-        if (index === 0) return `M ${point.x} ${point.y}`;
-        return `${acc} L ${point.x} ${point.y}`;
-      }, '') + (drawPoints.length > 2 ? ' Z' : '')
-    );
-  }, [drawPoints]);
-
-  // Calculate polygon centroid
-  const drawCenter = useMemo(() => {
-    if (drawPoints.length === 0) return { x: 50, y: 50 };
-    const sum = drawPoints.reduce((acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y }), { x: 0, y: 0 });
-    return {
-      x: Number((sum.x / drawPoints.length).toFixed(2)),
-      y: Number((sum.y / drawPoints.length).toFixed(2)),
-    };
-  }, [drawPoints]);
-
   // --- Wheel & Drag Handlers ---
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
@@ -117,13 +77,12 @@ const FloorContent = () => {
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (isDrawingMode) return; // Ignore drag in drawing mode
     setIsDragging(true);
     setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDrawingMode || !isDragging) return;
+    if (!isDragging) return;
     setPosition({
       x: e.clientX - dragStart.x,
       y: e.clientY - dragStart.y,
@@ -134,30 +93,8 @@ const FloorContent = () => {
     setIsDragging(false);
   };
 
-  // --- Drawing Click & Mouse Movement Handlers ---
-  const handlePlanClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDrawingMode || !planWrapperRef.current) return;
-    const rect = planWrapperRef.current.getBoundingClientRect();
-    const x = Number((((e.clientX - rect.left) / rect.width) * 100).toFixed(2));
-    const y = Number((((e.clientY - rect.top) / rect.height) * 100).toFixed(2));
-
-    if (x >= 0 && x <= 100 && y >= 0 && y <= 100) {
-      setDrawPoints((prev) => [...prev, { x, y }]);
-    }
-  };
-
-  const handlePlanMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDrawingMode || !planWrapperRef.current) return;
-    const rect = planWrapperRef.current.getBoundingClientRect();
-    const x = Number((((e.clientX - rect.left) / rect.width) * 100).toFixed(2));
-    const y = Number((((e.clientY - rect.top) / rect.height) * 100).toFixed(2));
-
-    setMousePos({ x, y });
-  };
-
   // --- Touch Events ---
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (isDrawingMode) return;
     if (e.touches.length === 1) {
       setIsDragging(true);
       setDragStart({ x: e.touches[0].clientX - position.x, y: e.touches[0].clientY - position.y });
@@ -171,7 +108,6 @@ const FloorContent = () => {
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDrawingMode) return;
     if (e.touches.length === 1 && isDragging) {
       setPosition({
         x: e.touches[0].clientX - dragStart.x,
@@ -212,13 +148,11 @@ const FloorContent = () => {
   };
 
   const handleUnitEnter = (unit: Unit) => {
-    if (isDrawingMode) return;
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setSelectedUnit(unit);
   };
 
   const handleUnitLeave = () => {
-    if (isDrawingMode) return;
     if (typeof window !== 'undefined' && window.innerWidth < 1280) return;
 
     hoverTimeoutRef.current = setTimeout(() => {
@@ -281,25 +215,6 @@ const FloorContent = () => {
       </div>
 
       <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
-        {/* Measuring & Drafting Toggle Button */}
-        <div className="relative group">
-          <button
-            onClick={() => setIsDrawingMode(!isDrawingMode)}
-            className={`p-2.5 rounded-full backdrop-blur-xl border transition-all hover:scale-110 cursor-pointer shadow-lg flex items-center justify-center ${
-              isDrawingMode
-                ? 'bg-amber-500 hover:bg-amber-600 border-amber-300 text-white ring-2 ring-amber-400/50'
-                : 'bg-brand-primary/80 hover:bg-brand-primary border-white/20 text-white'
-            }`}
-            aria-label="Medir y trazar planta"
-            title={isDrawingMode ? 'Cerrar herramienta de medición' : 'Medir y trazar planta'}
-          >
-            <Ruler size={22} className={isDrawingMode ? 'animate-pulse' : ''} />
-          </button>
-          <div className="absolute top-1/2 right-full mr-3 -translate-y-1/2 px-3 py-1 bg-black/80 backdrop-blur-sm text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
-            {isDrawingMode ? 'Cerrar medición' : 'Medir y trazar planta'}
-          </div>
-        </div>
-
         <FullScreenToggle />
       </div>
 
@@ -310,7 +225,6 @@ const FloorContent = () => {
 
       {/* Main Floor Plan Zoomable Area */}
       <div
-        ref={containerRef}
         className="absolute inset-0 flex items-center justify-center cursor-default"
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
@@ -322,12 +236,7 @@ const FloorContent = () => {
         onTouchEnd={handleTouchEnd}
       >
         <div
-          ref={planWrapperRef}
-          onClick={handlePlanClick}
-          onMouseMove={handlePlanMouseMove}
-          className={`relative transition-transform duration-75 ease-out ${
-            isDrawingMode ? 'cursor-crosshair' : ''
-          }`}
+          className="relative transition-transform duration-75 ease-out"
           style={{
             transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
             width: isForcedLandscape
@@ -355,15 +264,13 @@ const FloorContent = () => {
             style={{ zIndex: 5 }}
           >
             {floor.units.map((unit) => {
-              const activePath =
-                activeDrawUnitId === unit.id && generatedPath ? generatedPath : unit.path;
-              if (!activePath) return null;
+              if (!unit.path) return null;
               const isSelected = selectedUnit?.id === unit.id;
 
               return (
                 <path
                   key={`path-${unit.id}`}
-                  d={activePath}
+                  d={unit.path}
                   className={`
                     transition-all duration-300 cursor-pointer pointer-events-auto
                     ${isSelected ? 'fill-brand-primary/70' : 'fill-transparent hover:fill-brand-primary/20'}
@@ -371,7 +278,6 @@ const FloorContent = () => {
                   onMouseEnter={() => handleUnitEnter(unit)}
                   onMouseLeave={handleUnitLeave}
                   onClick={(e) => {
-                    if (isDrawingMode) return;
                     e.stopPropagation();
                     setSelectedUnit(unit);
                   }}
@@ -380,158 +286,57 @@ const FloorContent = () => {
             })}
           </svg>
 
-          {/* Interactive Coordinate Drawer SVG Overlay */}
-          {isDrawingMode && (
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="absolute inset-0 w-full h-full pointer-events-none z-30"
-            >
-              {/* Active Polygon Fill & Stroke */}
-              {drawPoints.length > 0 && (
-                <path
-                  d={generatedPath}
-                  className="fill-amber-500/30 stroke-amber-400 stroke-[0.6] transition-all"
-                  strokeDasharray="1 1"
-                />
-              )}
-
-              {/* Rubberband line connecting last point to cursor */}
-              {drawPoints.length > 0 && mousePos && (
-                <line
-                  x1={drawPoints[drawPoints.length - 1].x}
-                  y1={drawPoints[drawPoints.length - 1].y}
-                  x2={mousePos.x}
-                  y2={mousePos.y}
-                  className="stroke-amber-300/80 stroke-[0.4]"
-                  strokeDasharray="0.8 0.8"
-                />
-              )}
-
-              {/* Segment Distance Badges / Measurements */}
-              {drawPoints.map((pt, idx) => {
-                const nextIdx = (idx + 1) % drawPoints.length;
-                if (drawPoints.length < 2) return null;
-                if (idx === drawPoints.length - 1 && drawPoints.length < 3) return null;
-
-                const nextPt = drawPoints[nextIdx];
-                const midX = (pt.x + nextPt.x) / 2;
-                const midY = (pt.y + nextPt.y) / 2;
-                const dist = Math.hypot(nextPt.x - pt.x, nextPt.y - pt.y);
-
-                return (
-                  <g key={`seg-${idx}`} transform={`translate(${midX}, ${midY})`}>
-                    <rect
-                      x="-2.5"
-                      y="-1"
-                      width="5"
-                      height="2"
-                      rx="0.5"
-                      className="fill-black/80 stroke-amber-400/80 stroke-[0.2]"
-                    />
-                    <text
-                      x="0"
-                      y="0.4"
-                      textAnchor="middle"
-                      fontSize="0.9"
-                      fontWeight="bold"
-                      className="fill-amber-300 font-mono select-none"
-                    >
-                      {dist.toFixed(1)}%
-                    </text>
-                  </g>
-                );
-              })}
-
-              {/* Numbered Vertex Handles */}
-              {drawPoints.map((pt, idx) => (
-                <g key={idx} transform={`translate(${pt.x}, ${pt.y})`}>
-                  <circle r="1.4" className="fill-amber-500 stroke-white stroke-[0.4]" />
-                  <text
-                    x="0"
-                    y="0.4"
-                    textAnchor="middle"
-                    fontSize="1.1"
-                    fontWeight="bold"
-                    className="fill-white select-none pointer-events-none font-mono"
-                  >
-                    {idx + 1}
-                  </text>
-                </g>
-              ))}
-            </svg>
-          )}
-
           {/* Unit Pin Badges */}
-          {!isDrawingMode &&
-            floor.units.map((unit) => {
-              const center = getUnitCenter(unit);
-              const isSelected = selectedUnit?.id === unit.id;
+          {floor.units.map((unit) => {
+            const center = getUnitCenter(unit);
+            const isSelected = selectedUnit?.id === unit.id;
 
-              const statusColor =
-                unit.status === 'available'
-                  ? 'bg-green-500'
-                  : unit.status === 'reserved'
-                  ? 'bg-amber-400'
-                  : 'bg-red-400';
+            const statusColor =
+              unit.status === 'available'
+                ? 'bg-green-500'
+                : unit.status === 'reserved'
+                ? 'bg-amber-400'
+                : 'bg-red-400';
 
-              return (
+            return (
+              <div
+                key={unit.id}
+                className={`absolute group transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-10
+                ${isSelected ? 'scale-125 z-20' : 'hover:scale-110'}`}
+                style={{ left: `${center.x}%`, top: `${center.y}%` }}
+                onMouseEnter={() => handleUnitEnter(unit)}
+                onMouseLeave={handleUnitLeave}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedUnit(unit);
+                }}
+              >
                 <div
-                  key={unit.id}
-                  className={`absolute group transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 z-10 
-                  ${isSelected ? 'scale-125 z-20' : 'hover:scale-110'}`}
-                  style={{ left: `${center.x}%`, top: `${center.y}%` }}
-                  onMouseEnter={() => handleUnitEnter(unit)}
-                  onMouseLeave={handleUnitLeave}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedUnit(unit);
-                  }}
+                  className={`cursor-pointer flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-lg border border-gray-100 transition-colors
+                ${isSelected ? 'ring-2 ring-gray-900 border-transparent' : 'hover:border-gray-300'}
+              `}
                 >
-                  <div
-                    className={`cursor-pointer flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-lg border border-gray-100 transition-colors
-                  ${isSelected ? 'ring-2 ring-gray-900 border-transparent' : 'hover:border-gray-300'}
-                `}
-                  >
-                    {unit.subtitle !== 'Terraza' && <div className={`w-2.5 h-2.5 rounded-full ${statusColor}`} />}
-                    <span className="text-xs font-bold text-gray-800">{unit.identifier || unit.id}</span>
-                  </div>
-
-                  {isSelected && (
-                    <UnitPopover
-                      unit={unit}
-                      floorId={floor.id}
-                      scale={scale}
-                      onMouseEnter={handleUnitEnter}
-                      onMouseLeave={handleUnitLeave}
-                      onOpenConsultation={handleOpenConsultation}
-                      onNavigate={(path) => router.push(path)}
-                      openDirection={getUnitCenter(unit).y < 35 ? 'down' : 'up'}
-                    />
-                  )}
+                  {unit.subtitle !== 'Terraza' && <div className={`w-2.5 h-2.5 rounded-full ${statusColor}`} />}
+                  <span className="text-xs font-bold text-gray-800">{unit.identifier || unit.id}</span>
                 </div>
-              );
-            })}
+
+                {isSelected && (
+                  <UnitPopover
+                    unit={unit}
+                    floorId={floor.id}
+                    scale={scale}
+                    onMouseEnter={handleUnitEnter}
+                    onMouseLeave={handleUnitLeave}
+                    onOpenConsultation={handleOpenConsultation}
+                    onNavigate={(path) => router.push(path)}
+                    openDirection={getUnitCenter(unit).y < 35 ? 'down' : 'up'}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      {/* Floating PathBuilder Coordinate Tool Drawer */}
-      {isDrawingMode && (
-        <PathBuilder
-          generatedPath={generatedPath}
-          points={drawPoints}
-          center={drawCenter}
-          units={floor.units}
-          selectedUnitId={activeDrawUnitId}
-          onSelectUnit={(unitId) => setActiveDrawUnitId(unitId)}
-          onUndo={() => setDrawPoints((prev) => prev.slice(0, -1))}
-          onClear={() => {
-            setDrawPoints([]);
-            setMousePos(null);
-          }}
-          onClose={() => setIsDrawingMode(false)}
-        />
-      )}
 
       <ConsultationModal
         isOpen={isConsultationOpen}
@@ -541,7 +346,7 @@ const FloorContent = () => {
       />
 
       {/* Mobile Unit Modal */}
-      {selectedUnit && !isDrawingMode && (
+      {selectedUnit && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm xl:hidden animate-fade-in"
           onClick={() => setSelectedUnit(null)}
