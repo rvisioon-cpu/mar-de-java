@@ -4,9 +4,9 @@ import { join } from 'node:path';
 
 const keys = [
   'videos/video_portada.mp4',
-  'videos/video_general.mp4',
+  'videos/video_general_b830a6611c68.mp4',
   'homepage/intro.webp',
-  ...Array.from({ length: 14 }, (_, index) => `amenities/${index + 1}.webp`),
+  ...Array.from({ length: 17 }, (_, index) => `amenities/${index + 1}.webp`),
 ];
 const dryRun = process.argv.includes('--dry-run');
 const accountId = process.argv.find(arg => arg.startsWith('--account-id='))?.split('=')[1];

@@ -13,7 +13,7 @@ UPDATE units SET
   photos_plans = '["plants/details/101/plans.webp"]',
   gallery = '["plants/details/101/gallery/1.webp","plants/details/101/gallery/2.webp","plants/details/101/gallery/3.webp","plants/details/101/gallery/4.webp","plants/details/101/gallery/5.webp","plants/details/101/gallery/6.webp","plants/details/101/gallery/7.webp","plants/details/101/gallery/8.webp","plants/details/101/gallery/9.webp","plants/details/101/gallery/10.webp","plants/details/101/gallery/11.webp"]',
   updated_at = unixepoch()
-WHERE id = 'unit_1_101';
+WHERE id = 'unit_1_102';
 
 UPDATE units SET
   photos_furnished = '["plants/details/102/furnished.webp"]',
@@ -21,31 +21,7 @@ UPDATE units SET
   photos_plans = '["plants/details/102/plans.webp"]',
   gallery = '["plants/details/102/gallery/1.webp","plants/details/102/gallery/2.webp","plants/details/102/gallery/3.webp","plants/details/102/gallery/4.webp","plants/details/102/gallery/5.webp","plants/details/102/gallery/6.webp","plants/details/102/gallery/7.webp","plants/details/102/gallery/8.webp","plants/details/102/gallery/9.webp","plants/details/102/gallery/10.webp","plants/details/102/gallery/11.webp","plants/details/102/gallery/12.webp"]',
   updated_at = unixepoch()
-WHERE id = 'unit_1_102';
-
-UPDATE units SET
-  photos_furnished = '["plants/details/x01/furnished.webp"]',
-  photos_unfurnished = '["plants/details/x01/unfurnished.webp"]',
-  photos_plans = '["plants/details/x01/plans.webp"]',
-  gallery = '["plants/details/x01/gallery/1.webp","plants/details/x01/gallery/2.webp","plants/details/x01/gallery/3.webp","plants/details/x01/gallery/4.webp","plants/details/x01/gallery/5.webp","plants/details/x01/gallery/6.webp","plants/details/x01/gallery/7.webp","plants/details/x01/gallery/8.webp","plants/details/x01/gallery/9.webp"]',
-  updated_at = unixepoch()
-WHERE id = 'unit_2_201';
-
-UPDATE units SET
-  photos_furnished = '["plants/details/x01/furnished.webp"]',
-  photos_unfurnished = '["plants/details/x01/unfurnished.webp"]',
-  photos_plans = '["plants/details/x01/plans.webp"]',
-  gallery = '["plants/details/x01/gallery/1.webp","plants/details/x01/gallery/2.webp","plants/details/x01/gallery/3.webp","plants/details/x01/gallery/4.webp","plants/details/x01/gallery/5.webp","plants/details/x01/gallery/6.webp","plants/details/x01/gallery/7.webp","plants/details/x01/gallery/8.webp","plants/details/x01/gallery/9.webp"]',
-  updated_at = unixepoch()
-WHERE id = 'unit_3_301';
-
-UPDATE units SET
-  photos_furnished = '["plants/details/x01/furnished.webp"]',
-  photos_unfurnished = '["plants/details/x01/unfurnished.webp"]',
-  photos_plans = '["plants/details/x01/plans.webp"]',
-  gallery = '["plants/details/x01/gallery/1.webp","plants/details/x01/gallery/2.webp","plants/details/x01/gallery/3.webp","plants/details/x01/gallery/4.webp","plants/details/x01/gallery/5.webp","plants/details/x01/gallery/6.webp","plants/details/x01/gallery/7.webp","plants/details/x01/gallery/8.webp","plants/details/x01/gallery/9.webp"]',
-  updated_at = unixepoch()
-WHERE id = 'unit_4_401';
+WHERE id = 'unit_1_101';
 
 UPDATE units SET
   photos_furnished = '["plants/details/x02/furnished.webp"]',
@@ -56,10 +32,10 @@ UPDATE units SET
 WHERE id = 'unit_2_202';
 
 UPDATE units SET
-  photos_furnished = '["plants/details/x02/furnished.webp"]',
-  photos_unfurnished = '["plants/details/x02/unfurnished.webp"]',
-  photos_plans = '["plants/details/x02/plans.webp"]',
-  gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
+  photos_furnished = '["plants/details/x01/furnished.webp"]',
+  photos_unfurnished = '["plants/details/x01/unfurnished.webp"]',
+  photos_plans = '["plants/details/x01/plans.webp"]',
+  gallery = '["plants/details/x01/gallery/1.webp","plants/details/x01/gallery/2.webp","plants/details/x01/gallery/3.webp","plants/details/x01/gallery/4.webp","plants/details/x01/gallery/5.webp","plants/details/x01/gallery/6.webp","plants/details/x01/gallery/7.webp","plants/details/x01/gallery/8.webp","plants/details/x01/gallery/9.webp"]',
   updated_at = unixepoch()
 WHERE id = 'unit_3_302';
 
@@ -70,6 +46,30 @@ UPDATE units SET
   gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
   updated_at = unixepoch()
 WHERE id = 'unit_4_402';
+
+UPDATE units SET
+  photos_furnished = '["plants/details/x02/furnished.webp"]',
+  photos_unfurnished = '["plants/details/x02/unfurnished.webp"]',
+  photos_plans = '["plants/details/x02/plans.webp"]',
+  gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
+  updated_at = unixepoch()
+WHERE id = 'unit_2_201';
+
+UPDATE units SET
+  photos_furnished = '["plants/details/x02/furnished.webp"]',
+  photos_unfurnished = '["plants/details/x02/unfurnished.webp"]',
+  photos_plans = '["plants/details/x02/plans.webp"]',
+  gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
+  updated_at = unixepoch()
+WHERE id = 'unit_3_301';
+
+UPDATE units SET
+  photos_furnished = '["plants/details/x02/furnished.webp"]',
+  photos_unfurnished = '["plants/details/x02/unfurnished.webp"]',
+  photos_plans = '["plants/details/x02/plans.webp"]',
+  gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
+  updated_at = unixepoch()
+WHERE id = 'unit_4_401';
 
 UPDATE units SET
   photos_furnished = '["plants/details/203.1/furnished.webp"]',
@@ -151,3 +151,16 @@ WHERE id = 'unit_6_602';
 -- the type is what makes the unit page offer the level selector between them.
 UPDATE units SET type = 'DUPLEX', updated_at = unixepoch()
 WHERE id IN ('unit_2_203', 'unit_3_303', 'unit_4_403', 'unit_5_403', 'unit_5_501', 'unit_5_503', 'unit_6_601', 'unit_6_602');
+
+-- Restore the original 202 visual typology for 202, 402 and 502.
+-- Coordinates, specifications, availability and unit-specific 360 tours are preserved.
+UPDATE units SET
+  photos_furnished = '["plants/details/x02/furnished.webp"]',
+  photos_unfurnished = '["plants/details/x02/unfurnished.webp"]',
+  photos_plans = '["plants/details/x02/plans.webp"]',
+  gallery = '["plants/details/x02/gallery/1.webp","plants/details/x02/gallery/2.webp","plants/details/x02/gallery/3.webp","plants/details/x02/gallery/4.webp","plants/details/x02/gallery/5.webp","plants/details/x02/gallery/6.webp","plants/details/x02/gallery/7.webp","plants/details/x02/gallery/8.webp","plants/details/x02/gallery/9.webp","plants/details/x02/gallery/10.webp"]',
+  updated_at = unixepoch()
+WHERE id IN ('unit_2_202', 'unit_4_402', 'unit_5_502');
+
+UPDATE tours SET thumbnail_url = 'plants/details/x02/gallery/1.webp'
+WHERE unit_id IN ('unit_2_202', 'unit_4_402', 'unit_5_502');

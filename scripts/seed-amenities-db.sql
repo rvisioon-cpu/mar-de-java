@@ -16,4 +16,7 @@ INSERT INTO media (id, title, url, url_night, type, category, is_active) VALUES
   ('mar-java-amenity-11', 'Zona Social / Terraza 2', 'amenities/11.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
   ('mar-java-amenity-12', 'Zona Social / Parrilla', 'amenities/12.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
   ('mar-java-amenity-13', 'Área Común D1', 'amenities/13.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
-  ('mar-java-amenity-14', 'Área Común D2', 'amenities/14.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1);
+  ('mar-java-amenity-14', 'Área Común D2', 'amenities/14.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
+  ('mar-java-amenity-15', 'Sótano 1', 'amenities/15.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
+  ('mar-java-amenity-16', 'Sótano 2', 'amenities/16.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1),
+  ('mar-java-amenity-17', 'Sótano 3', 'amenities/17.webp', NULL, 'image/webp', 'AMENITIES_GALLERY', 1);
