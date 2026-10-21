@@ -83,8 +83,8 @@ export const CANONICAL_GALLERIES = {
 };
 
 export const EXPECTED_UNITS = [
-  { id: 'unit_1_101', identifier: '101', floorId: '1', assetId: '101', galleryFolder: '101', galleryCount: 11, isDuplex: false },
-  { id: 'unit_1_102', identifier: '102', floorId: '1', assetId: '102', galleryFolder: '102', galleryCount: 12, isDuplex: false },
+  { id: 'unit_1_101', identifier: '102', floorId: '1', assetId: '101', galleryFolder: '101', galleryCount: 11, isDuplex: false },
+  { id: 'unit_1_102', identifier: '101', floorId: '1', assetId: '102', galleryFolder: '102', galleryCount: 12, isDuplex: false },
   { id: 'unit_2_201', identifier: '201', floorId: '2', assetId: 'x01', galleryFolder: 'x01', galleryCount: 9, isDuplex: false },
   { id: 'unit_2_202', identifier: '202', floorId: '2', assetId: 'x02', galleryFolder: 'x02', galleryCount: 10, isDuplex: false },
   { id: 'unit_3_301', identifier: '301', floorId: '3', assetId: 'x01', galleryFolder: 'x01', galleryCount: 9, isDuplex: false },

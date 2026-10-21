@@ -1,47 +1,40 @@
--- Kuula 360 tours delivered by the client.
--- NOTE: these now live in src/data/floors.ts (per unit) and generate-seed.mjs
--- (the building-wide one) and ship in the generated seed, so this script is only
--- for patching a database in place — no wipe, unlike seeding.
--- Two consumers: units.tour_url powers the "Tour 360" button inside each unit
--- page, and the tours table powers the /recorridos gallery. The general tour
--- keeps the id 'building-main' because the showroom's "Recorrido General"
--- button deep-links to /recorridos?tourId=building-main.
---
--- Thumbnails point at each typology's first interior render; the general one
--- uses the daytime central face of the building.
---
--- NOTE: the collection ids are case sensitive.
--- Updated 2026-10-13 with the client's new collection ids (7dlH*/7dlM*/7dPKv/7dhMt).
+-- Apply to existing databases only; fresh databases use generate-seed.mjs.
+-- Kuula assignments verified against the collection titles on 2026-10-20.
+-- Only tour links change: preserve unit specifications, assets and sale states.
+-- Keep the unit page and /recorridos gallery synchronized without reseeding.
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '102' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '101' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMh?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '201' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMZ?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '202' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '203' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMP?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '301' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMD?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '302' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '401' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMH?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '402' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '403' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '501' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', updated_at = unixepoch() WHERE identifier = '502' AND deleted_at IS NULL;
 
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_1_101';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_1_102';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMh?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_2_201';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMZ?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_2_202';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMP?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_3_301';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMD?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_3_302';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_4_401';
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMH?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id = 'unit_4_402';
+-- 503 had been given flat 502's collection. Preserve any independently supplied tour.
+UPDATE units SET tour_url = NULL, updated_at = unixepoch()
+WHERE identifier = '503' AND tour_url LIKE 'https://kuula.co/share/collection/7dPKv%';
+UPDATE tours SET is_active = 0
+WHERE (unit_id IN (SELECT id FROM units WHERE identifier = '503') OR id = 'tour-503')
+  AND target_url LIKE 'https://kuula.co/share/collection/7dPKv%';
 
--- Each duplex is one apartment across two floors, so both of its unit rows
--- offer the same tour.
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_2_203', 'unit_3_303');
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_4_403', 'unit_5_403');
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE id IN ('unit_5_501', 'unit_6_601');
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', updated_at = unixepoch() WHERE id IN ('unit_5_502', 'unit_6_602');
+UPDATE tours SET target_url = (SELECT u.tour_url FROM units u WHERE u.id = tours.unit_id)
+WHERE deleted_at IS NULL AND unit_id IN (
+  SELECT id FROM units WHERE deleted_at IS NULL AND identifier IN ('101', '102', '201', '202', '203', '301', '302', '401', '402', '403', '501', '502')
+);
 
-DELETE FROM tours WHERE id = 'building-main' OR id LIKE 'tour-%';
+UPDATE tours SET target_url = 'https://kuula.co/share/collection/7dhMt?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es'
+WHERE id = 'building-main' AND deleted_at IS NULL;
 
-INSERT INTO tours (id, title, subtitle, thumbnail_url, type, target_url, unit_id, is_active, "order") VALUES
-  ('building-main', 'Recorrido General', 'Áreas comunes', 'building/photos/1.1.webp', 'building', 'https://kuula.co/share/collection/7dhMt?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', NULL, 1, 0),
-  ('tour-101', 'Unidad 101', 'Flat', 'plants/details/101/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_1_101', 1, 1),
-  ('tour-102', 'Unidad 102', 'Flat', 'plants/details/102/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_1_102', 1, 2),
-  ('tour-201', 'Unidad 201', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMh?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_2_201', 1, 3),
-  ('tour-202', 'Unidad 202', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMZ?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_2_202', 1, 4),
-  ('tour-203', 'Unidad 203', 'Dúplex', 'plants/details/203/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_2_203', 1, 5),
-  ('tour-301', 'Unidad 301', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMP?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_3_301', 1, 6),
-  ('tour-302', 'Unidad 302', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMD?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_3_302', 1, 7),
-  ('tour-401', 'Unidad 401', 'Flat', 'plants/details/x01/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMF?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_401', 1, 8),
-  ('tour-402', 'Unidad 402', 'Flat', 'plants/details/x02/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMH?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_402', 1, 9),
-  ('tour-403', 'Unidad 403', 'Dúplex', 'plants/details/403/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlM3?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_4_403', 1, 10),
-  ('tour-501', 'Unidad 501', 'Dúplex', 'plants/details/501/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dlMt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', 'unit_5_501', 1, 11),
-  ('tour-503', 'Unidad 503', 'Dúplex', 'plants/details/502/gallery/1.webp', 'unit', 'https://kuula.co/share/collection/7dPKv?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&sd=1&thumbs=3&inst=es', 'unit_5_502', 1, 12);
+-- Client supplied and Kuula title verified: DÚPLEX 503 - MAR DE JAVA.
+-- Both floor records belong to the same apartment.
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlT4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch()
+WHERE identifier = '503' AND deleted_at IS NULL;
+
+UPDATE tours SET target_url = 'https://kuula.co/share/collection/7dlT4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', is_active = 1
+WHERE unit_id IN (SELECT id FROM units WHERE identifier = '503' AND deleted_at IS NULL)
+  AND deleted_at IS NULL;

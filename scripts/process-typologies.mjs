@@ -76,7 +76,7 @@ export const GALLERY_CONFIG = {
   '102': { expectedCount: 12, sourceTypologies: ['102'] },
   'x01': { expectedCount: 9, sourceTypologies: ['x01', '201'] },
   'x02': { expectedCount: 10, sourceTypologies: ['x02', '202'] },
-  '501': { expectedCount: 15, sourceTypologies: ['501', '501.1', '501.2'], isDuplexConsolidated: true },
+  '501': { expectedCount: 12, sourceTypologies: ['501', '501.1', '501.2'], isDuplexConsolidated: true },
   '502': { expectedCount: 15, sourceTypologies: ['502', '503', '502.1', '502.2'], isDuplexConsolidated: true },
 };
 

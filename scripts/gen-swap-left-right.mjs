@@ -1,13 +1,16 @@
 // Generates scripts/swap-left-right-units.sql from a JSON dump of the paired
 // units and tours (wrangler d1 execute --json). The numbering on floors 1-4 was
 // mirrored: the left apartment must be X01 and the right one X02. Everything
-// physical (polygon, specs, renders, 360 tour) stays with the location; only
+// physical (polygon and specs) stays with the location; only
 // the number moves, so each pair swaps those fields while keeping id/state.
+// Images, galleries, thumbnails and Kuula collections follow the client unit labels
+// and must not be swapped when changing floor-plan coordinates.
 import fs from 'node:fs';
 
 const [unitsFile, toursFile, outFile] = process.argv.slice(2);
 const units = JSON.parse(fs.readFileSync(unitsFile, 'utf8'))[0].results;
-const tours = JSON.parse(fs.readFileSync(toursFile, 'utf8'))[0].results;
+// Retain the CLI argument for compatibility; tours are tied to unit numbers.
+JSON.parse(fs.readFileSync(toursFile, 'utf8'));
 
 const PAIRS = [
   ['unit_1_101', 'unit_1_102'],
@@ -15,11 +18,7 @@ const PAIRS = [
   ['unit_3_301', 'unit_3_302'],
   ['unit_4_401', 'unit_4_402'],
 ];
-const FIELDS = [
-  'type', 'bedrooms', 'bathrooms', 'area_sqm', 'coordinates', 'tour_url',
-  'photos_furnished', 'photos_unfurnished', 'photos_plans', 'photos_balcony',
-  'gallery', 'renders',
-];
+const FIELDS = ['type', 'bedrooms', 'bathrooms', 'area_sqm', 'coordinates'];
 
 const lit = (v) => (v === null || v === undefined ? 'NULL'
   : typeof v === 'number' ? String(v)
@@ -34,12 +33,7 @@ for (const [a, b] of PAIRS) {
     const sets = FIELDS.map((f) => `${f} = ${lit(source[f])}`).join(', ');
     out.push(`UPDATE units SET ${sets}, updated_at = unixepoch() WHERE id = '${target.id}';`);
   }
-  const ta = tours.find((t) => t.unit_id === a);
-  const tb = tours.find((t) => t.unit_id === b);
-  if (ta && tb) {
-    out.push(`UPDATE tours SET thumbnail_url = ${lit(tb.thumbnail_url)}, target_url = ${lit(tb.target_url)} WHERE id = '${ta.id}';`);
-    out.push(`UPDATE tours SET thumbnail_url = ${lit(ta.thumbnail_url)}, target_url = ${lit(ta.target_url)} WHERE id = '${tb.id}';`);
-  }
 }
+
 fs.writeFileSync(outFile, out.join('\n') + '\n');
 console.log(`Wrote ${outFile}`);

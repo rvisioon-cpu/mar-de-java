@@ -27,7 +27,7 @@ const unitGalleries: Record<string, number> = {
     'x02': 10,
     '203': 10,
     '403': 10,
-    '501': 15,
+    '501': 12,
     '502': 15,
 };
 
@@ -38,8 +38,23 @@ const unitViewAssets = unitViewFolders.flatMap(folder => [
     ...unitTransitions.map(name => `plants/details/${folder}/transitions/${name}.mp4`),
 ]);
 
+const gallery501 = [
+    "plants/details/501/gallery/1_181d18779033.webp",
+    "plants/details/501/gallery/2_5f9e9cdcdd31.webp",
+    "plants/details/501/gallery/3_895118200d10.webp",
+    "plants/details/501/gallery/4_5d56995c8b5b.webp",
+    "plants/details/501/gallery/5_adac69746ed3.webp",
+    "plants/details/501/gallery/6_9f280955c839.webp",
+    "plants/details/501/gallery/7_c410ba6d68ae.webp",
+    "plants/details/501/gallery/8_cbc0820156cf.webp",
+    "plants/details/501/gallery/9_5a5921403612.webp",
+    "plants/details/501/gallery/10_8330cf0896b1.webp",
+    "plants/details/501/gallery/11_a4957df769b5.webp",
+    "plants/details/501/gallery/12_1fb84ea2a91c.webp"
+];
+
 const unitGalleryAssets = Object.entries(unitGalleries).flatMap(([folder, count]) =>
-    Array.from({ length: count }, (_, i) => `plants/details/${folder}/gallery/${i + 1}.webp`)
+    folder === '501' ? gallery501 : Array.from({ length: count }, (_, i) => `plants/details/${folder}/gallery/${i + 1}.webp`)
 );
 
 export const assetManifest: string[] = [

@@ -1,0 +1,1139 @@
+[
+  {
+    "source": "T1 - FLAT 101/AMOBLADO.jpg",
+    "target": "plants/details/101/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "12fee157717ff884af130acc333209b840112fc7eb5ffb8afcf7f8c9fca9e50d",
+    "exists": true,
+    "localHash": "12fee157717ff884af130acc333209b840112fc7eb5ffb8afcf7f8c9fca9e50d",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/ENTREGABLE.jpg",
+    "target": "plants/details/101/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "a98880601957623025c9b17993cc691c7f4c3af93784d97f830bc245aac73f90",
+    "exists": true,
+    "localHash": "a98880601957623025c9b17993cc691c7f4c3af93784d97f830bc245aac73f90",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/CAD.jpg",
+    "target": "plants/details/101/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "7da44b8098943a41009305ed349c6af9eb91055cb2bd321044581eccb6d0fbd5",
+    "exists": true,
+    "localHash": "7da44b8098943a41009305ed349c6af9eb91055cb2bd321044581eccb6d0fbd5",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/1.jpg",
+    "target": "plants/details/101/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "8ada49a992e8f4faf5df104b638b71d724371478d5ef5a26aac0c0d55d103c45",
+    "exists": true,
+    "localHash": "8ada49a992e8f4faf5df104b638b71d724371478d5ef5a26aac0c0d55d103c45",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/2.jpg",
+    "target": "plants/details/101/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "85a6e7872fc07024fc23175d68ba3ed12d020e23eaf19838b8ac9495382aee6b",
+    "exists": true,
+    "localHash": "85a6e7872fc07024fc23175d68ba3ed12d020e23eaf19838b8ac9495382aee6b",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/3.jpg",
+    "target": "plants/details/101/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "55c266265222cd78d47f326949eefbcaeb37509cdaeb20863d7681a401a80997",
+    "exists": true,
+    "localHash": "55c266265222cd78d47f326949eefbcaeb37509cdaeb20863d7681a401a80997",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/4.jpg",
+    "target": "plants/details/101/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "13e669304bbb8de8c393edfa9186e2c6967d24e245900884b574eead382c01b7",
+    "exists": true,
+    "localHash": "13e669304bbb8de8c393edfa9186e2c6967d24e245900884b574eead382c01b7",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/5.jpg",
+    "target": "plants/details/101/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "7e74f336e4db02d383b303f4ca677d5e66633f1927cfc69c6728621f39f94e9f",
+    "exists": true,
+    "localHash": "7e74f336e4db02d383b303f4ca677d5e66633f1927cfc69c6728621f39f94e9f",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/6.jpg",
+    "target": "plants/details/101/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "6fe385782696979e9bd3fdec3374f493dc504908f13f75ce57ea049a1c1a8a6d",
+    "exists": true,
+    "localHash": "6fe385782696979e9bd3fdec3374f493dc504908f13f75ce57ea049a1c1a8a6d",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/7.jpg",
+    "target": "plants/details/101/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "c9be96f698b792c72e3868dada0fa2d58018bf45838ff102a5d7dd1ba3a4e128",
+    "exists": true,
+    "localHash": "c9be96f698b792c72e3868dada0fa2d58018bf45838ff102a5d7dd1ba3a4e128",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/8.jpg",
+    "target": "plants/details/101/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "92bd358f5204456d1bdd24b7ad40e13f6d17ac570b46239ab03e5da1ab150806",
+    "exists": true,
+    "localHash": "92bd358f5204456d1bdd24b7ad40e13f6d17ac570b46239ab03e5da1ab150806",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/9.jpg",
+    "target": "plants/details/101/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "be5279e7bec0bcd70fb2e757c3a58b84537d0e04312e700f224f782e53c5953e",
+    "exists": true,
+    "localHash": "be5279e7bec0bcd70fb2e757c3a58b84537d0e04312e700f224f782e53c5953e",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/10.jpg",
+    "target": "plants/details/101/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "cada6eff7c6a30ae638e225cd3ec7f92e2579caf87d7b3507ec60c2d5c53a4c4",
+    "exists": true,
+    "localHash": "cada6eff7c6a30ae638e225cd3ec7f92e2579caf87d7b3507ec60c2d5c53a4c4",
+    "exactMatch": true
+  },
+  {
+    "source": "T1 - FLAT 101/GALERIA/11.jpg",
+    "target": "plants/details/101/gallery/11.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "a15d1208ce15f39d196769533eb203dec17e8bdb8aa22612a83accbcdf2188ce",
+    "exists": true,
+    "localHash": "a15d1208ce15f39d196769533eb203dec17e8bdb8aa22612a83accbcdf2188ce",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/AMOBLADO.png",
+    "target": "plants/details/102/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "b9e47dc0c840177074c617383da139860f090464132f1b0c95aed6e2e6943f43",
+    "exists": true,
+    "localHash": "b9e47dc0c840177074c617383da139860f090464132f1b0c95aed6e2e6943f43",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/ENTREGABLE.jpg",
+    "target": "plants/details/102/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "3f8a826cfa8a79a44f43ecaea289cedbc1fe43c9c2d533f5e5eaf7f8ba8446bd",
+    "exists": true,
+    "localHash": "3f8a826cfa8a79a44f43ecaea289cedbc1fe43c9c2d533f5e5eaf7f8ba8446bd",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/CAD.jpg",
+    "target": "plants/details/102/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "2e54bf3909a7b9359b06d85e6f5b56a5e99317e151ea0846afbf3cc2efaa0467",
+    "exists": true,
+    "localHash": "2e54bf3909a7b9359b06d85e6f5b56a5e99317e151ea0846afbf3cc2efaa0467",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/1.jpg",
+    "target": "plants/details/102/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "028f68d6081099b2f4770953151c1429206c1d70b3a157441d2a56a8e89cc2dc",
+    "exists": true,
+    "localHash": "028f68d6081099b2f4770953151c1429206c1d70b3a157441d2a56a8e89cc2dc",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/2.jpg",
+    "target": "plants/details/102/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "786e9b435c10e4bd60425b72213637f5a3614ec843a9f4774d4a26fee8fb2e1d",
+    "exists": true,
+    "localHash": "786e9b435c10e4bd60425b72213637f5a3614ec843a9f4774d4a26fee8fb2e1d",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/3.jpg",
+    "target": "plants/details/102/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "9922a411d72396194b7dcfc9520476120ebce5586776c50fc2449b9b9b4e42e1",
+    "exists": true,
+    "localHash": "9922a411d72396194b7dcfc9520476120ebce5586776c50fc2449b9b9b4e42e1",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/4.jpg",
+    "target": "plants/details/102/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "ddec4d22f8931e0336608a283d48f6778d1ad84959ac55138247de5d8c22f186",
+    "exists": true,
+    "localHash": "ddec4d22f8931e0336608a283d48f6778d1ad84959ac55138247de5d8c22f186",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/5.jpg",
+    "target": "plants/details/102/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f38781240475335ce15b1acb783337f36e422199715f6374751a45086db9612c",
+    "exists": true,
+    "localHash": "f38781240475335ce15b1acb783337f36e422199715f6374751a45086db9612c",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/6.jpg",
+    "target": "plants/details/102/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "76c551da3b56b3ea8fbe8dbfa610c322a5d7b8affe0fe2f45eec26935976ace7",
+    "exists": true,
+    "localHash": "76c551da3b56b3ea8fbe8dbfa610c322a5d7b8affe0fe2f45eec26935976ace7",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/7.jpg",
+    "target": "plants/details/102/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "af283678c96149f5c03fce61c1c11a18f924ca3ba274c4cee5ea2bd5dae32f2e",
+    "exists": true,
+    "localHash": "af283678c96149f5c03fce61c1c11a18f924ca3ba274c4cee5ea2bd5dae32f2e",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/8.jpg",
+    "target": "plants/details/102/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "ce412f2f23e5a41b06cc393f8f786dba32d53d24b3e9cdca6671186d44e4a6c0",
+    "exists": true,
+    "localHash": "ce412f2f23e5a41b06cc393f8f786dba32d53d24b3e9cdca6671186d44e4a6c0",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/9.jpg",
+    "target": "plants/details/102/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "9bab5647d5f99e9afbbccc08c46934140d4f9262ed5eb5766b6c5541fad9e053",
+    "exists": true,
+    "localHash": "9bab5647d5f99e9afbbccc08c46934140d4f9262ed5eb5766b6c5541fad9e053",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/10.jpg",
+    "target": "plants/details/102/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "eefb6e80c9629e070dab640c78df71824e0160af8a9e4072d7cffb305c57bef4",
+    "exists": true,
+    "localHash": "eefb6e80c9629e070dab640c78df71824e0160af8a9e4072d7cffb305c57bef4",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/11.jpg",
+    "target": "plants/details/102/gallery/11.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "73641475f59aa632bb9d7ccb726d8255f32794457891ec18e9927f6238c7c681",
+    "exists": true,
+    "localHash": "73641475f59aa632bb9d7ccb726d8255f32794457891ec18e9927f6238c7c681",
+    "exactMatch": true
+  },
+  {
+    "source": "T2 - FLAT 102/GALERIA/12.jpg",
+    "target": "plants/details/102/gallery/12.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f1719202b30f211a71600868387f1de0817072fc20f400a9ce0ed11f07fd6cad",
+    "exists": true,
+    "localHash": "f1719202b30f211a71600868387f1de0817072fc20f400a9ce0ed11f07fd6cad",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/AMOBLADO.png",
+    "target": "plants/details/x01/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "83446556809d8a404a533903479e2e4ee3f4b262d80f2e95ae4c11a1b36941e9",
+    "exists": true,
+    "localHash": "83446556809d8a404a533903479e2e4ee3f4b262d80f2e95ae4c11a1b36941e9",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/ENTREGABLE.jpg",
+    "target": "plants/details/x01/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "475119fdadbc233ce5d08bb2da11ef636b04d157915eeb529d903ada05c44afa",
+    "exists": true,
+    "localHash": "475119fdadbc233ce5d08bb2da11ef636b04d157915eeb529d903ada05c44afa",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/CAD.jpg",
+    "target": "plants/details/x01/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "23f2f15282b7f3b7f1155e4755bb9b95db07859a74bfc7343e29414321aae98e",
+    "exists": true,
+    "localHash": "23f2f15282b7f3b7f1155e4755bb9b95db07859a74bfc7343e29414321aae98e",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.1.png",
+    "target": "plants/details/x01/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "1d351cbbee69637986c26310b1bbaacee0c62bc222ed252abc367f8206357b5e",
+    "exists": true,
+    "localHash": "1d351cbbee69637986c26310b1bbaacee0c62bc222ed252abc367f8206357b5e",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.2.png",
+    "target": "plants/details/x01/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "4eecdf7b33cd4b0fd076ecd554dd1f2e9929cad9f56233fa63d0e5422127b5ef",
+    "exists": true,
+    "localHash": "4eecdf7b33cd4b0fd076ecd554dd1f2e9929cad9f56233fa63d0e5422127b5ef",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.3.png",
+    "target": "plants/details/x01/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "742a5a3e45b6db84b4d4e98fb867051deaa75cc068e71e870519f87f6ac13a8f",
+    "exists": true,
+    "localHash": "742a5a3e45b6db84b4d4e98fb867051deaa75cc068e71e870519f87f6ac13a8f",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.4.png",
+    "target": "plants/details/x01/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "d4dfe0f711350a6b07a19358097d91d892c7f304e7d0adb6b2ffe07afdd59494",
+    "exists": true,
+    "localHash": "d4dfe0f711350a6b07a19358097d91d892c7f304e7d0adb6b2ffe07afdd59494",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.5.png",
+    "target": "plants/details/x01/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "daa7da79f685c4b1b97cdfd0ad9e7fc0889a451595a7a200bad4948ccc23b74e",
+    "exists": true,
+    "localHash": "daa7da79f685c4b1b97cdfd0ad9e7fc0889a451595a7a200bad4948ccc23b74e",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.6.png",
+    "target": "plants/details/x01/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "77c379b041d074f3cd3562a8081ef1727315803c0e7e2599e0a1df34791857d7",
+    "exists": true,
+    "localHash": "77c379b041d074f3cd3562a8081ef1727315803c0e7e2599e0a1df34791857d7",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.7.png",
+    "target": "plants/details/x01/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "6dcbefbc217e02b9d71b08802f5b2c18d9de001d889d9aec4b17d5c7db984395",
+    "exists": true,
+    "localHash": "6dcbefbc217e02b9d71b08802f5b2c18d9de001d889d9aec4b17d5c7db984395",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.8.png",
+    "target": "plants/details/x01/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "cc64c10377fef8f44293f81cfe11acbef5ddfc09e2deb2635894d16638dccdb5",
+    "exists": true,
+    "localHash": "cc64c10377fef8f44293f81cfe11acbef5ddfc09e2deb2635894d16638dccdb5",
+    "exactMatch": true
+  },
+  {
+    "source": "T3 - FLAT 201/GALERIA/201.9.png",
+    "target": "plants/details/x01/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "d39b4ee07a300a50ff4019e2f9b84d30f2b6f0a90a0324b1a88e7b0d051f3ca8",
+    "exists": true,
+    "localHash": "d39b4ee07a300a50ff4019e2f9b84d30f2b6f0a90a0324b1a88e7b0d051f3ca8",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/AMOBLADO.png",
+    "target": "plants/details/x02/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "e32531a050558e752a4a3b48ae67240b4a45408de184c085dd28c601bffd8828",
+    "exists": true,
+    "localHash": "e32531a050558e752a4a3b48ae67240b4a45408de184c085dd28c601bffd8828",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/ENTREGABLE.jpg",
+    "target": "plants/details/x02/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "bd90408df1c57253f14c1b5f7952f1174517e00b14448e94d7ef493bfc307a59",
+    "exists": true,
+    "localHash": "bd90408df1c57253f14c1b5f7952f1174517e00b14448e94d7ef493bfc307a59",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/CAD.jpg",
+    "target": "plants/details/x02/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "779660016a91498f1cdb8ef1d9648e8144f7eefacc156af1d67c232b48ccf93e",
+    "exists": true,
+    "localHash": "779660016a91498f1cdb8ef1d9648e8144f7eefacc156af1d67c232b48ccf93e",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/1.png",
+    "target": "plants/details/x02/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "6ac36cc9345787dd9a0e3ce3d33db12de676be1507e030a02106fa61af9545df",
+    "exists": true,
+    "localHash": "6ac36cc9345787dd9a0e3ce3d33db12de676be1507e030a02106fa61af9545df",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/2.png",
+    "target": "plants/details/x02/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "54c361412dd40e48702b8f92e34f1a8acda768b5d538b8e442d9d812d3404fd8",
+    "exists": true,
+    "localHash": "54c361412dd40e48702b8f92e34f1a8acda768b5d538b8e442d9d812d3404fd8",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/3.png",
+    "target": "plants/details/x02/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "711d75a70930030c5688f9bf51000d27fdf4f317aed427886182efc3310b2e52",
+    "exists": true,
+    "localHash": "711d75a70930030c5688f9bf51000d27fdf4f317aed427886182efc3310b2e52",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/4.png",
+    "target": "plants/details/x02/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "a15111eadb82c802d37103e839547332f8a4c4cc9c99e7c73ac58ae4da8b05b6",
+    "exists": true,
+    "localHash": "a15111eadb82c802d37103e839547332f8a4c4cc9c99e7c73ac58ae4da8b05b6",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/5.png",
+    "target": "plants/details/x02/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "ec3b49fd4917d823a7ca9d44220a6470f641e82e8a502d1dc6bd8ec1b62af460",
+    "exists": true,
+    "localHash": "ec3b49fd4917d823a7ca9d44220a6470f641e82e8a502d1dc6bd8ec1b62af460",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/6.png",
+    "target": "plants/details/x02/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "31ae7834245426fedeb6651c44afd3b54811b1eb9e00c0c5aa2cd8bfa666c4bd",
+    "exists": true,
+    "localHash": "31ae7834245426fedeb6651c44afd3b54811b1eb9e00c0c5aa2cd8bfa666c4bd",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/7.png",
+    "target": "plants/details/x02/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "aa2ac1270122143d33bc2d3c198ac1a67906dc5ae6a46b2cdf1ae4bb5189165f",
+    "exists": true,
+    "localHash": "aa2ac1270122143d33bc2d3c198ac1a67906dc5ae6a46b2cdf1ae4bb5189165f",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/8.png",
+    "target": "plants/details/x02/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "882cf8f1f53c267bfb4ca4558e5c2681694ee4546aed025d1c2ec07ff3974d22",
+    "exists": true,
+    "localHash": "882cf8f1f53c267bfb4ca4558e5c2681694ee4546aed025d1c2ec07ff3974d22",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/9.png",
+    "target": "plants/details/x02/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "22ed0110ecf936043de2f567b74e8b7510f1a25c5a5700a925f503a75788eb23",
+    "exists": true,
+    "localHash": "22ed0110ecf936043de2f567b74e8b7510f1a25c5a5700a925f503a75788eb23",
+    "exactMatch": true
+  },
+  {
+    "source": "T4 - FLAT 202/GALERIA/10.png",
+    "target": "plants/details/x02/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "3c7d231373022e1662f6016e8d3428e4780707b3d3545d9233fa07a6af1c9eb4",
+    "exists": true,
+    "localHash": "3c7d231373022e1662f6016e8d3428e4780707b3d3545d9233fa07a6af1c9eb4",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/AMOBLADO P1.png",
+    "target": "plants/details/203.1/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "fd87b7e58cfbea3c730e94621280bf78dc771c1aab89f27a2e3edffc968509d4",
+    "exists": true,
+    "localHash": "fd87b7e58cfbea3c730e94621280bf78dc771c1aab89f27a2e3edffc968509d4",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/ENTREGABLE P1.png",
+    "target": "plants/details/203.1/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "3010c5f7fcc47395a59cd4014782e43bd8965f8456fba0b7fa8193363b44f51e",
+    "exists": true,
+    "localHash": "3010c5f7fcc47395a59cd4014782e43bd8965f8456fba0b7fa8193363b44f51e",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/CAD P1.jpg",
+    "target": "plants/details/203.1/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "264ec03fe862d225f69c28a44beec87c9e5137f988c511c4e7c65deb6d8d2c4f",
+    "exists": true,
+    "localHash": "264ec03fe862d225f69c28a44beec87c9e5137f988c511c4e7c65deb6d8d2c4f",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/AMOBLADO P2.png",
+    "target": "plants/details/203.2/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "4e03dfe0643117671523cd7df92f0823a6dc2ee6283cf971bb443637f6736ede",
+    "exists": true,
+    "localHash": "4e03dfe0643117671523cd7df92f0823a6dc2ee6283cf971bb443637f6736ede",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/ENTREGABLE P2.jpg",
+    "target": "plants/details/203.2/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "a717f2625f1c3deab23206375d433913b091ca099901a4491af226095e69a655",
+    "exists": true,
+    "localHash": "a717f2625f1c3deab23206375d433913b091ca099901a4491af226095e69a655",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/CAD P2.jpg",
+    "target": "plants/details/203.2/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "95294bd7a2c126171d56c43d3b299bba56d608e5809c13242e362ad5b1bee083",
+    "exists": true,
+    "localHash": "95294bd7a2c126171d56c43d3b299bba56d608e5809c13242e362ad5b1bee083",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/1.png",
+    "target": "plants/details/203/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "734f415dee12186ea47c598ab229130628753d067c1bca4e973bf943bafcf830",
+    "exists": true,
+    "localHash": "734f415dee12186ea47c598ab229130628753d067c1bca4e973bf943bafcf830",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/2.png",
+    "target": "plants/details/203/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "317f11113eaadf413b6680f7a2ca3c5e639e1774fb37be58c805605d13677841",
+    "exists": true,
+    "localHash": "317f11113eaadf413b6680f7a2ca3c5e639e1774fb37be58c805605d13677841",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/3.png",
+    "target": "plants/details/203/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "843c5989a129719976149424f5184995033fc18de6e01ac1390c1d254a15ef44",
+    "exists": true,
+    "localHash": "843c5989a129719976149424f5184995033fc18de6e01ac1390c1d254a15ef44",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/4.png",
+    "target": "plants/details/203/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "7187e1c46c08120579917f50dacc38f9a45c7054c4e50702a2b535d3e1d8c5f5",
+    "exists": true,
+    "localHash": "7187e1c46c08120579917f50dacc38f9a45c7054c4e50702a2b535d3e1d8c5f5",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/5.png",
+    "target": "plants/details/203/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "215f276bf069cb37ea1c10bf3d04adb55453e5cc7ba32ad1874bdb9cc3f18b76",
+    "exists": true,
+    "localHash": "215f276bf069cb37ea1c10bf3d04adb55453e5cc7ba32ad1874bdb9cc3f18b76",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/6.png",
+    "target": "plants/details/203/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "d735b4f358fd37a2dfa1533f18dd245b508e34acd064b74593a2c937d12b2195",
+    "exists": true,
+    "localHash": "d735b4f358fd37a2dfa1533f18dd245b508e34acd064b74593a2c937d12b2195",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/7.png",
+    "target": "plants/details/203/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "863c4558a5d14b17259cdb32e03e3ba4b2c70fbec745b1d1f00de10bd832be81",
+    "exists": true,
+    "localHash": "863c4558a5d14b17259cdb32e03e3ba4b2c70fbec745b1d1f00de10bd832be81",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/8.png",
+    "target": "plants/details/203/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "732fd04a37ac4740795d6f1b145caede72949eb4fd54f3e67c7666fdc3199156",
+    "exists": true,
+    "localHash": "732fd04a37ac4740795d6f1b145caede72949eb4fd54f3e67c7666fdc3199156",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/9.png",
+    "target": "plants/details/203/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "440dd3c2e6d7c1a3da7767a07ea7959bb11d1552749fd6d550e85ee21993d1cb",
+    "exists": true,
+    "localHash": "440dd3c2e6d7c1a3da7767a07ea7959bb11d1552749fd6d550e85ee21993d1cb",
+    "exactMatch": true
+  },
+  {
+    "source": "T5- DUPLEX 203/GALERIA/10.png",
+    "target": "plants/details/203/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "55ef58d11f8068170345a6c6b916b2aefc1ea71e51d73041558ecb3222da4498",
+    "exists": true,
+    "localHash": "55ef58d11f8068170345a6c6b916b2aefc1ea71e51d73041558ecb3222da4498",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/AMOBLADO P1.jpg",
+    "target": "plants/details/403.1/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "0c4b56b3acd70160ae172c7b2ac3fadb6472476ddb077730442d45ca9cb6ace7",
+    "exists": true,
+    "localHash": "0c4b56b3acd70160ae172c7b2ac3fadb6472476ddb077730442d45ca9cb6ace7",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/ENTREGABLE P1.jpg",
+    "target": "plants/details/403.1/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "d4b10f2b4ef9e726d3435ea642b5c8519a8f658b39fe2559b53bbb2432aaf419",
+    "exists": true,
+    "localHash": "d4b10f2b4ef9e726d3435ea642b5c8519a8f658b39fe2559b53bbb2432aaf419",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/CAD P1.jpg",
+    "target": "plants/details/403.1/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "5db96082ab28a5ab0b40f4cc57f3271ae36f0aeb131aadbc7b3825e20e4e6462",
+    "exists": true,
+    "localHash": "5db96082ab28a5ab0b40f4cc57f3271ae36f0aeb131aadbc7b3825e20e4e6462",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/AMOBLADO P2.png",
+    "target": "plants/details/403.2/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "a50c6dd44181d3397b8dd80915fb356f35c0d0b0d29d758dbed1bacf90910119",
+    "exists": true,
+    "localHash": "a50c6dd44181d3397b8dd80915fb356f35c0d0b0d29d758dbed1bacf90910119",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/ENTREGABLE P2.png",
+    "target": "plants/details/403.2/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "38a543a486d0043ca37140db0b97567835883091b228797c0f1d5791e90654f7",
+    "exists": true,
+    "localHash": "38a543a486d0043ca37140db0b97567835883091b228797c0f1d5791e90654f7",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/CAD P2.jpg",
+    "target": "plants/details/403.2/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "869377d211d4e6506eee8c58c0d98cf3075ad51f9ac2840c9e859d12e02a04bd",
+    "exists": true,
+    "localHash": "869377d211d4e6506eee8c58c0d98cf3075ad51f9ac2840c9e859d12e02a04bd",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/1.jpg",
+    "target": "plants/details/403/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f812bde2300fbbbe8fd9789962aada78f27f1f4b54eda4e199408b7b18c0db92",
+    "exists": true,
+    "localHash": "f812bde2300fbbbe8fd9789962aada78f27f1f4b54eda4e199408b7b18c0db92",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/2.jpg",
+    "target": "plants/details/403/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "9a05dc5d091c19f7fc5983d39d6941c15d5b9a68a23be9929e51b5fc713e8f7b",
+    "exists": true,
+    "localHash": "9a05dc5d091c19f7fc5983d39d6941c15d5b9a68a23be9929e51b5fc713e8f7b",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/3.jpg",
+    "target": "plants/details/403/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "044465db4a1af39322aa3d69a5dfafa44340116dd33f45b36c5dddf1f305374f",
+    "exists": true,
+    "localHash": "044465db4a1af39322aa3d69a5dfafa44340116dd33f45b36c5dddf1f305374f",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/4.jpg",
+    "target": "plants/details/403/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "c738cbe11544b4069caa14f018e108dd15a98364acb104e4d3747d7746cd7186",
+    "exists": true,
+    "localHash": "c738cbe11544b4069caa14f018e108dd15a98364acb104e4d3747d7746cd7186",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/5.jpg",
+    "target": "plants/details/403/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "6d5393ea340821e0ab2b07bf3f6c8152e7345368d8c582bc8d28804fd810c485",
+    "exists": true,
+    "localHash": "6d5393ea340821e0ab2b07bf3f6c8152e7345368d8c582bc8d28804fd810c485",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/6.jpg",
+    "target": "plants/details/403/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "2cb955b7d0dedc026765b67ffe2a32d6d373c1602a36239400efe40b56592ef4",
+    "exists": true,
+    "localHash": "2cb955b7d0dedc026765b67ffe2a32d6d373c1602a36239400efe40b56592ef4",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/7.jpg",
+    "target": "plants/details/403/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "0c93da6e17ba71198e218699a9b0d450260282eb97346384a12de2952f618e69",
+    "exists": true,
+    "localHash": "0c93da6e17ba71198e218699a9b0d450260282eb97346384a12de2952f618e69",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/8.jpg",
+    "target": "plants/details/403/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "90b09c1755c292dab3adfc1c00baab8d8020f6ccf943bbe2a807f588f9867d54",
+    "exists": true,
+    "localHash": "90b09c1755c292dab3adfc1c00baab8d8020f6ccf943bbe2a807f588f9867d54",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/9.jpg",
+    "target": "plants/details/403/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "28b983e6ce2745f82547e3d942d1ad237de19da173528e83c0ff0981807077d7",
+    "exists": true,
+    "localHash": "28b983e6ce2745f82547e3d942d1ad237de19da173528e83c0ff0981807077d7",
+    "exactMatch": true
+  },
+  {
+    "source": "T6 - DUPLEX 403/GALERIA/10.jpg",
+    "target": "plants/details/403/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "3f1bbb0424924db77acaa7d09b681f37713d3415d271f3ef69f76a15a59d8c1e",
+    "exists": true,
+    "localHash": "3f1bbb0424924db77acaa7d09b681f37713d3415d271f3ef69f76a15a59d8c1e",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/AMOBLADO P1.png",
+    "target": "plants/details/501.1/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "89934083e07ca22a2978b38bb7868a3c40a34d6305856f5356391e48e7bf1817",
+    "exists": true,
+    "localHash": "89934083e07ca22a2978b38bb7868a3c40a34d6305856f5356391e48e7bf1817",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/ENTREGABLE P1.png",
+    "target": "plants/details/501.1/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "cc48c21fa1f602bda80744f7591f2fb36d292c46ebf8ddeeb035b82b0d769fc6",
+    "exists": true,
+    "localHash": "cc48c21fa1f602bda80744f7591f2fb36d292c46ebf8ddeeb035b82b0d769fc6",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/CAD P1.jpg",
+    "target": "plants/details/501.1/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "7aa9711ed9915f2b015027a01a4582275a8ca8f21e80c56be8b24f0de1ba007d",
+    "exists": true,
+    "localHash": "7aa9711ed9915f2b015027a01a4582275a8ca8f21e80c56be8b24f0de1ba007d",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/AMOBLADO P2.png",
+    "target": "plants/details/501.2/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "d7f2e7fe166ce9d52b3680526d1b675c09d02390a31855e038eb7b65310f2108",
+    "exists": true,
+    "localHash": "d7f2e7fe166ce9d52b3680526d1b675c09d02390a31855e038eb7b65310f2108",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/ENTREGABLE P2.jpg",
+    "target": "plants/details/501.2/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "97b7cd2f0d56f8bd8ceea22dae62eb6feb66d47c42f475e6e8f992271f82e9cd",
+    "exists": true,
+    "localHash": "97b7cd2f0d56f8bd8ceea22dae62eb6feb66d47c42f475e6e8f992271f82e9cd",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/CAD P2.jpg",
+    "target": "plants/details/501.2/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "f82dad097e02c4c51db480fb6eb88b34f20fc5d5a7d0072681cc5bc5a84b7f65",
+    "exists": true,
+    "localHash": "f82dad097e02c4c51db480fb6eb88b34f20fc5d5a7d0072681cc5bc5a84b7f65",
+    "exactMatch": true
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/1.png",
+    "target": "plants/details/501/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "181d18779033c7053db999d9bd86c560bb54fbbc3f4a11386d8b9db01954cdf3",
+    "exists": true,
+    "localHash": "8ef1eedacbcd8e31399fab8b7aea4b176b334782465812236fcd17194acc870d",
+    "exactMatch": false,
+    "meanAbsPixelError": 61.271892361111114
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/2.png",
+    "target": "plants/details/501/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "5f9e9cdcdd3127cfe88fa9f318492a38a55a16b309afba3a5cad78bd7ed6eb0e",
+    "exists": true,
+    "localHash": "13016e76c99216d2436aa51909c8a2a1008df57b12c4bf8ade1d2c6f328d620e",
+    "exactMatch": false,
+    "meanAbsPixelError": 55.597488425925924
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/3.png",
+    "target": "plants/details/501/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "895118200d10afd690b56cf5fdc183db412b611b5e20ace6e073d975a44b4664",
+    "exists": true,
+    "localHash": "f3d4d97e1aaea9dd4e5015812c55414c3186c867ead8f4f17f258b8ee49f2268",
+    "exactMatch": false,
+    "meanAbsPixelError": 68.79239004629629
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/4.png",
+    "target": "plants/details/501/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "5d56995c8b5bd26533e2bc0b9141ba258c26989c2bddfaa1ca64a5fae861b432",
+    "exists": true,
+    "localHash": "bb92e4b499ff2f8945ee8a73d001f63f6f8972a9e97eed712b9c81ee0f807baf",
+    "exactMatch": false,
+    "meanAbsPixelError": 74.40890046296296
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/5.png",
+    "target": "plants/details/501/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "adac69746ed331b3c80e8a7a9795148e62d93ca2a2c494639ddbbf768b459239",
+    "exists": true,
+    "localHash": "8d1d2ab0e4540b41aa7d56400ae8baad60196728a613e536f342d30adfc6e70f",
+    "exactMatch": false,
+    "meanAbsPixelError": 68.61749421296297
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/6.png",
+    "target": "plants/details/501/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "9f280955c839194d130b2ae5631af1bcd03f2d6e65320bde97a19eb12916603e",
+    "exists": true,
+    "localHash": "f0401857f758e06dab695931c204cbbc54b941b5e7c4efdcfa5f4726377e47b1",
+    "exactMatch": false,
+    "meanAbsPixelError": 69.27205439814814
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/7.png",
+    "target": "plants/details/501/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "c410ba6d68aebcf6c26ffb4fad275fb7f91dc8930c472cdabe54189ee098b552",
+    "exists": true,
+    "localHash": "89e4599c7f720b1b2507a38f11680f877f1ce234917fffdd052a75583a07887b",
+    "exactMatch": false,
+    "meanAbsPixelError": 59.72398148148148
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/8.png",
+    "target": "plants/details/501/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "cbc0820156cf7a74c1fd147c1742f24951c15c20417d4024df8c117fd6176c5c",
+    "exists": true,
+    "localHash": "0a654bb072fd31ea664feabdeb097dfc0c77fc5ac86ec01577cb0897c8ee6f72",
+    "exactMatch": false,
+    "meanAbsPixelError": 66.26138888888889
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/9.png",
+    "target": "plants/details/501/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "5a59214036128c7069ce04d791326e81588e7816e656c6e5a1aa5898d04f3288",
+    "exists": true,
+    "localHash": "507bcddfad6d31c105588d7ad9004004904d84deef124ff936ca2b36e84be51b",
+    "exactMatch": false,
+    "meanAbsPixelError": 64.44548032407407
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/10.png",
+    "target": "plants/details/501/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "8330cf0896b1281322a5de2b940c6d4a1461b0f19f701cf637c98b862db820ab",
+    "exists": true,
+    "localHash": "df7423246ee0b09dab99a50dfc4cd58e363ab58c08206e3d51537b49b7df23e6",
+    "exactMatch": false,
+    "meanAbsPixelError": 64.89495949074075
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/11.png",
+    "target": "plants/details/501/gallery/11.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "a4957df769b5c197c1d43b54e63bb9b050c4c963342d473ae3566acf02e1c861",
+    "exists": true,
+    "localHash": "62febcce89172c55c35dfacd018885797f94a2b156d335a3da8923e584d49def",
+    "exactMatch": false,
+    "meanAbsPixelError": 65.4290798611111
+  },
+  {
+    "source": "T7 - DUPLEX 501/GALERIA/12.png",
+    "target": "plants/details/501/gallery/12.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "1fb84ea2a91cdec15da636e5fc86c77ced52dbd0ebc76282d7355829c50bcaac",
+    "exists": true,
+    "localHash": "56b9980a0d508f496f419070c55cc9d1d71a303ba67e4e33068328c4abed1de4",
+    "exactMatch": false,
+    "meanAbsPixelError": 72.56946180555556
+  },
+  {
+    "source": "T8 - DUPLEX 503/AMOBLADO P1.png",
+    "target": "plants/details/502.1/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "6fdb13a9688fed58df3703a6d4bf0eccbe662c6ff37904691fa29c0389a97067",
+    "exists": true,
+    "localHash": "6fdb13a9688fed58df3703a6d4bf0eccbe662c6ff37904691fa29c0389a97067",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/ENTREGABLE P1.jpg",
+    "target": "plants/details/502.1/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "dae69978815e63c7d379b8ed9af8ef1c1f8e4f34ea7805faa41ec6264d3eed8f",
+    "exists": true,
+    "localHash": "dae69978815e63c7d379b8ed9af8ef1c1f8e4f34ea7805faa41ec6264d3eed8f",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/CAD P1.jpg",
+    "target": "plants/details/502.1/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "0223eee74571ab28e559336d3f0a096ca6d7ed8933f680cfb7f4cefc604fd6ea",
+    "exists": true,
+    "localHash": "0223eee74571ab28e559336d3f0a096ca6d7ed8933f680cfb7f4cefc604fd6ea",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/AMOBLADO P2.png",
+    "target": "plants/details/502.2/furnished.webp",
+    "kind": "furnished",
+    "sourceConvertedHash": "c70ad8e37a03f6b8b3be70e71dbca6e0ff13f5517b25613cf88f74d09c5ee08e",
+    "exists": true,
+    "localHash": "c70ad8e37a03f6b8b3be70e71dbca6e0ff13f5517b25613cf88f74d09c5ee08e",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/ENTREGABLE P2.jpg",
+    "target": "plants/details/502.2/unfurnished.webp",
+    "kind": "unfurnished",
+    "sourceConvertedHash": "7da9e8c27fce1bc0982c15de58b036cac49df97e780808af15e54f91e1bad744",
+    "exists": true,
+    "localHash": "7da9e8c27fce1bc0982c15de58b036cac49df97e780808af15e54f91e1bad744",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/CAD P2.jpg",
+    "target": "plants/details/502.2/plans.webp",
+    "kind": "plans",
+    "sourceConvertedHash": "fe54770a2e0099cf9eafd5739909bc8373fe338b9da39be52aa09ae6d1c3c6b7",
+    "exists": true,
+    "localHash": "fe54770a2e0099cf9eafd5739909bc8373fe338b9da39be52aa09ae6d1c3c6b7",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/1.jpg",
+    "target": "plants/details/502/gallery/1.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "8ef1eedacbcd8e31399fab8b7aea4b176b334782465812236fcd17194acc870d",
+    "exists": true,
+    "localHash": "8ef1eedacbcd8e31399fab8b7aea4b176b334782465812236fcd17194acc870d",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/2.jpg",
+    "target": "plants/details/502/gallery/2.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "13016e76c99216d2436aa51909c8a2a1008df57b12c4bf8ade1d2c6f328d620e",
+    "exists": true,
+    "localHash": "13016e76c99216d2436aa51909c8a2a1008df57b12c4bf8ade1d2c6f328d620e",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/3.jpg",
+    "target": "plants/details/502/gallery/3.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f3d4d97e1aaea9dd4e5015812c55414c3186c867ead8f4f17f258b8ee49f2268",
+    "exists": true,
+    "localHash": "f3d4d97e1aaea9dd4e5015812c55414c3186c867ead8f4f17f258b8ee49f2268",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/4.jpg",
+    "target": "plants/details/502/gallery/4.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "bb92e4b499ff2f8945ee8a73d001f63f6f8972a9e97eed712b9c81ee0f807baf",
+    "exists": true,
+    "localHash": "bb92e4b499ff2f8945ee8a73d001f63f6f8972a9e97eed712b9c81ee0f807baf",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/5.jpg",
+    "target": "plants/details/502/gallery/5.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "8d1d2ab0e4540b41aa7d56400ae8baad60196728a613e536f342d30adfc6e70f",
+    "exists": true,
+    "localHash": "8d1d2ab0e4540b41aa7d56400ae8baad60196728a613e536f342d30adfc6e70f",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/6.jpg",
+    "target": "plants/details/502/gallery/6.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f0401857f758e06dab695931c204cbbc54b941b5e7c4efdcfa5f4726377e47b1",
+    "exists": true,
+    "localHash": "f0401857f758e06dab695931c204cbbc54b941b5e7c4efdcfa5f4726377e47b1",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/7.jpg",
+    "target": "plants/details/502/gallery/7.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "89e4599c7f720b1b2507a38f11680f877f1ce234917fffdd052a75583a07887b",
+    "exists": true,
+    "localHash": "89e4599c7f720b1b2507a38f11680f877f1ce234917fffdd052a75583a07887b",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/8.jpg",
+    "target": "plants/details/502/gallery/8.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "0a654bb072fd31ea664feabdeb097dfc0c77fc5ac86ec01577cb0897c8ee6f72",
+    "exists": true,
+    "localHash": "0a654bb072fd31ea664feabdeb097dfc0c77fc5ac86ec01577cb0897c8ee6f72",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/9.jpg",
+    "target": "plants/details/502/gallery/9.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "507bcddfad6d31c105588d7ad9004004904d84deef124ff936ca2b36e84be51b",
+    "exists": true,
+    "localHash": "507bcddfad6d31c105588d7ad9004004904d84deef124ff936ca2b36e84be51b",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/10.jpg",
+    "target": "plants/details/502/gallery/10.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "df7423246ee0b09dab99a50dfc4cd58e363ab58c08206e3d51537b49b7df23e6",
+    "exists": true,
+    "localHash": "df7423246ee0b09dab99a50dfc4cd58e363ab58c08206e3d51537b49b7df23e6",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/11.jpg",
+    "target": "plants/details/502/gallery/11.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "62febcce89172c55c35dfacd018885797f94a2b156d335a3da8923e584d49def",
+    "exists": true,
+    "localHash": "62febcce89172c55c35dfacd018885797f94a2b156d335a3da8923e584d49def",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/12.jpg",
+    "target": "plants/details/502/gallery/12.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "56b9980a0d508f496f419070c55cc9d1d71a303ba67e4e33068328c4abed1de4",
+    "exists": true,
+    "localHash": "56b9980a0d508f496f419070c55cc9d1d71a303ba67e4e33068328c4abed1de4",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/13.jpg",
+    "target": "plants/details/502/gallery/13.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "812a27ef0989fc7dbcc12aa4c99f5ba2ce4b4fd987dd499bafcfae89216e85cf",
+    "exists": true,
+    "localHash": "812a27ef0989fc7dbcc12aa4c99f5ba2ce4b4fd987dd499bafcfae89216e85cf",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/14.jpg",
+    "target": "plants/details/502/gallery/14.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "79be77334087a7ed23bd8dcaf254b65d5cbf597190efff67bd0fae6615c8b89d",
+    "exists": true,
+    "localHash": "79be77334087a7ed23bd8dcaf254b65d5cbf597190efff67bd0fae6615c8b89d",
+    "exactMatch": true
+  },
+  {
+    "source": "T8 - DUPLEX 503/GALERIA/15.jpg",
+    "target": "plants/details/502/gallery/15.webp",
+    "kind": "gallery",
+    "sourceConvertedHash": "f2bb9f104b77a3771f2aee73c31f49c07bf4decc32f77dd05ee2b65757ef8e08",
+    "exists": true,
+    "localHash": "f2bb9f104b77a3771f2aee73c31f49c07bf4decc32f77dd05ee2b65757ef8e08",
+    "exactMatch": true
+  }
+]
