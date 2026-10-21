@@ -4,7 +4,8 @@ import path from 'path';
 const R2_PUBLIC_URL = "https://pub-44777f1e13a04cbaa9c6d275228617c2.r2.dev";
 
 const unitAssetMap = {
-  'unit_1_101': '101',
+  'unit_1_101': '102',
+  'unit_1_102': '101',
   'unit_2_201': 'x01',
   'unit_3_301': 'x01',
   'unit_4_401': 'x01',

@@ -339,12 +339,12 @@ export const floorsData: Floor[] = [
         x: 33.06,
         y: 58.65,
         path: "M 48.58 85.39 L 21.43 89.68 L 21.95 73.44 L 19.75 73.62 L 21.11 37.3 L 13.55 36.65 L 14.18 26.84 L 43.07 26.66 L 42.91 56.26 L 50.89 56.63 L 50.89 70.54 L 48.42 70.73 Z",
-        assetId: "101",
-        tourUrl: "https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es",
-        photosFurnished: ["plants/details/101/furnished.webp"],
-        photosUnfurnished: ["plants/details/101/unfurnished.webp"],
-        photosPlans: ["plants/details/101/plans.webp"],
-        gallery: ["plants/details/101/gallery/1.webp", "plants/details/101/gallery/2.webp", "plants/details/101/gallery/3.webp", "plants/details/101/gallery/4.webp", "plants/details/101/gallery/5.webp", "plants/details/101/gallery/6.webp", "plants/details/101/gallery/7.webp", "plants/details/101/gallery/8.webp", "plants/details/101/gallery/9.webp", "plants/details/101/gallery/10.webp", "plants/details/101/gallery/11.webp"]
+        assetId: "102",
+        tourUrl: "https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es",
+        photosFurnished: ["plants/details/102/furnished.webp"],
+        photosUnfurnished: ["plants/details/102/unfurnished.webp"],
+        photosPlans: ["plants/details/102/plans.webp"],
+        gallery: ["plants/details/102/gallery/1.webp", "plants/details/102/gallery/2.webp", "plants/details/102/gallery/3.webp", "plants/details/102/gallery/4.webp", "plants/details/102/gallery/5.webp", "plants/details/102/gallery/6.webp", "plants/details/102/gallery/7.webp", "plants/details/102/gallery/8.webp", "plants/details/102/gallery/9.webp", "plants/details/102/gallery/10.webp", "plants/details/102/gallery/11.webp", "plants/details/102/gallery/12.webp"]
       },
       {
         id: "102",
@@ -359,12 +359,12 @@ export const floorsData: Floor[] = [
         x: 62.3,
         y: 46.81,
         path: "M 65.3 13.0 L 79.2 13.0 L 81.8 81.8 L 58.5 84.3 L 58.3 56.8 L 54.7 56.8 L 54.7 50.2 L 52.5 50.2 L 52.5 31.0 L 65.5 31.0 Z",
-        assetId: "102",
-        tourUrl: "https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es",
-        photosFurnished: ["plants/details/102/furnished.webp"],
-        photosUnfurnished: ["plants/details/102/unfurnished.webp"],
-        photosPlans: ["plants/details/102/plans.webp"],
-        gallery: ["plants/details/102/gallery/1.webp", "plants/details/102/gallery/2.webp", "plants/details/102/gallery/3.webp", "plants/details/102/gallery/4.webp", "plants/details/102/gallery/5.webp", "plants/details/102/gallery/6.webp", "plants/details/102/gallery/7.webp", "plants/details/102/gallery/8.webp", "plants/details/102/gallery/9.webp", "plants/details/102/gallery/10.webp", "plants/details/102/gallery/11.webp", "plants/details/102/gallery/12.webp"]
+        assetId: "101",
+        tourUrl: "https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es",
+        photosFurnished: ["plants/details/101/furnished.webp"],
+        photosUnfurnished: ["plants/details/101/unfurnished.webp"],
+        photosPlans: ["plants/details/101/plans.webp"],
+        gallery: ["plants/details/101/gallery/1.webp", "plants/details/101/gallery/2.webp", "plants/details/101/gallery/3.webp", "plants/details/101/gallery/4.webp", "plants/details/101/gallery/5.webp", "plants/details/101/gallery/6.webp", "plants/details/101/gallery/7.webp", "plants/details/101/gallery/8.webp", "plants/details/101/gallery/9.webp", "plants/details/101/gallery/10.webp", "plants/details/101/gallery/11.webp"]
       },
       {
         id: "1",

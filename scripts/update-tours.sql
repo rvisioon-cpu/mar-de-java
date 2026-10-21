@@ -2,8 +2,8 @@
 -- Kuula assignments verified against the collection titles on 2026-10-20.
 -- Only tour links change: preserve unit specifications, assets and sale states.
 -- Keep the unit page and /recorridos gallery synchronized without reseeding.
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '102' AND deleted_at IS NULL;
-UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '101' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlHt?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '101' AND deleted_at IS NULL;
+UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlM4?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '102' AND deleted_at IS NULL;
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMh?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '201' AND deleted_at IS NULL;
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMZ?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '202' AND deleted_at IS NULL;
 UPDATE units SET tour_url = 'https://kuula.co/share/collection/7dlMd?logo=-1&card=1&info=0&fs=1&vr=1&gyro=0&initload=0&thumbs=1&inst=es', updated_at = unixepoch() WHERE identifier = '203' AND deleted_at IS NULL;
