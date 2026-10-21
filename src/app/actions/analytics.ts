@@ -1,9 +1,9 @@
 "use server";
 
 import { getDb } from "@/lib/db";
-import { pageViews, prospects, units, users, logs, floors, appointments } from "@/lib/db/schema";
+import { pageViews, analyticsSessions, prospects, units, users, logs, floors, appointments } from "@/lib/db/schema";
 import { eq, and, isNull, isNotNull, gte, lte, count, desc, like, sql } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
+import { isAnalyticsId, isPublicAnalyticsPath, measuredDuration, VISIT_TIMEOUT_SECONDS } from "@/lib/analytics/policy";
 import { auth } from "@/auth";
 
 // Utility to calculate monthly growth percentage
@@ -15,43 +15,49 @@ function calculateGrowth(current: number, previous: number): string {
   return percentage >= 0 ? `+${percentage}%` : `${percentage}%`;
 }
 
-// Action to track a page view
-export async function trackPageView(path: string, deviceType: string) {
+// A visit is a browser session; page opens remain separate events for unit analytics.
+export async function trackPageView(
+  path: string,
+  deviceType: string,
+  candidateSessionId?: string,
+  candidatePageViewId?: string,
+) {
+  if (!isPublicAnalyticsPath(path)) return { success: false, error: "Invalid public path" };
   try {
     const db = await getDb();
-    
-    // Extract unit ID from path if visiting a unit page (e.g. /unidad/unit_2_201)
+    const pageViewId = isAnalyticsId(candidatePageViewId) ? candidatePageViewId : crypto.randomUUID();
+    // Retried events reuse their original session, even after its cookie expires.
+    const [existingView] = await db.select({ id: pageViews.id, sessionId: pageViews.sessionId })
+      .from(pageViews).where(eq(pageViews.id, pageViewId)).limit(1);
+    if (existingView) return { success: true, pageViewId: existingView.id, sessionId: existingView.sessionId };
+
+    const now = new Date();
+    const [existingSession] = isAnalyticsId(candidateSessionId)
+      ? await db.select().from(analyticsSessions).where(eq(analyticsSessions.id, candidateSessionId)).limit(1)
+      : [];
+    const sessionId = existingSession && now.getTime() - existingSession.lastSeenAt.getTime() < VISIT_TIMEOUT_SECONDS * 1000
+      ? existingSession.id : pageViewId;
+    const device = ["desktop", "mobile", "tablet"].includes(deviceType) ? deviceType : "desktop";
+
     let unitId: string | null = null;
     if (path.startsWith("/unidad/")) {
-      const parts = path.split("/");
-      unitId = parts[2] || null;
+      const [unit] = await db.select({ id: units.id }).from(units)
+        .where(and(eq(units.id, path.split("/")[2]), isNull(units.deletedAt))).limit(1);
+      // Nonexistent units are error pages, not department visits.
+      if (!unit) return { success: false, error: "Unknown unit" };
+      unitId = unit.id;
     }
 
-    // Verify unit exists to satisfy foreign key constraint
-    let verifiedUnitId: string | null = null;
-    if (unitId) {
-      const [existingUnit] = await db
-        .select()
-        .from(units)
-        .where(eq(units.id, unitId))
-        .limit(1);
-      
-      if (existingUnit) {
-        verifiedUnitId = unitId;
-      }
-    }
-
-    const [inserted] = await db.insert(pageViews).values({
-      path,
-      unitId: verifiedUnitId,
-      deviceType: deviceType || "desktop",
-      duration: 0,
-    }).returning();
-
-    return { success: true, pageViewId: inserted ? inserted.id : null };
+    await db.batch([
+      db.insert(analyticsSessions).values({ id: sessionId, deviceType: device, createdAt: now, lastSeenAt: now })
+        .onConflictDoUpdate({ target: analyticsSessions.id, set: { lastSeenAt: now } }),
+      db.insert(pageViews).values({ id: pageViewId, sessionId, path, unitId, deviceType: device, duration: 0 })
+        .onConflictDoNothing({ target: pageViews.id }),
+    ]);
+    return { success: true, pageViewId, sessionId };
   } catch (error) {
     console.error("Error tracking page view:", error);
-    return { success: false, error: String(error) };
+    return { success: false, error: "Unable to register visit" };
   }
 }
 
@@ -61,26 +67,13 @@ export async function updatePageViewDuration(id: string, duration: number) {
     const db = await getDb();
     await db
       .update(pageViews)
-      .set({ duration })
+      .set({ duration: sql`max(coalesce(${pageViews.duration}, 0), ${Math.max(0, Math.round(duration))})` })
       .where(eq(pageViews.id, id));
     return { success: true };
   } catch (error) {
     console.error("Error updating page view duration:", error);
     return { success: false, error: String(error) };
   }
-}
-
-// Helper to get effective duration (with deterministic simulation for historical data)
-function getEffectiveDuration(pv: { id: string; duration: number | null }) {
-  if (pv.duration && pv.duration > 0) return pv.duration;
-  // Dynamic deterministic mock duration based on ID
-  let hash = 0;
-  for (let i = 0; i < pv.id.length; i++) {
-    hash = pv.id.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const min = 30;
-  const max = 150;
-  return min + Math.abs(hash % (max - min));
 }
 
 // Helper to format duration in seconds to "Xm Ys" or "Xs"
@@ -133,17 +126,17 @@ export async function getDashboardStats(filters?: {
     const prevStart = new Date(start.getTime() - durationMs);
     const prevEnd = new Date(end.getTime() - durationMs);
 
-    // 1. Visitas Totales
+    // 1. Visits count sessions by their start time, never page opens.
     const [visitsResult] = await db
       .select({ count: count() })
-      .from(pageViews)
-      .where(and(gte(pageViews.createdAt, start), lte(pageViews.createdAt, end)));
+      .from(analyticsSessions)
+      .where(and(gte(analyticsSessions.createdAt, start), lte(analyticsSessions.createdAt, end)));
     const totalVisits = visitsResult?.count || 0;
 
     const [prevVisitsResult] = await db
       .select({ count: count() })
-      .from(pageViews)
-      .where(and(gte(pageViews.createdAt, prevStart), lte(pageViews.createdAt, prevEnd)));
+      .from(analyticsSessions)
+      .where(and(gte(analyticsSessions.createdAt, prevStart), lte(analyticsSessions.createdAt, prevEnd)));
     const prevVisits = prevVisitsResult?.count || 0;
     const visitsGrowth = calculateGrowth(totalVisits, prevVisits);
 
@@ -311,7 +304,7 @@ export async function getDashboardStats(filters?: {
         totalDuration: 0,
       };
       existing.views++;
-      existing.totalDuration += getEffectiveDuration({ id: pv.id, duration: pv.duration });
+      existing.totalDuration += measuredDuration(pv.duration);
       unitStatsMap.set(uId, existing);
     }
 
@@ -333,7 +326,7 @@ export async function getDashboardStats(filters?: {
         const unitDurationSeries = buckets.map(b => {
           const bucketViews = unitViews.filter(pv => pv.createdAt && pv.createdAt >= b.start && pv.createdAt < b.end);
           if (bucketViews.length === 0) return 0;
-          const sum = bucketViews.reduce((acc, pv) => acc + getEffectiveDuration({ id: pv.id, duration: pv.duration }), 0);
+          const sum = bucketViews.reduce((acc, pv) => acc + measuredDuration(pv.duration), 0);
           return Math.round(sum / bucketViews.length);
         });
 
@@ -354,12 +347,12 @@ export async function getDashboardStats(filters?: {
     // 6. Dispositivos (Valores absolutos)
     const rawDevices = await db
       .select({
-        deviceType: pageViews.deviceType,
-        count: count(pageViews.id),
+        deviceType: analyticsSessions.deviceType,
+        count: count(analyticsSessions.id),
       })
-      .from(pageViews)
-      .where(and(gte(pageViews.createdAt, start), lte(pageViews.createdAt, end)))
-      .groupBy(pageViews.deviceType);
+      .from(analyticsSessions)
+      .where(and(gte(analyticsSessions.createdAt, start), lte(analyticsSessions.createdAt, end)))
+      .groupBy(analyticsSessions.deviceType);
 
     const mobileViews = rawDevices.find(d => d.deviceType === "mobile")?.count || 0;
     const desktopViews = rawDevices.find(d => d.deviceType === "desktop")?.count || 0;
@@ -443,7 +436,10 @@ export async function getDashboardStats(filters?: {
 
     // 8. Gráficos y Series Temporales
     const chartLabels = buckets.map(b => b.label);
-    const viewsSeries = buckets.map(b => rawAllViews.filter(pv => pv.createdAt && pv.createdAt >= b.start && pv.createdAt < b.end).length);
+    const sessionsInRange = await db.select({ createdAt: analyticsSessions.createdAt })
+      .from(analyticsSessions)
+      .where(and(gte(analyticsSessions.createdAt, start), lte(analyticsSessions.createdAt, end)));
+    const viewsSeries = buckets.map(b => sessionsInRange.filter(session => session.createdAt >= b.start && session.createdAt < b.end).length);
 
     let allProspectsInRange: { createdAt: Date | null }[] = [];
     if (role === "SELLER") {

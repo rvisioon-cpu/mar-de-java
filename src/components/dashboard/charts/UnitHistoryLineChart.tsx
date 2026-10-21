@@ -70,7 +70,7 @@ export default function UnitHistoryLineChart({
         <div className="flex items-center gap-4 text-[10px] font-medium font-secondary">
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-violet-500" />
-            <span className="text-slate-500">Visitas (Eje Izq.)</span>
+            <span className="text-slate-500">Páginas vistas (Eje Izq.)</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
@@ -199,7 +199,7 @@ export default function UnitHistoryLineChart({
             <div className="flex items-center justify-between gap-4">
               <span className="text-slate-500 flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                Visitas:
+                Páginas vistas:
               </span>
               <span className="font-bold font-mono text-violet-600">{viewsData[activeIdx]}</span>
             </div>

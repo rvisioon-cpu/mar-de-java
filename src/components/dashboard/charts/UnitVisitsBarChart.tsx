@@ -39,8 +39,8 @@ export default function UnitVisitsBarChart({
     <div className="w-full flex flex-col bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm relative overflow-hidden">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
-          <span className="text-sm font-semibold tracking-wider text-slate-700">Comparativa de Visitas por Unidad</span>
-          <p className="text-[10px] text-gray-500 mt-0.5">Haz clic en una barra para ver su historial de visitas y tiempo en detalle.</p>
+          <span className="text-sm font-semibold tracking-wider text-slate-700">Páginas Vistas por Unidad</span>
+          <p className="text-[10px] text-gray-500 mt-0.5">Haz clic en una barra para ver su historial de páginas vistas y tiempo en detalle.</p>
         </div>
         {selectedIdx !== null && (
           <button 
@@ -186,7 +186,7 @@ export default function UnitVisitsBarChart({
             >
               <div className="font-bold text-slate-700 border-b border-base-200 pb-1 mb-1">{labels[hoveredIdx]}</div>
               <div className="flex items-center justify-between gap-4">
-                <span className="text-slate-500">Visitas:</span>
+                <span className="text-slate-500">Páginas vistas:</span>
                 <span className="font-bold font-mono text-cyan-600">{data[hoveredIdx]?.toLocaleString()}</span>
               </div>
             </div>

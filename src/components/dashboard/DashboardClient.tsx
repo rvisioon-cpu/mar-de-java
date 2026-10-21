@@ -155,7 +155,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
 
   const generalCards = [
     {
-      title: "Visitas Totales",
+      title: "Visitas (sesiones)",
       value: stats.totalVisits.toLocaleString(),
       change: stats.visitsGrowth,
       icon: Eye,
@@ -430,12 +430,17 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
               ))}
             </div>
 
+            <p className="text-xs text-gray-500">
+              Una visita es una sesión de navegación. Abrir varias páginas no suma visitas nuevas;
+              tras 30 minutos sin registrar actividad comienza otra sesión. Las estadísticas por unidad cuentan páginas vistas.
+            </p>
+
             {/* Graphs Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <GradientAreaChart
                 labels={stats.chartLabels}
                 data={stats.viewsSeries}
-                name="Tendencia de Visitas Totales"
+                name="Tendencia de Sesiones"
                 colorStart="#8b5cf6"
                 colorEnd="#ec4899"
               />
@@ -443,7 +448,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
               <MultiAreaChart
                 labels={stats.chartLabels}
                 series={[
-                  { name: "Visitas", data: stats.viewsSeries, color: "#06b6d4" },
+                  { name: "Sesiones", data: stats.viewsSeries, color: "#06b6d4" },
                   { name: "Prospectos", data: stats.prospectsSeries, color: "#8b5cf6" },
                 ]}
               />
@@ -459,7 +464,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
               <div className="card lg:col-span-2 bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm">
                 <h2 className="text-lg font-bold font-primary text-brand-orange border-b border-base-200 pb-3 flex items-center gap-2">
                   <Building className="w-5 h-5 text-brand-orange" />
-                  Interacción por Unidad (Todas)
+                  Interacción por Unidad (Páginas vistas)
                 </h2>
                 
                 <div className="overflow-x-auto mt-4 scrollbar-thin max-h-[460px]">
@@ -467,7 +472,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
                     <thead>
                       <tr className="border-b border-base-200 text-gray-500 uppercase text-xs tracking-wider">
                         <th className="bg-transparent font-semibold">Unidad</th>
-                        <th className="bg-transparent font-semibold text-center">Visitas</th>
+                        <th className="bg-transparent font-semibold text-center">Páginas vistas</th>
                         <th className="bg-transparent font-semibold text-right">Permanencia Promedio</th>
                       </tr>
                     </thead>
@@ -512,7 +517,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
                       ) : (
                         <tr>
                           <td colSpan={3} className="text-slate-400 text-center py-12 text-sm bg-transparent">
-                            No hay suficientes visitas registradas en este periodo.
+                            No hay páginas vistas registradas en este periodo.
                           </td>
                         </tr>
                       )}
@@ -572,7 +577,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
                             {topDur.unit}
                           </h4>
                           <div className="text-[10px] text-gray-500 font-medium">
-                            Total de visitas: {topDur.views} en este rango
+                            Total de páginas vistas: {topDur.views} en este rango
                           </div>
                         </div>
                       );
@@ -611,7 +616,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
                     <Clock className="w-10 h-10 text-slate-350 mb-3 animate-pulse" />
                     <span className="text-sm font-semibold text-slate-500">Historial Detallado</span>
                     <p className="text-xs text-slate-400 mt-2 max-w-[200px]">
-                      Haz clic en una unidad de la tabla o en una barra del gráfico para ver su flujo histórico de visitas y retención.
+                      Haz clic en una unidad de la tabla o en una barra del gráfico para ver su historial de páginas vistas y permanencia.
                     </p>
                   </div>
                 )}
@@ -628,7 +633,7 @@ export default function DashboardClient({ initialStats, userRole }: DashboardCli
               <div>
                 <h2 className="text-lg font-bold font-primary text-brand-orange border-b border-base-200 pb-3 flex items-center gap-2">
                   <Smartphone className="w-5 h-5 text-brand-orange" />
-                  Visitas por Dispositivo
+                  Sesiones por Dispositivo
                 </h2>
                 <div className="mt-4">
                   <RadialConcentricChart

@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, real, index } from 'drizzle-orm/sqlite-core';
 
 export const users = sqliteTable('users', {
   id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
@@ -217,9 +217,17 @@ export const calendarTransfers = sqliteTable('calendar_transfers', {
   createdAt: integer('created_at', { mode: 'timestamp' }).$defaultFn(() => new Date()),
 });
 
+export const analyticsSessions = sqliteTable('analytics_sessions', {
+  id: text('id').primaryKey(),
+  deviceType: text('device_type').notNull(),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+  lastSeenAt: integer('last_seen_at', { mode: 'timestamp' }).notNull(),
+}, (table) => [index('analytics_sessions_created_at_idx').on(table.createdAt)]);
+
 export const pageViews = sqliteTable('page_views', {
   id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
   path: text('path').notNull(),
+  sessionId: text('session_id').references(() => analyticsSessions.id),
   unitId: text('unit_id').references(() => units.id),
   deviceType: text('device_type').notNull(), // 'mobile', 'tablet', 'desktop'
   duration: integer('duration').default(0), // in seconds

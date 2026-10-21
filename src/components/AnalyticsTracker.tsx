@@ -1,125 +1,71 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { isPublicAnalyticsPath } from "@/lib/analytics/policy";
+
+// Serialize hits so a fast navigation waits for the first response's session cookie.
+let hitQueue: Promise<void> = Promise.resolve();
+
+function sendDuration(id: string, startTime: number, endTime: number) {
+  const duration = Math.round((endTime - startTime) / 1000);
+  if (duration < 1) return;
+  const payload = JSON.stringify({ id, duration });
+  if (navigator.sendBeacon) {
+    const sent = navigator.sendBeacon("/api/analytics/duration", new Blob([payload], { type: "application/json" }));
+    if (sent) return;
+  }
+  void fetch("/api/analytics/duration", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true,
+  }).catch(() => {});
+}
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
-  const lastTrackedPath = useRef<string | null>(null);
-  const activeViewRef = useRef<{ id: string; startTime: number } | null>(null);
-
-  // Send duration to server
-  const sendDuration = (id: string, startTime: number) => {
-    const elapsedSeconds = Math.round((Date.now() - startTime) / 1000);
-    // Only track if stayed for at least 1 second
-    if (elapsedSeconds > 0) {
-      const url = "/api/analytics/duration";
-      const payload = JSON.stringify({ id, duration: elapsedSeconds });
-
-      if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-        navigator.sendBeacon(url, new Blob([payload], { type: "application/json" }));
-      } else {
-        fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-          keepalive: true,
-        }).catch((err) => console.error("Error sending page duration:", err));
-      }
-    }
-  };
 
   useEffect(() => {
-    if (!pathname) return;
+    if (!isPublicAnalyticsPath(pathname)) return;
+    let view: { id: string; start: number; end: number | null; registered: boolean };
 
-    // Do not track visits to dashboard, admin pages, login, or API endpoints
-    if (
-      pathname.startsWith("/dashboard") ||
-      pathname.startsWith("/login") ||
-      pathname.startsWith("/api")
-    ) {
-      // If we had an active tracking session, close it when entering dashboard/etc.
-      if (activeViewRef.current) {
-        sendDuration(activeViewRef.current.id, activeViewRef.current.startTime);
-        activeViewRef.current = null;
-      }
-      return;
-    }
-
-    // Prevent double tracking in React StrictMode
-    if (lastTrackedPath.current === pathname) {
-      return;
-    }
-
-    // If changing paths, send the duration for the previous path
-    if (activeViewRef.current) {
-      sendDuration(activeViewRef.current.id, activeViewRef.current.startTime);
-      activeViewRef.current = null;
-    }
-
-    lastTrackedPath.current = pathname;
-    const startTime = Date.now();
-
-    // Client-side device detection
-    let deviceType = "desktop";
-    if (typeof window !== "undefined") {
+    const finish = () => {
+      if (view.end !== null) return;
+      view.end = Date.now();
+      if (view.registered) sendDuration(view.id, view.start, view.end);
+    };
+    const start = () => {
+      const current = { id: crypto.randomUUID(), start: Date.now(), end: null as number | null, registered: false };
+      view = current;
       const width = window.innerWidth;
-      if (width < 768) {
-        deviceType = "mobile";
-      } else if (width < 1024) {
-        deviceType = "tablet";
-      }
-    }
-
-    // Fire page view event
-    fetch("/api/analytics/hit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        path: pathname,
-        deviceType,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.success && data.pageViewId) {
-          activeViewRef.current = {
-            id: data.pageViewId,
-            startTime,
-          };
+      const deviceType = width < 768 ? "mobile" : width < 1024 ? "tablet" : "desktop";
+      hitQueue = hitQueue.then(async () => {
+        // StrictMode cleanup and pages left before their queued hit do not create visits.
+        if (current.end !== null) return;
+        const response = await fetch("/api/analytics/hit", {
+          method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+          body: JSON.stringify({ path: pathname, deviceType, pageViewId: current.id }),
+        });
+        const data = await response.json();
+        if (data.success && data.pageViewId) {
+          current.registered = true;
+          current.id = data.pageViewId;
+          // A late response belongs to its original page, never the next one.
+          if (current.end !== null) sendDuration(current.id, current.start, current.end);
         }
-      })
-      .catch((err) => {
-        console.error("Failed to register page view event:", err);
-      });
+      }).catch(error => console.error("Failed to register page view:", error));
+    };
+    const restore = (event: PageTransitionEvent) => {
+      if (event.persisted) start();
+    };
 
-    // Cleanup on unmount or path change
+    start();
+    window.addEventListener("pagehide", finish);
+    window.addEventListener("pageshow", restore);
     return () => {
-      if (activeViewRef.current) {
-        sendDuration(activeViewRef.current.id, activeViewRef.current.startTime);
-      }
+      finish();
+      window.removeEventListener("pagehide", finish);
+      window.removeEventListener("pageshow", restore);
     };
   }, [pathname]);
-
-  // Handle page unloads, tab closing, backgrounding
-  useEffect(() => {
-    const handleUnload = () => {
-      if (activeViewRef.current) {
-        sendDuration(activeViewRef.current.id, activeViewRef.current.startTime);
-        activeViewRef.current = null;
-      }
-    };
-
-    window.addEventListener("beforeunload", handleUnload);
-    window.addEventListener("pagehide", handleUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleUnload);
-      window.removeEventListener("pagehide", handleUnload);
-    };
-  }, []);
 
   return null;
 }
