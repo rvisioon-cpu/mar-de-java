@@ -1,5 +1,17 @@
 const ASSET_BASE_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || '';
 
+export const ASSET_VERSIONS: Record<string, string> = {
+  'plants/details/102/gallery/1.webp': 'e10606fe1fc3',
+  'amenities/8.webp': '82270262b9ed',
+};
+
+function withAssetVersion(url: string, assetPath: string): string {
+  const version = ASSET_VERSIONS[assetPath];
+  if (!version) return url;
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}v=${version}`;
+}
+
 export const getAssetUrl = (path: string): string => {
   if (!path) return '';
   // Rutas del proxy same-origin (dev) y data URIs se sirven tal cual
@@ -28,7 +40,7 @@ export const getAssetUrl = (path: string): string => {
     cleanPathNoSlash.startsWith('amenities/') ||
     cleanPathNoSlash.startsWith('homepage/')
   )) {
-    return `/api/r2/${cleanPathNoSlash}`;
+    return withAssetVersion(`/api/r2/${cleanPathNoSlash}`, cleanPathNoSlash);
   }
 
   // Bundled static assets served directly from the app's public directory
@@ -43,7 +55,7 @@ export const getAssetUrl = (path: string): string => {
     cleanPathNoSlash.startsWith('amenities/') ||
     cleanPathNoSlash.startsWith('identity/')
   ) {
-    return `/${cleanPathNoSlash}`;
+    return withAssetVersion(`/${cleanPathNoSlash}`, cleanPathNoSlash);
   }
 
   
@@ -52,10 +64,10 @@ export const getAssetUrl = (path: string): string => {
   const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"];
   const isVideo = videoExtensions.some(ext => cleanPathNoSlash.toLowerCase().endsWith(ext));
   if (isVideo) {
-    return `/api/r2/${cleanPathNoSlash}`;
+    return withAssetVersion(`/api/r2/${cleanPathNoSlash}`, cleanPathNoSlash);
   }
   
-  return `/api/r2/${cleanPathNoSlash}`;
+  return withAssetVersion(`/api/r2/${cleanPathNoSlash}`, cleanPathNoSlash);
 };
 
 // URL segura para cargar medios dentro de un canvas (Konva/toDataURL).
@@ -76,7 +88,7 @@ export const getCanvasImageUrl = (path: string): string => {
     cleanKey.startsWith('amenities/') ||
     cleanKey.startsWith('homepage/')
   )) {
-    return `/api/r2/${cleanKey}`;
+    return withAssetVersion(`/api/r2/${cleanKey}`, cleanKey);
   }
   if (
     cleanKey.startsWith('ICONOS/') ||
@@ -84,9 +96,9 @@ export const getCanvasImageUrl = (path: string): string => {
     cleanKey.startsWith('amenities/') ||
     cleanKey.startsWith('identity/')
   ) {
-    return `/${cleanKey}`;
+    return withAssetVersion(`/${cleanKey}`, cleanKey);
   }
-  return `/api/r2/${cleanKey}`;
+  return withAssetVersion(`/api/r2/${cleanKey}`, cleanKey);
 
 };
 
