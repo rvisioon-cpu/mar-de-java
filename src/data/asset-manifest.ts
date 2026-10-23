@@ -122,5 +122,5 @@ export const assetManifest: string[] = [
 
     // Videos
     'videos/video_portada.mp4',
-    'videos/video_general_b830a6611c68.mp4',
+    'videos/video_general_87d60c91f80a.mp4',
 ];

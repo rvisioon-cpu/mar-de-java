@@ -4,7 +4,7 @@ UPDATE media SET is_active = 0 WHERE category IN ('VIDEO_SIDEBAR', 'VIDEO_PORTAD
 
 INSERT INTO media (id, title, url, url_night, type, category, is_active) VALUES
   ('mar-java-video-portada', 'Video Portada', 'videos/video_portada.mp4', NULL, 'video/mp4', 'VIDEO_PORTADA', 1),
-  ('mar-java-video-general', 'Video General', 'videos/video_general_b830a6611c68.mp4', NULL, 'video/mp4', 'VIDEO_SIDEBAR', 1)
+  ('mar-java-video-general', 'Video General', 'videos/video_general_87d60c91f80a.mp4', NULL, 'video/mp4', 'VIDEO_SIDEBAR', 1)
 ON CONFLICT(id) DO UPDATE SET title = excluded.title, url = excluded.url,
   url_night = excluded.url_night, type = excluded.type, category = excluded.category,
   is_active = excluded.is_active, deleted_at = NULL;

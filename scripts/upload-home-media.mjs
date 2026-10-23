@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 const keys = [
   'videos/video_portada.mp4',
-  'videos/video_general_b830a6611c68.mp4',
+  'videos/video_general_87d60c91f80a.mp4',
   'homepage/intro.webp',
   ...Array.from({ length: 17 }, (_, index) => `amenities/${index + 1}.webp`),
 ];

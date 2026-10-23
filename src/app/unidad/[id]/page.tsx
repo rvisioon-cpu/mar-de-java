@@ -631,7 +631,9 @@ const UnitPage = () => {
                                 <ul className="space-y-6">
                                     <li className="flex items-center gap-4 text-neutral-700">
                                         <Ruler strokeWidth={1.5} className="text-brand-gold" size={22} />
-                                        <span className="text-sm font-medium">Area total {unit.dimensions} m²</span>
+                                        <span className="text-sm font-medium">
+                                            {['101', '102', '501', '503'].includes(unit.identifier || unit.id) ? 'Área ocupada total' : 'Area total'} {unit.dimensions} m²
+                                        </span>
                                     </li>
                                     <li className="flex items-center gap-4 text-neutral-700">
                                         <Bed strokeWidth={1.5} className="text-brand-gold" size={22} />
